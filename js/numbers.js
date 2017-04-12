@@ -97,7 +97,7 @@ ulnBtn.addEventListener("click", function(){
 	visBtn.classList.remove("show");
 	thuBtn.classList.remove("show");
 	ulnBtn.classList.add("show");
-	
+
 })
 
 // Settings Variables
