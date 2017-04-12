@@ -50,8 +50,9 @@ window.onload = function (event) {
         loader.load( 'hand3.json', function( geometry, materials ) {
             // console.log(geometry, materials)
             var material = new THREE.MeshBasicMaterial( {skinning: true, map: texture} );
+            material.side = THREE.BackSide;
             model = new THREE.SkinnedMesh( geometry, material );
-            model.scale.set(1,1,1);
+            model.scale.set(-1,1,1);
             for(var i = 0; i < model.skeleton.bones.length; i++) {
                 console.log(model.skeleton.bones[i]);
                 bones[model.skeleton.bones[i].name] = model.skeleton.bones[i];

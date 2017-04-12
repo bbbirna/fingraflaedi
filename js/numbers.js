@@ -6,6 +6,8 @@ const visBtn = document.getElementById("vis-btn");
 const thuBtn = document.getElementById("thu-btn");
 const ulnBtn = document.getElementById("uln-btn");
 
+
+// Adding event listener to finger and removing from other fingers
 lilBtn.addEventListener("click", function(){
 	litliSettings.classList.add("show");
 	baugSettings.classList.remove("show");
@@ -98,6 +100,7 @@ ulnBtn.addEventListener("click", function(){
 
 })
 
+// Settings Variables
 let countArray = [];
 let countElArray = [];
 
@@ -132,6 +135,9 @@ const ulnX = document.getElementById("uln-x");
 const ulnY = document.getElementById("uln-y");
 const ulnZ = document.getElementById("uln-z");
 
+
+
+// Settings - Bending fingers
 litliX.innerHTML += "<p class='my-type'>X</p>";
 for (let i = 0; i < 3; i++) {
 
@@ -314,7 +320,7 @@ for (let i = 47; i < 48; i++) {
 
 
 
-
+// 
 
 var count0 = 0;
 var countEl0 = document.getElementById("count0");
