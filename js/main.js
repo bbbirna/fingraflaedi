@@ -26,7 +26,7 @@ window.onload = function (event) {
         
         // Create scene
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x00eeee);
+        scene.background = new THREE.Color(0xffeeee);
         
         // Create camera and position it in space
         camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 10000);
