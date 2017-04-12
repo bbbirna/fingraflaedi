@@ -96,8 +96,6 @@ ulnBtn.addEventListener("click", function(){
 	thuBtn.classList.remove("show");
 	ulnBtn.classList.add("show");
 
-	const joints = document.getElementById("joints");
-	
 })
 
 let countArray = [];
