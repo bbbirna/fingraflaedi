@@ -1,0 +1,66 @@
+header {
+  width: 100vw;
+  height: calc(100vh * 0.1);
+  position: relative; }
+  header .logo {
+    margin-left: 24px;
+    height: 100%;
+    width: 30px;
+    position: absolute; }
+  header .menu {
+    position: absolute;
+    z-index: 100;
+    width: 70px;
+    height: 100%;
+    right: 0; }
+    header .menu.closebtn {
+      animation: rotateMenuX .5s forwards; }
+  header .menuIcon {
+    margin-right: 24px;
+    width: 40px;
+    height: 100%; }
+    header .menuIcon polygon {
+      fill: pink;
+      transition: all .3s ease; }
+
+@keyframes rotateMenuX {
+  from {
+    transform: rotate(0); }
+  to {
+    transform: rotate(450deg) translate(35%, 20%); } }
+#container {
+  height: calc(100vh * 0.9);
+  background-color: #FAFD7B; }
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../fonts/Nunito-Thin.eot");
+  src: url("../fonts/Nunito-Thin.eot?#iefix") format("embedded-opentype"), url("../fonts/Nunito-Thin.woff") format("woff"), url("../fonts/Nunito-Thin.ttf") format("truetype"); }
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Black.eot");
+  src: url("../fonts/Roboto-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Black.woff") format("woff"), url("../fonts/Roboto-Black.ttf") format("truetype"); }
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Thin.eot");
+  src: url("../fonts/Roboto-Thin.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Thin.woff") format("woff"), url("../fonts/Roboto-Thin.ttf") format("truetype"); }
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Regular.eot");
+  src: url("../fonts/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Regular.woff") format("woff"), url("../fonts/Roboto-Regular.ttf") format("truetype"); }
+h1 {
+  font-family: "Roboto", sans-serif; }
+
+h6 {
+  font-family: "Nunito", sans-serif; }
+
+ul {
+  list-style-type: none; }
+
+li {
+  list-style-type: none; }
+
+a {
+  text-decoration: none; }
+
+/*# sourceMappingURL=application.css.map */

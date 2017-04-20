@@ -1,0 +1,33 @@
+@include font-face('Nunito', Nunito-Thin);
+@include font-face('Roboto', Roboto-Black);
+@include font-face('Roboto', Roboto-Thin);
+@include font-face('Roboto', Roboto-Regular);
+
+h1{
+	font-family: $stack-roboto;
+}
+
+
+h2 {
+}
+h3 {
+}
+h4 {
+}
+h5 {
+}
+h6 {
+	font-family: $stack-nunito;
+}
+
+p {
+}
+ul {
+	list-style-type: none;
+}
+li {
+	list-style-type: none;
+}
+a {
+	text-decoration: none;
+}

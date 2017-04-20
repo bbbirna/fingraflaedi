@@ -6,16 +6,60 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="../logo/logo.png">
 	<link rel="stylesheet" href="../css/reset.css">
-	<link rel="stylesheet" href="../css/style.css">
+	<!-- <link rel="stylesheet" href="../css/style.css"> -->
+	<link rel="stylesheet" href="../css/application.css">
 </head>
-<body> 
-	<div id="container"></div>
-	<input type="text">
+	<body>
+		<header>
+				<svg class="logo" viewBox="0 0 61 124" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+				        <g id="logo" fill="#000000">
+				            <path d="M9.53982854,26.3393801 L23.6022112,35.1801378 L23.6022112,43.4422619 L9.53982854,34.6015042 L9.53982854,123.376455 L0,116.032345 L0,21.6923044 C0,15.2298076 1.64124441,10.0496299 4.92378247,6.15161593 C6.94080341,3.75640357 9.38384266,2.09709524 12.252931,1.17367736 C17.5411165,-0.945822891 22.2638562,0.129689954 25.9224977,1.84359355 C30.5372734,4.00540159 33.5614519,7.76151752 34.9951238,13.112054 C35.5635461,15.2334349 35.8555499,18.5525438 35.8711371,21.6293979 C36.3284754,21.3748259 36.7992617,21.1434826 37.2834963,20.935368 C42.2164189,18.5505357 47.8391123,18.9548312 52.3669126,21.0758953 C56.9816883,23.2377033 59.087853,26.9938192 60.5215249,32.3443557 C61.3711083,35.515044 60.9069347,46.3123954 60.5215249,50.026395 L53.2447995,45.436326 C53.2447995,45.436326 53.2447995,41.8564867 53.2447995,39.9282433 C53.2447995,38 53.2389453,35.8917561 53,35 C51.6266816,29.8747061 48.7580066,28.1513996 43.9847301,28.5269888 C38.6510491,29.4902404 35.9842434,33.622752 35.9842434,40.9246061 L35.9842434,123.330468 L26.4444148,115.986357 L26.4444148,40.9246061 C26.4444148,40.2428058 26.4626827,39.5752783 26.4992184,38.9220235 L26.4444148,39 C26.4444148,39 27,22.1719762 27,21 C27,19.8280238 26.6833602,17.2556569 26.4444148,16.3639008 C25.0127095,11.0207037 22.0236961,9.01075715 16.9075452,9.42680518 C11.9957136,10.5966779 9.53982854,14.6851533 9.53982854,21.6923044 L9.53982854,26.3393801 Z M36,52.2621241 L36,44 L50.6022112,53.1801378 L50.6022112,61.4422619 L36,52.2621241 Z" id="Combined-Shape"></path>
+				        </g>
+				    </g>
+				</svg>
+			<div class="menu" onclick="openNav()">
+				<!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"> -->
+					<svg class="menuIcon"  width="57px" height="30px" viewBox="0 0 57 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+					        <g id="menuIcon" transform="translate(-2.000000, -10.000000)" fill="#000000">
+					            <g id="Group-2" transform="translate(2.000000, 10.000000)">
+					                <polygon id="menu1" points="7 0 57 0 50 6 0 6"></polygon>
+					                <polygon id="menu2" points="7 12 57 12 50 18 0 18"></polygon>
+					                <polygon id="menu3" points="7 24 57 24 50 30 0 30"></polygon>
+					            </g>
+					        </g>
+					    </g>
+					</svg>
+				<!-- </a> -->
+			</div>
+			<!-- <div class="overlay" id="myNav">
+			<div class="overlay-content">
+				<a href="#">About</a>
+				<a href="#">Services</a>
+				<a href="#">Clients</a>
+				<a href="#">Contact</a>
+			</div>
+			</div> -->
+		</header>
+		<div id="container">
+			<input type="text">
+		</div>
+		
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/animations.js"></script>
+		<script>function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+}
 
-<!-- 		<script type="text/javascript" src="../js/three.js"></script>
-		<script type="text/javascript" src="../js/orbit.js"></script>
-	
-		<script type="text/javascript" src="../js/numbers.js"></script>
-		<script type="text/javascript" src="../js/main.js"></script> -->
-</body>
+/* Close when someone clicks on the "x" symbol inside the overlay */
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+}</script>
+	<!-- 		<script type="text/javascript" src="../js/three.js"></script>
+			<script type="text/javascript" src="../js/orbit.js"></script>
+		
+			<script type="text/javascript" src="../js/numbers.js"></script>
+			<script type="text/javascript" src="../js/main.js"></script> -->
+	</body>
 </html>

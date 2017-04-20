@@ -1,0 +1,29 @@
+
+$white          : #fff;
+$black          : #000;
+
+$Honeysuckle  : #FAFD7B;
+$CreamCan	: #F3C362;
+
+
+
+$color-shadow       : rgba($black,.5);
+
+$stack-roboto  : 'Roboto', sans-serif;
+$stack-nunito  : 'Nunito', sans-serif;
+
+// Border radius
+
+$br: 10px;
+
+// Asset paths
+
+$path-img  : '../img';
+$path-font : '../fonts';
+$path-icon : '../icon';
+$path-icon-Letter : '../icon/alphabet';
+$path-logo : '../logo';
+// Media query breakpoints
+
+$brk-narrow : '(max-width: 768px)';
+$brk-wide   : '(max-width: 1024px)';
