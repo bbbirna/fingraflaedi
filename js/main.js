@@ -297,7 +297,9 @@ window.onload = function (event) {
         // model.skeleton.bones[25].rotation.x = 1; // þumall kjuka2
         // model.skeleton.bones[26].rotation.x = 1; // veit ekki
      
-
+        model.skeleton.bones[7].rotation.z = 0.02;
+        model.skeleton.bones[12].rotation.z = 0.1;
+        model.skeleton.bones[17].rotation.z = -0.07;
 
         renderer.render( scene, camera );
 
