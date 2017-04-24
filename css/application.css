@@ -51,6 +51,12 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+html, body {
+  overflow: hidden; }
+
+html, body {
+  overflow: hidden; }
+
 header {
   width: 100vw;
   position: relative; }
@@ -71,12 +77,21 @@ header {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   display: flex;
-  background-color: #AFDBD1;
+  background-color: #FFFFFF;
   height: 100vh; }
   #container:last-child:not(:first-child) {
     float: right; }
   #container input {
     align-self: center; }
+
+.background {
+  border-bottom: 100vh solid #AFDBD1;
+  border-left: 180px solid transparent;
+  border-right: 180px solid transparent;
+  height: 0;
+  width: 50%;
+  position: absolute;
+  left: calc(50% - 180px); }
 
 @font-face {
   font-family: "Nunito";

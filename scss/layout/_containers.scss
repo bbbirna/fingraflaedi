@@ -1,7 +1,7 @@
 #container {
 	@include grid-column($columns:12, $gutters:16px);
 	@include flexy();
-	background-color: $Sinbad;
+	background-color: $White;
 	height: 100vh;
 	input{
 		align-self: center;

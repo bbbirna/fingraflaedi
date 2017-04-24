@@ -2,10 +2,11 @@
 $white          : #fff;
 $black          : #000;
 
-$Honeysuckle  : #FAFD7B;
-$CreamCan	: #F3C362;
-$Sinbad	: #AFDBD1;
-$BabyPink	: #EDC8CD;
+$Honeysuckle	: #FAFD7B;
+$CreamCan		: #F3C362;
+$Sinbad			: #AFDBD1;
+$BabyPink		: #EDC8CD;
+$White			: #FFFFFF;
 
 // Opacity 
 $op-inactive	: 50%;
@@ -31,19 +32,19 @@ $br: 10px;
 
 // Asset paths
 
-$path-img  : '../img';
-$path-font : '../fonts';
-$path-icon : '../icon';
-$path-icon-Letter : '../icon/alphabet';
-$path-logo : '../logo';
+$path-img  			: '../img';
+$path-font 			: '../fonts';
+$path-icon 			: '../icon';
+$path-icon-Letter 	: '../icon/alphabet';
+$path-logo 			: '../logo';
 // Media query breakpoints
 
 $brk-narrow : '(max-width: 768px)';
 $brk-wide   : '(max-width: 1024px)';
 
 // Layout
-$max-width: 1000px;
-$gutter: 10px;
+$max-width		: 1000px;
+$gutter			: 10px;
 
 // Breakpoints
 $breakpoints: (
