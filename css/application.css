@@ -1,4 +1,9 @@
-@charset "UTF-8";
+/**
+ * Foundation for Sites by ZURB
+ * Version 6.3.1
+ * foundation.zurb.com
+ * Licensed under MIT Open Source
+ */
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -61,11 +66,15 @@ header {
   to {
     transform: rotate(450deg) translate(35%, 20%); } }
 #container {
+  width: 100%;
+  float: left;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
   display: flex;
   background-color: #AFDBD1;
-  height: 100vh;
-      shape-outside: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
-      shape-margin: 20px; }
+  height: 100vh; }
+  #container:last-child:not(:first-child) {
+    float: right; }
   #container input {
     align-self: center; }
 
@@ -81,6 +90,10 @@ header {
   font-family: "Nunito";
   src: url("../fonts/Nunito-Bold.eot");
   src: url("../fonts/Nunito-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Nunito-Bold.woff") format("woff"), url("../fonts/Nunito-Bold.ttf") format("truetype"); }
+@font-face {
+  font-family: "Nunito";
+  src: url("../fonts/Nunito-ExtraLight.eot");
+  src: url("../fonts/Nunito-ExtraLight.eot?#iefix") format("embedded-opentype"), url("../fonts/Nunito-ExtraLight.woff") format("woff"), url("../fonts/Nunito-ExtraLight.ttf") format("truetype"); }
 h1 {
   font-family: "Nunito", sans-serif;
   font-weight: 700; }
@@ -99,6 +112,41 @@ li {
 
 a {
   text-decoration: none; }
+
+button {
+  outline: none;
+  font-family: "Nunito", sans-serif; }
+
+.btn-share {
+  font-weight: 300;
+  border: solid 1px #fff;
+  color: #fff;
+  opacity: 50%;
+  background-color: transparent;
+  height: 42px;
+  width: 192px;
+  font-size: 16px;
+  transition: .5s ease;
+  letter-spacing: 5px; }
+  .btn-share:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #AFDBD1;
+    border: none; }
+  .btn-share:active {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #AFDBD1;
+    border: none; }
+.btn-alpha {
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.5);
+  align-self: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 30px;
+  width: 72px;
+  height: 106px;
+  border: none;
+  height: 50px;
+  border-radius: 100px 0 0 100px; }
 
 input {
   font-family: "Nunito", sans-serif;

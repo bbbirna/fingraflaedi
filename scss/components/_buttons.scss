@@ -1,0 +1,62 @@
+// %btn {
+//   color: $white;
+//   display: inline-block;
+//   font-weight: bold;
+//   text-decoration: none;
+//   text-transform: uppercase;
+//   padding: 0.75em 1.5em;
+//   border-radius: 0.35em;
+//   transition: opacity 0.3s;
+//   &:hover {
+//     color: $white;
+//     opacity: 0.8;
+//   }
+//   &:active {
+//     opacity: initial;
+//   }
+// }
+
+button {
+  outline: none;
+  font-family: $stack-nunito;
+}
+.btn {
+  &-share{
+  font-weight: $font-light;
+  border: solid 1px $white;
+  color: $white;
+  opacity: 50%;
+  background-color: transparent;
+  height: 42px;
+  width: 192px;
+  font-size: 16px;
+  transition: .5s ease;
+  letter-spacing: 5px;
+  &:hover {
+    background-color: $black-opacity;
+    color: $Sinbad;
+    border: none;
+  }
+  &:active {
+    background-color: $black-opacity;
+    color: $Sinbad;
+    border: none;
+  }
+  }
+  &-alpha {
+    font-weight: $font-bold;
+    color: $black-opacity;
+    align-self:center;
+    background-color: $white-opacity;
+    font-size: 30px;
+    width: 72px;
+    height: 106px;
+    border:  none;
+    height: 50px;
+    border-radius: 100px 0 0 100px;
+    &:hover {
+
+    }
+    &:active {}
+  }
+}

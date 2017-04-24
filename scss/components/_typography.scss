@@ -1,6 +1,7 @@
 @include font-face('Nunito', Nunito-Light);
 @include font-face('Nunito', Nunito-Regular);
 @include font-face('Nunito', Nunito-Bold);
+@include font-face('Nunito', Nunito-ExtraLight);
 // @include font-face('Roboto', Roboto-Black);
 // @include font-face('Roboto', Roboto-Thin);
 // @include font-face('Roboto', Roboto-Regular);
@@ -35,3 +36,4 @@ li {
 a {
 	text-decoration: none;
 }
+

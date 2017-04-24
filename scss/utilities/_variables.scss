@@ -7,18 +7,23 @@ $CreamCan	: #F3C362;
 $Sinbad	: #AFDBD1;
 $BabyPink	: #EDC8CD;
 
-
-$Opacity-fifty	: 50%;
-
-
+// Opacity 
+$op-inactive	: 50%;
+$black-opacity :	rgba(0,0,0,.5);
+$white-opacity : rgba(255,255,255,.5);
+// Shadow
 $color-shadow       : rgba($black,.5);
 
-// $stack-roboto  : 'Roboto', sans-serif;
+//Font family
 $stack-nunito  : 'Nunito', sans-serif;
 
+$font-extralight: 200;
 $font-light: 300;
 $font-regular: 400;
-$font-bold: 700;
+$font-bold: 700; 
+
+//Letter Spacing
+
 
 // Border radius
 

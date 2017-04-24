@@ -1,9 +1,8 @@
 #container {
+	@include grid-column($columns:12, $gutters:16px);
 	@include flexy();
 	background-color: $Sinbad;
 	height: 100vh;
-    shape-outside: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
-    shape-margin: 20px;
 	input{
 		align-self: center;
 	}
