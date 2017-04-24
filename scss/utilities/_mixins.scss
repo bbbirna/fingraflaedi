@@ -1,0 +1,79 @@
+@mixin font-face($family, $file) {
+  @font-face {
+    font-family: $family;
+    src: url('#{$path-font}/#{$file}.eot');
+    src: url('#{$path-font}/#{$file}.eot?#iefix') format('embedded-opentype'),
+         url('#{$path-font}/#{$file}.woff') format('woff'),
+         url('#{$path-font}/#{$file}.ttf') format('truetype');
+  }
+}
+
+
+// Text
+
+@mixin text($size, $l-height: null, $weight: null, $color: null) {
+  font-size: $size;
+  line-height: $l-height;
+  font-weight: $weight;
+  color: $color;
+}
+
+
+// Center containers
+@mixin center($w) {
+  width: $w;
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Rounded elements
+@mixin roundy($dim, $brdr: null) {
+  width: $dim;
+  height: $dim;
+  border: $brdr;
+  border-radius: 50%;
+}
+  
+// Create a flex container
+@mixin flexy(
+  $disp: flex,
+  $dir: null,
+  $wrap: null,
+  $just: null) {
+  display: $disp;
+  flex-direction: $dir;
+  flex-wrap: $wrap;
+  justify-content: $just;
+}
+
+// Media queries
+@mixin mq($break) {  
+  $value: map-get($breakpoints, $break);
+  $sm: map-get($breakpoints, 'sm');            
+  
+  @if $value == null {
+    @error "`#{$break}` is not a valid breakpoint name.";          
+  }          
+            
+  @else if $value < $sm {
+    @media (max-width: $value) {
+      @content;       
+    }          
+  }    
+  @else {
+    @media (min-width: $value) {
+      @content;       
+    }             
+  }  
+}
+
+// Colors
+@mixin themes($map) {
+  @each $theme, $color in $map {
+    &-#{$theme} {
+      color: $color;
+    }
+  } 
+}
+

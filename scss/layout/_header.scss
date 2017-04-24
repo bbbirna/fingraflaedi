@@ -1,38 +1,18 @@
 header {
 	width: 100vw;
-	height: calc(100vh * 0.1);
+	// height: calc(100% * 0.1);
 	position: relative;
 	// display: flex;
 	// align-items: center;
 	// justify-content: space-between;
-
 	.logo{
-		margin-left: 24px; 
-		height: 100%;
-		width: 30px;
+		top: 40px;
+		left: 40px;
 		position: absolute;
-	}
-	.menu {
-		position: absolute;
-		z-index: 100;
 		width: 70px;
-		height: 100%;
-		right: 0;
-
-		&.closebtn{
-			animation: rotateMenuX .5s forwards;}
-		}
-		.menuIcon{
-			margin-right: 24px; 
-			width: 40px;
-			height: 100%;
-			polygon {
-				fill: pink;
-				transition: all .3s ease;
-			}
-			
 	}
 }
+
 @keyframes rotateMenuX {
 	from{
 		transform: rotate(0);}
@@ -40,46 +20,3 @@ header {
 		transform: rotate(450deg) translate(35%,20%);
 }
 }
-
-// /* The Overlay (background) */
-// .overlay {
-//     /* Height & width depends on how you want to reveal the overlay (see JS below) */    
-//     height: 100%;
-//     width: 0;
-//     position: fixed; /* Stay in place */
-//     z-index: 1; /* Sit on top */
-//     left: 0;
-//     top: 0;
-//     background-color: rgb(0,0,0); /* Black fallback color */
-//     background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
-//     overflow-x: hidden; /* Disable horizontal scroll */
-//     transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
-// }
-
-// .overlay-content {
-//     position: relative;
-//     top: 25%; /* 25% from the top */
-//     width: 100%; /* 100% width */
-//     text-align: center; /* Centered text/links */
-//     margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
-// }
-
-// // .overlay a {
-// //     padding: 8px;
-// //     text-decoration: none;
-// //     font-size: 36px;
-// //     color: #818181;
-// //     display: block; /* Display block instead of inline */
-// //     transition: 0.3s; /* Transition effects on hover (color) */
-// // }
-
-// // .overlay a:hover, .overlay a:focus {
-// //     color: #f1f1f1;
-// // }
-
-// .overlay .closebtn {
-//     position: absolute;
-//     top: 20px;
-//     right: 45px;
-//     font-size: 60px;
-// }
