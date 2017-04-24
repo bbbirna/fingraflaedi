@@ -1,27 +1,59 @@
+@charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
 header {
   width: 100vw;
-  height: calc(100vh * 0.1);
   position: relative; }
   header .logo {
-    margin-left: 24px;
-    height: 100%;
-    width: 30px;
-    position: absolute; }
-  header .menu {
+    top: 40px;
+    left: 40px;
     position: absolute;
-    z-index: 100;
-    width: 70px;
-    height: 100%;
-    right: 0; }
-    header .menu.closebtn {
-      animation: rotateMenuX .5s forwards; }
-  header .menuIcon {
-    margin-right: 24px;
-    width: 40px;
-    height: 100%; }
-    header .menuIcon polygon {
-      fill: pink;
-      transition: all .3s ease; }
+    width: 70px; }
 
 @keyframes rotateMenuX {
   from {
@@ -29,29 +61,34 @@ header {
   to {
     transform: rotate(450deg) translate(35%, 20%); } }
 #container {
-  height: calc(100vh * 0.9);
-  background-color: #FAFD7B; }
+  display: flex;
+  background-color: #AFDBD1;
+  height: 100vh;
+      shape-outside: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
+      shape-margin: 20px; }
+  #container input {
+    align-self: center; }
 
 @font-face {
   font-family: "Nunito";
-  src: url("../fonts/Nunito-Thin.eot");
-  src: url("../fonts/Nunito-Thin.eot?#iefix") format("embedded-opentype"), url("../fonts/Nunito-Thin.woff") format("woff"), url("../fonts/Nunito-Thin.ttf") format("truetype"); }
+  src: url("../fonts/Nunito-Light.eot");
+  src: url("../fonts/Nunito-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/Nunito-Light.woff") format("woff"), url("../fonts/Nunito-Light.ttf") format("truetype"); }
 @font-face {
-  font-family: "Roboto";
-  src: url("../fonts/Roboto-Black.eot");
-  src: url("../fonts/Roboto-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Black.woff") format("woff"), url("../fonts/Roboto-Black.ttf") format("truetype"); }
+  font-family: "Nunito";
+  src: url("../fonts/Nunito-Regular.eot");
+  src: url("../fonts/Nunito-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Nunito-Regular.woff") format("woff"), url("../fonts/Nunito-Regular.ttf") format("truetype"); }
 @font-face {
-  font-family: "Roboto";
-  src: url("../fonts/Roboto-Thin.eot");
-  src: url("../fonts/Roboto-Thin.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Thin.woff") format("woff"), url("../fonts/Roboto-Thin.ttf") format("truetype"); }
-@font-face {
-  font-family: "Roboto";
-  src: url("../fonts/Roboto-Regular.eot");
-  src: url("../fonts/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Regular.woff") format("woff"), url("../fonts/Roboto-Regular.ttf") format("truetype"); }
+  font-family: "Nunito";
+  src: url("../fonts/Nunito-Bold.eot");
+  src: url("../fonts/Nunito-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Nunito-Bold.woff") format("woff"), url("../fonts/Nunito-Bold.ttf") format("truetype"); }
 h1 {
-  font-family: "Roboto", sans-serif; }
+  font-family: "Nunito", sans-serif;
+  font-weight: 700; }
 
 h6 {
+  font-family: "Nunito", sans-serif; }
+
+p {
   font-family: "Nunito", sans-serif; }
 
 ul {
@@ -62,5 +99,16 @@ li {
 
 a {
   text-decoration: none; }
+
+input {
+  font-family: "Nunito", sans-serif;
+  font-weight: 300;
+  font-size: 36px; }
+  input:focus {
+    outline: none; }
+  input.input {
+    background: transparent;
+    border-style: none;
+    border-bottom: solid 2px black; }
 
 /*# sourceMappingURL=application.css.map */

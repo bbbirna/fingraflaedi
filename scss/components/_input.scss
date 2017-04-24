@@ -1,0 +1,16 @@
+
+input {
+	font-family: $stack-nunito;
+	font-weight: 300;
+	font-size: 36px;
+	&:focus{
+    outline: none;
+	}
+	&.input {
+	background: transparent;
+	// background-color: transparent;
+	border-style: none;
+	border-bottom: solid 2px black;
+}
+}
+
