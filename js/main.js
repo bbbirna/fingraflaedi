@@ -76,7 +76,7 @@ window.onload = function (event) {
         setTimeout(handleResize, 1);
 
         var counter = 0;
-        var max = 1.4;
+        var max = 2;
         var min = 0;
 
 
@@ -100,108 +100,185 @@ window.onload = function (event) {
             }
         }
 
-
         var reverse = false;
-        function render() {
-            requestAnimationFrame( render );
+        function rotateBoneX ( bone, minVal, maxVal, rotation, counterAdd) {
+            min = minVal;
+            max = maxVal;
+
+            if(rotation < min) rotation = max;
+            if(rotation > max) rotation = min;
+            //console.log(rotation)
+           
+            bone.rotation.x = rotation;
             if(reverse) {
-                counter -= 0.01;
+                counter -= counterAdd;
                 if(counter < min) {
                     counter = min;
                     reverse = false;
                 }
-            } else {
-                counter += 0.01;
+            } 
+            else {
+                counter += counterAdd;
                 if(counter > max) {
                     counter = max;
                     reverse = true;
                 }
             }
+        }
+
+        
+
+
+  
+
+
+        
+        function render() {
+            requestAnimationFrame( render );
+            // if(reverse) {
+            //     counter -= 0.01;
+            //     if(counter < min) {
+            //         counter = min;
+            //         reverse = false;
+            //     }
+            // } 
+            // else {
+            //     counter += 0.01;
+            //     if(counter > max) {
+            //         counter = max;
+            //         reverse = true;
+            //     }
+            // }
+
+            //console.log(counter);
+
+            rotateBoneX(model.skeleton.bones[14], 0, 1.2, counter, 0.001);
+            rotateBoneX(model.skeleton.bones[15], 0, 2.7, counter, 0.001);
+            rotateBoneX(model.skeleton.bones[16], 0, 3.3, counter, 0.001);
+
+
+            
+
+
+            //rotateBoneX(model.skeleton.bones[19], 0, 1, counter);
+
+            // if (counter > 0 && counter < 1.3) {
+            //     rotateChildX(model.skeleton.bones[14], counter)
+            // }
+
+            // if (counter > 0 && counter < 1.3) {
+            //     rotateChildX(model.skeleton.bones[15], counter)
+            // }
+
+            // if (counter > 0 && counter < 0.5) {
+            //     rotateChildX(model.skeleton.bones[16], counter)
+            // }
+
+            // if (counter > -0.6) {
+            //     rotateChildY(model.skeleton.bones[14], counter)
+            // }
+
+            // if (counter > -0.2) {
+            //     rotateChildY(model.skeleton.bones[15], counter)
+            // }
+
+            // if (counter > 0) {
+            //     rotateChildY(model.skeleton.bones[16], counter)
+            // }
+
+            
+
+
+            // model.skeleton.bones[14].rotation.x = count0;
+            // model.skeleton.bones[15].rotation.x = count1;
+            // model.skeleton.bones[16].rotation.x = count2;
+
+            // model.skeleton.bones[14].rotation.y = count3;
+            // model.skeleton.bones[15].rotation.y = count4;
+            // model.skeleton.bones[16].rotation.y = count5;
+
+            // model.skeleton.bones[14].rotation.z = count6;
+            // model.skeleton.bones[15].rotation.z = count7;
+            // model.skeleton.bones[16].rotation.z = count8;
+
+
+            // //VISIFINGUR
+
+            // model.skeleton.bones[19].rotation.x = count9;
+            // model.skeleton.bones[20].rotation.x = count10;
+            // model.skeleton.bones[21].rotation.x = count11;
+
+            // model.skeleton.bones[19].rotation.y = count12;
+            // model.skeleton.bones[20].rotation.y = count13;
+            // model.skeleton.bones[21].rotation.y = count14;
+
+            // model.skeleton.bones[19].rotation.z = count15;
+            // model.skeleton.bones[20].rotation.z = count16;
+            // model.skeleton.bones[21].rotation.z = count17;
+
+
+            // //BAUGFINGUR
+
+            // model.skeleton.bones[9].rotation.x = count18;
+            // model.skeleton.bones[10].rotation.x = count19;
+            // model.skeleton.bones[11].rotation.x = count20;
+
+            // model.skeleton.bones[9].rotation.y = count21;
+            // model.skeleton.bones[10].rotation.y = count22;
+            // model.skeleton.bones[11].rotation.y = count23;
+
+            // model.skeleton.bones[9].rotation.z = count24;
+            // model.skeleton.bones[10].rotation.z = count25;
+            // model.skeleton.bones[11].rotation.z = count26;
+
+
+            // //FU
+
+            // model.skeleton.bones[4].rotation.x = count27;
+            // model.skeleton.bones[5].rotation.x = count28;
+            // model.skeleton.bones[6].rotation.x = count29;
+
+            // model.skeleton.bones[4].rotation.y = count30;
+            // model.skeleton.bones[5].rotation.y = count31;
+            // model.skeleton.bones[6].rotation.y = count32;
+
+            // model.skeleton.bones[4].rotation.z = count33;
+            // model.skeleton.bones[5].rotation.z = count34;
+            // model.skeleton.bones[6].rotation.z = count35;
+
+
+            // //THUMB
+
+            // model.skeleton.bones[23].rotation.x = count36;
+            // model.skeleton.bones[24].rotation.x = count37;
+            // model.skeleton.bones[25].rotation.x = count38;
+
+            // model.skeleton.bones[23].rotation.y = count39;
+            // model.skeleton.bones[24].rotation.y = count40;
+            // model.skeleton.bones[25].rotation.y = count41;
+
+            // model.skeleton.bones[23].rotation.z = count42;
+            // model.skeleton.bones[24].rotation.z = count43;
+            // model.skeleton.bones[25].rotation.z = count44;
+
+
+            // //ULNLIÐUR
+
+            // model.skeleton.bones[1].rotation.x = count45;
+            // model.skeleton.bones[1].rotation.y = count46;
+            // model.skeleton.bones[1].rotation.z = count47;
 
 
 
-        //     model.skeleton.bones[14].rotation.x = count0;
-        // model.skeleton.bones[15].rotation.x = count1;
-        // model.skeleton.bones[16].rotation.x = count2;
-
-        // model.skeleton.bones[14].rotation.y = count3;
-        // model.skeleton.bones[15].rotation.y = count4;
-        // model.skeleton.bones[16].rotation.y = count5;
-
-        // model.skeleton.bones[14].rotation.z = count6;
-        // model.skeleton.bones[15].rotation.z = count7;
-        // model.skeleton.bones[16].rotation.z = count8;
-
-
-        // //VISIFINGUR
-
-        // model.skeleton.bones[19].rotation.x = count9;
-        // model.skeleton.bones[20].rotation.x = count10;
-        // model.skeleton.bones[21].rotation.x = count11;
-
-        // model.skeleton.bones[19].rotation.y = count12;
-        // model.skeleton.bones[20].rotation.y = count13;
-        // model.skeleton.bones[21].rotation.y = count14;
-
-        // model.skeleton.bones[19].rotation.z = count15;
-        // model.skeleton.bones[20].rotation.z = count16;
-        // model.skeleton.bones[21].rotation.z = count17;
-
-
-        // //BAUGFINGUR
-
-        // model.skeleton.bones[9].rotation.x = count18;
-        // model.skeleton.bones[10].rotation.x = count19;
-        // model.skeleton.bones[11].rotation.x = count20;
-
-        // model.skeleton.bones[9].rotation.y = count21;
-        // model.skeleton.bones[10].rotation.y = count22;
-        // model.skeleton.bones[11].rotation.y = count23;
-
-        // model.skeleton.bones[9].rotation.z = count24;
-        // model.skeleton.bones[10].rotation.z = count25;
-        // model.skeleton.bones[11].rotation.z = count26;
-
-
-        // //FU
-
-        // model.skeleton.bones[4].rotation.x = count27;
-        // model.skeleton.bones[5].rotation.x = count28;
-        // model.skeleton.bones[6].rotation.x = count29;
-
-        // model.skeleton.bones[4].rotation.y = count30;
-        // model.skeleton.bones[5].rotation.y = count31;
-        // model.skeleton.bones[6].rotation.y = count32;
-
-        // model.skeleton.bones[4].rotation.z = count33;
-        // model.skeleton.bones[5].rotation.z = count34;
-        // model.skeleton.bones[6].rotation.z = count35;
-
-
-        // //THUMB
-
-        // model.skeleton.bones[23].rotation.x = count36;
-        // model.skeleton.bones[24].rotation.x = count37;
-        // model.skeleton.bones[25].rotation.x = count38;
-
-        // model.skeleton.bones[23].rotation.y = count39;
-        // model.skeleton.bones[24].rotation.y = count40;
-        // model.skeleton.bones[25].rotation.y = count41;
-
-        // model.skeleton.bones[23].rotation.z = count42;
-        // model.skeleton.bones[24].rotation.z = count43;
-        // model.skeleton.bones[25].rotation.z = count44;
-
-
-        // //ULNLIÐUR
-
-        // model.skeleton.bones[1].rotation.x = count45;
-        // model.skeleton.bones[1].rotation.y = count46;
-        // model.skeleton.bones[1].rotation.z = count47;
 
 
 
            
+
+
+
+
+
 
             renderer.render( scene, camera );
 
@@ -217,6 +294,8 @@ window.onload = function (event) {
 
             e = e || window.event;
 
+
+            //A
             if (e.keyCode == '65') {
                 console.log("A");
 
@@ -281,10 +360,122 @@ window.onload = function (event) {
                 model.skeleton.bones[20].rotation.z = 0;
                 model.skeleton.bones[21].rotation.z = 0;
 
+                //ULNLIÐUR
+
+                model.skeleton.bones[1].rotation.x = 0;
+                model.skeleton.bones[1].rotation.y = 0;
+                model.skeleton.bones[1].rotation.z = 0;
+
+                //ANNAÐ
+
+                model.skeleton.bones[7].rotation.z = 0;
+                model.skeleton.bones[12].rotation.z = 0;
+                model.skeleton.bones[17].rotation.z = 0;
+
 
 
             }
 
+            //B
+            else if (e.keyCode == '66') {
+                console.log("B");
+
+                 //LITLIPUTTI
+
+                model.skeleton.bones[14].rotation.x = 0;
+                model.skeleton.bones[15].rotation.x = 0;
+                model.skeleton.bones[16].rotation.x = 0;
+
+                model.skeleton.bones[14].rotation.y = 0;
+                model.skeleton.bones[15].rotation.y = 0;
+                model.skeleton.bones[16].rotation.y = 0;
+
+                model.skeleton.bones[14].rotation.z = 0.3;
+                model.skeleton.bones[15].rotation.z = 0;
+                model.skeleton.bones[16].rotation.z = 0;
+
+
+                //BAUGFINGUR
+
+                model.skeleton.bones[9].rotation.x = 0;
+                model.skeleton.bones[10].rotation.x = 0;
+                model.skeleton.bones[11].rotation.x = 0;
+
+                model.skeleton.bones[9].rotation.y = 0;
+                model.skeleton.bones[10].rotation.y = 0;
+                model.skeleton.bones[11].rotation.y = 0;
+
+                model.skeleton.bones[9].rotation.z = 0.1;
+                model.skeleton.bones[10].rotation.z = 0;
+                model.skeleton.bones[11].rotation.z = 0;
+
+
+                //FU
+
+                model.skeleton.bones[4].rotation.x = 0;
+                model.skeleton.bones[5].rotation.x = 0;
+                model.skeleton.bones[6].rotation.x = 0;
+
+                model.skeleton.bones[4].rotation.y = 0;
+                model.skeleton.bones[5].rotation.y = 0;
+                model.skeleton.bones[6].rotation.y = 0;
+
+                model.skeleton.bones[4].rotation.z = 0;
+                model.skeleton.bones[5].rotation.z = 0;
+                model.skeleton.bones[6].rotation.z = 0;
+
+
+
+
+                //VISIFINGUR
+
+                model.skeleton.bones[19].rotation.x = 0;
+                model.skeleton.bones[20].rotation.x = 0;
+                model.skeleton.bones[21].rotation.x = 0;
+
+                model.skeleton.bones[19].rotation.y = 0;
+                model.skeleton.bones[20].rotation.y = 0;
+                model.skeleton.bones[21].rotation.y = 0;
+
+                model.skeleton.bones[19].rotation.z = -0.1;
+                model.skeleton.bones[20].rotation.z = 0;
+                model.skeleton.bones[21].rotation.z = 0;
+
+
+
+
+                //THUMB
+
+                model.skeleton.bones[23].rotation.x = 0;
+                model.skeleton.bones[24].rotation.x = 0;
+                model.skeleton.bones[25].rotation.x = 0;
+
+                model.skeleton.bones[23].rotation.y = 0.3;
+                model.skeleton.bones[24].rotation.y = 0;
+                model.skeleton.bones[25].rotation.y = 0;
+
+                model.skeleton.bones[23].rotation.z = -0.3;
+                model.skeleton.bones[24].rotation.z = -0.3;
+                model.skeleton.bones[25].rotation.z = 0.5;
+
+
+                //ULNLIÐUR
+
+                model.skeleton.bones[1].rotation.x = 0;
+                model.skeleton.bones[1].rotation.y = 0;
+                model.skeleton.bones[1].rotation.z = 0;
+
+                //ANNAÐ
+
+                model.skeleton.bones[7].rotation.z = 0.03;
+                model.skeleton.bones[12].rotation.z = 0.09;
+                model.skeleton.bones[17].rotation.z = -0.07;
+
+
+            }
+
+
+            //C
             else if (e.keyCode == '67') {
                 console.log("c");
 
@@ -370,12 +561,22 @@ window.onload = function (event) {
                 model.skeleton.bones[1].rotation.x = 0;
                 model.skeleton.bones[1].rotation.y = 0;
                 model.skeleton.bones[1].rotation.z = 0;
+
+
+                //ANNAÐ
+
+                model.skeleton.bones[7].rotation.z = 0;
+                model.skeleton.bones[12].rotation.z = 0;
+                model.skeleton.bones[17].rotation.z = 0;
+
+           
+
             }
 
+            //SPACE
             else if (e.keyCode == '32') {
+                console.log("space");
 
-                console.log("c");
-                
                 model.skeleton.bones[14].rotation.x = 0;
                 model.skeleton.bones[15].rotation.x = 0;
                 model.skeleton.bones[16].rotation.x = 0;
@@ -459,9 +660,24 @@ window.onload = function (event) {
                 model.skeleton.bones[1].rotation.y = 0;
                 model.skeleton.bones[1].rotation.z = 0;
 
+
+                //ANNAÐ
+
+                model.skeleton.bones[7].rotation.z = 0;
+                model.skeleton.bones[12].rotation.z = 0;
+                model.skeleton.bones[17].rotation.z = 0;
+
+           
+
             }
 
-        render();
+            if (e.keyCode == '81') {
+                console.log("hlihuhuhu")
+
+                rotateBoneX(model.skeleton.bones[19], 0, 0.9, counter, 0.1);
+            }
+
+            render();
 
         }
         
