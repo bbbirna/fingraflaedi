@@ -6,5 +6,11 @@
 	width: 100%;
 	position: absolute;
 	z-index: -1;
+}
+.bg-right {
 	left: calc(50% - 90px);
 }
+.bg-left {
+	right: calc(50% - 90px);
+}
+

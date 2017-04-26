@@ -1648,7 +1648,7 @@ pre {
 .long-delay {
   animation-delay: 0.7s !important; }
 
-html, body {
+html, body, .horizontal-content {
   overflow: hidden; }
 
 header {
@@ -1665,39 +1665,39 @@ header {
     transform: rotate(0); }
   to {
     transform: rotate(450deg) translate(35%, 20%); } }
-.main-content {
-  display: flex; }
-
 .first-half {
   display: flex;
   height: 100vh;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  align-items: center; }
+  justify-content: center; }
   .first-half .user-input {
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    align-items: center; }
+    align-self: flex-end; }
     .first-half .user-input .input {
+      margin: auto;
       box-shadow: none;
       background: transparent;
       border-style: none;
       outline: none;
       position: relative; }
+  .first-half .controls-icon {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-self: flex-end;
+    margin-bottom: 50px; }
 
 .second-half {
   display: flex;
   flex-direction: column;
   align-content: center;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center; }
   .second-half #container {
     height: calc(100vh - 200px);
     width: calc(50vw - 200px); }
+  .second-half .btn-share {
+    margin-bottom: 90px; }
 
 .background {
   border-bottom: 100vh solid #AFDBD1;
@@ -1706,8 +1706,13 @@ header {
   height: 0;
   width: 100%;
   position: absolute;
-  z-index: -1;
+  z-index: -1; }
+
+.bg-right {
   left: calc(50% - 90px); }
+
+.bg-left {
+  right: calc(50% - 90px); }
 
 @font-face {
   font-family: "Nunito";
@@ -1733,7 +1738,7 @@ a {
 button {
   outline: none; }
 
-.btn-share {
+#btn-share {
   font-family: nunito-light;
   border: solid 1px #fff;
   color: #fff;
@@ -1743,16 +1748,17 @@ button {
   width: 192px;
   font-size: 16px;
   transition: .5s ease;
-  letter-spacing: 5px; }
-  .btn-share:hover {
+  letter-spacing: 5px;
+  margin-bottom: 90px; }
+  #btn-share:hover {
     background-color: rgba(0, 0, 0, 0.5);
     color: #AFDBD1;
     border: none; }
-  .btn-share:active {
+  #btn-share:active {
     background-color: rgba(0, 0, 0, 0.5);
     color: #AFDBD1;
     border: none; }
-.btn-alpha {
+#btn-alpha {
   position: absolute;
   right: 0;
   z-index: 10;
@@ -1766,12 +1772,527 @@ button {
   height: 50px;
   border-radius: 100px 0 0 100px;
   transition: .3s ease; }
-  .btn-alpha:hover {
+  #btn-alpha:hover {
     border: none;
     width: 70px; }
-  .btn-alpha:active {
+  #btn-alpha:active {
     transition: .01s ease;
     border: none; }
+
+@keyframes endlessloop {
+  0% {
+    top: 13px;
+    left: 30px; }
+  0.61% {
+    top: 13px;
+    left: 30px; }
+  1.22% {
+    top: 12.29px;
+    left: 29.29px; }
+  1.83% {
+    top: 11.59px;
+    left: 28.59px; }
+  2.44% {
+    top: 10.88px;
+    left: 27.88px; }
+  3.05% {
+    top: 10.17px;
+    left: 27.17px; }
+  3.66% {
+    top: 9.46px;
+    left: 26.46px; }
+  4.27% {
+    top: 8.76px;
+    left: 25.76px; }
+  4.88% {
+    top: 8.05px;
+    left: 25.05px; }
+  5.49% {
+    top: 7.34px;
+    left: 24.34px; }
+  6.1% {
+    top: 6.64px;
+    left: 23.64px; }
+  6.71% {
+    top: 5.92px;
+    left: 22.94px; }
+  7.32% {
+    top: 5.19px;
+    left: 22.25px; }
+  7.93% {
+    top: 4.51px;
+    left: 21.52px; }
+  8.54% {
+    top: 3.87px;
+    left: 20.75px; }
+  9.15% {
+    top: 3.29px;
+    left: 19.94px; }
+  9.76% {
+    top: 2.75px;
+    left: 19.1px; }
+  10.37% {
+    top: 2.28px;
+    left: 18.22px; }
+  10.98% {
+    top: 1.87px;
+    left: 17.31px; }
+  11.59% {
+    top: 1.53px;
+    left: 16.37px; }
+  12.2% {
+    top: 1.27px;
+    left: 15.4px; }
+  12.8% {
+    top: 1.09px;
+    left: 14.42px; }
+  13.41% {
+    top: 1.01px;
+    left: 13.42px; }
+  14.02% {
+    top: 1.02px;
+    left: 12.42px; }
+  14.63% {
+    top: 1.11px;
+    left: 11.43px; }
+  15.24% {
+    top: 1.3px;
+    left: 10.44px; }
+  15.85% {
+    top: 1.58px;
+    left: 9.48px; }
+  16.46% {
+    top: 1.93px;
+    left: 8.55px; }
+  17.07% {
+    top: 2.35px;
+    left: 7.64px; }
+  17.68% {
+    top: 2.83px;
+    left: 6.77px; }
+  18.29% {
+    top: 3.38px;
+    left: 5.93px; }
+  18.9% {
+    top: 3.97px;
+    left: 5.12px; }
+  19.51% {
+    top: 4.62px;
+    left: 4.36px; }
+  20.12% {
+    top: 5.3px;
+    left: 3.63px; }
+  20.73% {
+    top: 6.04px;
+    left: 2.96px; }
+  21.34% {
+    top: 6.86px;
+    left: 2.39px; }
+  21.95% {
+    top: 7.76px;
+    left: 1.94px; }
+  22.56% {
+    top: 8.7px;
+    left: 1.6px; }
+  23.17% {
+    top: 9.66px;
+    left: 1.34px; }
+  23.78% {
+    top: 10.64px;
+    left: 1.16px; }
+  24.39% {
+    top: 11.64px;
+    left: 1.05px; }
+  25% {
+    top: 12.64px;
+    left: 1px; }
+  25.61% {
+    top: 13.64px;
+    left: 1.01px; }
+  26.22% {
+    top: 14.63px;
+    left: 1.08px; }
+  26.83% {
+    top: 15.63px;
+    left: 1.2px; }
+  27.44% {
+    top: 16.61px;
+    left: 1.4px; }
+  28.05% {
+    top: 17.57px;
+    left: 1.68px; }
+  28.66% {
+    top: 18.49px;
+    left: 2.05px; }
+  29.27% {
+    top: 19.37px;
+    left: 2.53px; }
+  29.88% {
+    top: 20.16px;
+    left: 3.14px; }
+  30.49% {
+    top: 20.89px;
+    left: 3.83px; }
+  31.1% {
+    top: 21.57px;
+    left: 4.56px; }
+  31.71% {
+    top: 22.2px;
+    left: 5.34px; }
+  32.32% {
+    top: 22.78px;
+    left: 6.15px; }
+  32.93% {
+    top: 23.31px;
+    left: 7px; }
+  33.54% {
+    top: 23.77px;
+    left: 7.88px; }
+  34.15% {
+    top: 24.18px;
+    left: 8.8px; }
+  34.76% {
+    top: 24.51px;
+    left: 9.74px; }
+  35.37% {
+    top: 24.76px;
+    left: 10.71px; }
+  35.98% {
+    top: 24.92px;
+    left: 11.7px; }
+  36.59% {
+    top: 25px;
+    left: 12.69px; }
+  37.2% {
+    top: 24.98px;
+    left: 13.69px; }
+  37.8% {
+    top: 24.87px;
+    left: 14.69px; }
+  38.41% {
+    top: 24.67px;
+    left: 15.67px; }
+  39.02% {
+    top: 24.39px;
+    left: 16.63px; }
+  39.63% {
+    top: 24.03px;
+    left: 17.56px; }
+  40.24% {
+    top: 23.6px;
+    left: 18.46px; }
+  40.85% {
+    top: 23.11px;
+    left: 19.33px; }
+  41.46% {
+    top: 22.56px;
+    left: 20.17px; }
+  42.07% {
+    top: 21.96px;
+    left: 20.97px; }
+  42.68% {
+    top: 21.31px;
+    left: 21.73px; }
+  43.29% {
+    top: 20.61px;
+    left: 22.45px; }
+  43.9% {
+    top: 19.88px;
+    left: 23.12px; }
+  44.51% {
+    top: 19.17px;
+    left: 23.83px; }
+  45.12% {
+    top: 18.46px;
+    left: 24.54px; }
+  45.73% {
+    top: 17.76px;
+    left: 25.24px; }
+  46.34% {
+    top: 17.05px;
+    left: 25.95px; }
+  46.95% {
+    top: 16.34px;
+    left: 26.66px; }
+  47.56% {
+    top: 15.63px;
+    left: 27.37px; }
+  48.17% {
+    top: 14.93px;
+    left: 28.07px; }
+  48.78% {
+    top: 14.22px;
+    left: 28.78px; }
+  49.39% {
+    top: 13.51px;
+    left: 29.49px; }
+  50% {
+    top: 12.81px;
+    left: 30.19px; }
+  50.61% {
+    top: 12.1px;
+    left: 30.9px; }
+  51.22% {
+    top: 11.39px;
+    left: 31.61px; }
+  51.83% {
+    top: 10.68px;
+    left: 32.32px; }
+  52.44% {
+    top: 9.98px;
+    left: 33.02px; }
+  53.05% {
+    top: 9.27px;
+    left: 33.73px; }
+  53.66% {
+    top: 8.56px;
+    left: 34.44px; }
+  54.27% {
+    top: 7.86px;
+    left: 35.14px; }
+  54.88% {
+    top: 7.15px;
+    left: 35.85px; }
+  55.49% {
+    top: 6.44px;
+    left: 36.56px; }
+  56.1% {
+    top: 5.72px;
+    left: 37.24px; }
+  56.71% {
+    top: 5px;
+    left: 37.94px; }
+  57.32% {
+    top: 4.33px;
+    left: 38.68px; }
+  57.93% {
+    top: 3.71px;
+    left: 39.47px; }
+  58.54% {
+    top: 3.13px;
+    left: 40.29px; }
+  59.15% {
+    top: 2.61px;
+    left: 41.14px; }
+  59.76% {
+    top: 2.16px;
+    left: 42.03px; }
+  60.37% {
+    top: 1.77px;
+    left: 42.95px; }
+  60.98% {
+    top: 1.45px;
+    left: 43.9px; }
+  61.59% {
+    top: 1.21px;
+    left: 44.87px; }
+  62.2% {
+    top: 1.06px;
+    left: 45.86px; }
+  62.8% {
+    top: 1px;
+    left: 46.85px; }
+  63.41% {
+    top: 1.03px;
+    left: 47.85px; }
+  64.02% {
+    top: 1.16px;
+    left: 48.85px; }
+  64.63% {
+    top: 1.37px;
+    left: 49.82px; }
+  65.24% {
+    top: 1.66px;
+    left: 50.78px; }
+  65.85% {
+    top: 2.04px;
+    left: 51.71px; }
+  66.46% {
+    top: 2.47px;
+    left: 52.6px; }
+  67.07% {
+    top: 2.98px;
+    left: 53.47px; }
+  67.68% {
+    top: 3.53px;
+    left: 54.3px; }
+  68.29% {
+    top: 4.14px;
+    left: 55.09px; }
+  68.9% {
+    top: 4.8px;
+    left: 55.85px; }
+  69.51% {
+    top: 5.5px;
+    left: 56.56px; }
+  70.12% {
+    top: 6.26px;
+    left: 57.21px; }
+  70.73% {
+    top: 7.1px;
+    left: 57.75px; }
+  71.34% {
+    top: 8.01px;
+    left: 58.16px; }
+  71.95% {
+    top: 8.96px;
+    left: 58.48px; }
+  72.56% {
+    top: 9.93px;
+    left: 58.71px; }
+  73.17% {
+    top: 10.92px;
+    left: 58.87px; }
+  73.78% {
+    top: 11.91px;
+    left: 58.97px; }
+  74.39% {
+    top: 12.91px;
+    left: 59px; }
+  75% {
+    top: 13.91px;
+    left: 58.98px; }
+  75.61% {
+    top: 14.91px;
+    left: 58.9px; }
+  76.22% {
+    top: 15.9px;
+    left: 58.75px; }
+  76.83% {
+    top: 16.87px;
+    left: 58.53px; }
+  77.44% {
+    top: 17.82px;
+    left: 58.22px; }
+  78.05% {
+    top: 18.74px;
+    left: 57.83px; }
+  78.66% {
+    top: 19.6px;
+    left: 57.32px; }
+  79.27% {
+    top: 20.37px;
+    left: 56.68px; }
+  79.88% {
+    top: 21.08px;
+    left: 55.97px; }
+  80.49% {
+    top: 21.74px;
+    left: 55.23px; }
+  81.1% {
+    top: 22.36px;
+    left: 54.44px; }
+  81.71% {
+    top: 22.93px;
+    left: 53.62px; }
+  82.32% {
+    top: 23.44px;
+    left: 52.76px; }
+  82.93% {
+    top: 23.89px;
+    left: 51.87px; }
+  83.54% {
+    top: 24.28px;
+    left: 50.94px; }
+  84.15% {
+    top: 24.58px;
+    left: 49.99px; }
+  84.76% {
+    top: 24.81px;
+    left: 49.02px; }
+  85.37% {
+    top: 24.95px;
+    left: 48.03px; }
+  85.98% {
+    top: 25px;
+    left: 47.03px; }
+  86.59% {
+    top: 24.96px;
+    left: 46.03px; }
+  87.2% {
+    top: 24.82px;
+    left: 45.04px; }
+  87.8% {
+    top: 24.6px;
+    left: 44.07px; }
+  88.41% {
+    top: 24.3px;
+    left: 43.11px; }
+  89.02% {
+    top: 23.92px;
+    left: 42.19px; }
+  89.63% {
+    top: 23.47px;
+    left: 41.3px; }
+  90.24% {
+    top: 22.96px;
+    left: 40.43px; }
+  90.85% {
+    top: 22.4px;
+    left: 39.61px; }
+  91.46% {
+    top: 21.78px;
+    left: 38.82px; }
+  92.07% {
+    top: 21.12px;
+    left: 38.07px; }
+  92.68% {
+    top: 20.41px;
+    left: 37.36px; }
+  93.29% {
+    top: 19.68px;
+    left: 36.68px; }
+  93.9% {
+    top: 18.98px;
+    left: 35.98px; }
+  94.51% {
+    top: 18.27px;
+    left: 35.27px; }
+  95.12% {
+    top: 17.56px;
+    left: 34.56px; }
+  95.73% {
+    top: 16.85px;
+    left: 33.85px; }
+  96.34% {
+    top: 16.15px;
+    left: 33.15px; }
+  96.95% {
+    top: 15.44px;
+    left: 32.44px; }
+  97.56% {
+    top: 14.73px;
+    left: 31.73px; }
+  98.17% {
+    top: 14.03px;
+    left: 31.03px; }
+  98.78% {
+    top: 13.32px;
+    left: 30.32px; } }
+.loop-icon {
+  position: relative;
+  text-align: center; }
+
+.loop-icon .ball {
+  width: 9px;
+  height: 9px;
+  background-color: #AFDBD1;
+  margin-top: -5px;
+  margin-left: 36px;
+  border-radius: 100%;
+  position: absolute;
+  animation-name: endlessloop;
+  animation-timing-function: linear;
+  animation-duration: 2s;
+  animation-iteration-count: infinite; }
+
+.pause-icon {
+  text-align: center;
+  margin: 0 auto; }
+
+.word-icon {
+  text-align: center;
+  margin: 0 auto; }
 
 [type='text']:focus,
 textarea:focus {
@@ -1787,7 +2308,7 @@ input {
   font-size: 24px;
   color: rgba(0, 0, 0, 0.5);
   letter-spacing: 4px;
-  text-align: right; }
+  text-align: center; }
   input:focus {
     box-shadow: none;
     outline: none; }

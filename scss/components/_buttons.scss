@@ -20,7 +20,7 @@ button {
   outline: none;
   // font-family: $stack-nunito;
 }
-.btn {
+#btn {
   &-share{
   font-family: $nunito-light;
   border: solid 1px $white;
@@ -32,6 +32,7 @@ button {
   font-size: 16px;
   transition: .5s ease;
   letter-spacing: 5px;
+  margin-bottom: 90px;
   &:hover {
     background-color: $black-opacity;
     color: $Sinbad;
