@@ -1,4 +1,4 @@
-@mixin font-face($family, $file) {
+@mixin nunito-bold($family, $file) {
   @font-face {
     font-family: $family;
     src: url('#{$path-font}/#{$file}.eot');
@@ -7,7 +7,24 @@
          url('#{$path-font}/#{$file}.ttf') format('truetype');
   }
 }
-
+@mixin nunito-regular($family, $file) {
+  @font-face {
+    font-family: $family;
+    src: url('#{$path-font}/#{$file}.eot');
+    src: url('#{$path-font}/#{$file}.eot?#iefix') format('embedded-opentype'),
+         url('#{$path-font}/#{$file}.woff') format('woff'),
+         url('#{$path-font}/#{$file}.ttf') format('truetype');
+  }
+}
+@mixin nunito-light($family, $file) {
+  @font-face {
+    font-family: $family;
+    src: url('#{$path-font}/#{$file}.eot');
+    src: url('#{$path-font}/#{$file}.eot?#iefix') format('embedded-opentype'),
+         url('#{$path-font}/#{$file}.woff') format('woff'),
+         url('#{$path-font}/#{$file}.ttf') format('truetype');
+  }
+}
 
 // Text
 
@@ -41,8 +58,10 @@
   $disp: flex,
   $dir: null,
   $wrap: null,
+  $cont: null,
   $just: null) {
   display: $disp;
+  align-content: $cont;
   flex-direction: $dir;
   flex-wrap: $wrap;
   justify-content: $just;

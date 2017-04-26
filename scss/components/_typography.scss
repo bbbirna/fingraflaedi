@@ -1,14 +1,14 @@
-@include font-face('Nunito', Nunito-Light);
-@include font-face('Nunito', Nunito-Regular);
-@include font-face('Nunito', Nunito-Bold);
-@include font-face('Nunito', Nunito-ExtraLight);
+@include nunito-light('Nunito', Nunito-Light);
+@include nunito-regular('Nunito', Nunito-Regular);
+@include nunito-bold('Nunito', Nunito-Bold);
+
 // @include font-face('Roboto', Roboto-Black);
 // @include font-face('Roboto', Roboto-Thin);
 // @include font-face('Roboto', Roboto-Regular);
 
 h1{
-	font-family: $stack-nunito;
-	font-weight: $font-bold;
+	// font-family: $stack-nunito;
+	// font-weight: $font-bold;
 }
 
 
@@ -21,11 +21,11 @@ h4 {
 h5 {
 }
 h6 {
-	font-family: $stack-nunito;
+	// font-family: $stack-nunito;
 }
 
 p {
-	font-family: $stack-nunito;
+	// font-family: $stack-nunito;
 }
 ul {
 	list-style-type: none;
@@ -36,4 +36,10 @@ li {
 a {
 	text-decoration: none;
 }
+
+
+
+
+
+
 

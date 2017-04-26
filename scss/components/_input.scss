@@ -1,16 +1,25 @@
 
-input {
-	font-family: $stack-nunito;
-	font-weight: 300;
-	font-size: 36px;
-	&:focus{
+[type='text']:focus, 
+  textarea:focus {
     outline: none;
-	}
-	&.input {
-	background: transparent;
-	// background-color: transparent;
-	border-style: none;
-	border-bottom: solid 2px black;
+    border-style: none;
+	// border-bottom: solid 2px black;
+    background-color: none;
+    box-shadow: none;
+    transition: none; 
 }
+input {
+		box-shadow: none;
+		font-family: $nunito-regular;
+		font-size: 24px;
+		color: $black-opacity;
+		letter-spacing: 4px;
+		text-align: right;
+		// border-bottom: solid 2px black;
+		&:focus {
+		box-shadow: none;
+	    outline: none;
+		}
 }
+
 

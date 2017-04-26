@@ -1,9 +1,51 @@
-#container {
-	@include grid-column($columns:12, $gutters:16px);
-	@include flexy();
-	background-color: $White;
+
+.main-content{
+	display: flex;
+}
+	
+.first-half {
+	display: flex;
 	height: 100vh;
-	input{
-		align-self: center;
+	flex-direction: column;
+	align-content:center;
+	justify-content: center;
+	align-items:center;
+	.user-input{
+		display: flex;
+		height: 100vh;
+		flex-direction: column;
+		align-content:center;
+		justify-content: center;
+		align-items:center;
+		.input {
+		box-shadow: none;
+		background: transparent;
+		border-style: none;
+		outline: none;
+		position: relative;
+		}
+		// &:after{
+		// 	content: '';
+		// 	height: 2px;
+		// 	width: 200px;
+		// 	background-color: $black-opacity;
+		// 	position: absolute; 
+		// }
+	}
+}
+
+
+.second-half{
+	display: flex;
+	flex-direction: column;
+	align-content:center;
+	justify-content: center;
+	align-items:center;
+	#container {
+		height: calc(100vh - 200px);
+		width: calc(50vw - 200px);
+	}
+	.btn-share {
+		
 	}
 }

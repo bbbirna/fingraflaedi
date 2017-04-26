@@ -18,11 +18,11 @@
 
 button {
   outline: none;
-  font-family: $stack-nunito;
+  // font-family: $stack-nunito;
 }
 .btn {
   &-share{
-  font-weight: $font-light;
+  font-family: $nunito-light;
   border: solid 1px $white;
   color: $white;
   opacity: 50%;
@@ -44,19 +44,27 @@ button {
   }
   }
   &-alpha {
-    font-weight: $font-bold;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    font-family: $nunito-bold;
     color: $black-opacity;
     align-self:center;
     background-color: $white-opacity;
-    font-size: 30px;
-    width: 72px;
-    height: 106px;
+    font-size: 18px;
+    width: 50px;
     border:  none;
     height: 50px;
     border-radius: 100px 0 0 100px;
-    &:hover {
+    transition: .3s ease;
 
+    &:hover {
+      border: none;
+      width: 70px;
     }
-    &:active {}
+    &:active {
+      transition: .01s ease;
+      border: none;
+    }
   }
 }

@@ -1,11 +1,10 @@
 .background {
-
 	border-bottom: 100vh solid $Sinbad;
 	border-left: 180px solid transparent;
 	border-right: 180px solid transparent;
 	height: 0;
-	width: 50%;
+	width: 100%;
 	position: absolute;
-	left: calc(50% - 180px);
-
+	z-index: -1;
+	left: calc(50% - 90px);
 }
