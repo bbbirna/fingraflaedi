@@ -50,7 +50,7 @@ window.onload = function (event) {
         var loader = new THREE.JSONLoader();
         var bones = {};
         var model;
-        loader.load( 'hand3.json', function( geometry, materials ) {
+        loader.load( '../hand19.json', function( geometry, materials ) {
             // console.log(geometry, materials)
             var material = new THREE.MeshBasicMaterial( {skinning: true, map: texture} );
             material.side = THREE.BackSide;

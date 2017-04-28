@@ -1,16 +1,19 @@
-.background {
-	border-bottom: 100vh solid $Sinbad;
-	border-left: 180px solid transparent;
-	border-right: 180px solid transparent;
-	height: 0;
-	width: 100%;
+#background {
+	// border-bottom: 100vh solid $Sinbad;
+	// border-left: 180px solid transparent;
+	// border-right: 180px solid transparent;
+	height: 100vh;
+	width: 100vw;
 	position: absolute;
 	z-index: -1;
+	.bgsvg {
+		width: 100vw;
+		position: absolute;
+		left: 0;
+	#backgroundsvg {
+		position: absolute;
+	}
+	}
 }
-.bg-right {
-	left: calc(50% - 90px);
-}
-.bg-left {
-	right: calc(50% - 90px);
-}
+
 
