@@ -76,8 +76,8 @@ window.onload = function (event) {
         setTimeout(handleResize, 1);
 
         var counter = 0;
-        var max = 2;
-        var min = 0;
+        var max = 1.4;
+        var min = 0 ;
 
 
         function rotateChildX( bone, rotation ) {
@@ -105,11 +105,13 @@ window.onload = function (event) {
             min = minVal;
             max = maxVal;
 
-            if(rotation < min) rotation = max;
-            if(rotation > max) rotation = min;
+            // if(rotation < min) rotation = max;
+            // if(rotation > max) rotation = min;
             //console.log(rotation)
-           
+
             bone.rotation.x = rotation;
+
+           
             if(reverse) {
                 counter -= counterAdd;
                 if(counter < min) {
@@ -117,13 +119,14 @@ window.onload = function (event) {
                     reverse = false;
                 }
             } 
-            else {
+            if(!reverse) {
                 counter += counterAdd;
                 if(counter > max) {
                     counter = max;
                     reverse = true;
                 }
             }
+            
         }
 
         
@@ -152,12 +155,14 @@ window.onload = function (event) {
 
             //console.log(counter);
 
-            rotateBoneX(model.skeleton.bones[14], 0, 1.2, counter, 0.001);
-            rotateBoneX(model.skeleton.bones[15], 0, 2.7, counter, 0.001);
-            rotateBoneX(model.skeleton.bones[16], 0, 3.3, counter, 0.001);
+            // rotateBoneX(model.skeleton.bones[14], 0, 1.2, counter, 0.001);
+            // rotateBoneX(model.skeleton.bones[15], 0, 2.7, counter, 0.001);
+            // rotateBoneX(model.skeleton.bones[16], 0, 3.3, counter, 0.001);
 
 
             
+
+           
 
 
             //rotateBoneX(model.skeleton.bones[19], 0, 1, counter);
@@ -283,6 +288,7 @@ window.onload = function (event) {
             renderer.render( scene, camera );
 
         }
+
         render();
 
 
@@ -293,6 +299,53 @@ window.onload = function (event) {
         function checkKey(e) {
 
             e = e || window.event;
+
+
+            if (e.keyCode == '81') {
+                console.log("Q PRESS")
+                
+                // rotateBoneX(model.skeleton.bones[19], 0, 0.9, counter, 0.1);
+                // rotateBoneX(model.skeleton.bones[20], 0, 0.9, counter, 0.1);
+                // rotateBoneX(model.skeleton.bones[21], 0, 0.9, counter, 0.1);
+
+                var x1 = model.skeleton.bones[19].rotation.x;
+                
+                var move = setInterval(function() {
+                    var pos = Math.sin(x1) * 2;
+                    var neg = - pos;
+                    console.log(x1 + " <- x1");
+                    
+                    // if (pos > 0.9) {
+                    //     clearInterval(move);
+                    // }
+                    //console.log(model.skeleton.bones[19].rotation.x + " model skeleton rot x");
+                    if (x1 <= pos) {
+                        if (pos > 0.9) {
+                            clearInterval(move);
+                        }
+                        console.log("if nr 1")
+                        model.skeleton.bones[19].rotation.x = pos;
+                        model.skeleton.bones[20].rotation.x = pos;
+                        model.skeleton.bones[21].rotation.x = pos;
+                        
+                    }
+
+                    else if (x1 > pos) {
+                        if (pos < 0.9) {
+                            clearInterval(move);
+                        }
+                        console.log("if nr 2")
+                        model.skeleton.bones[19].rotation.x = pos;
+                        model.skeleton.bones[20].rotation.x = pos;
+                        model.skeleton.bones[21].rotation.x = pos;
+                        
+                    }
+                    
+                    x1 += 0.01;
+                    console.log(pos + " POS")
+
+                }, 20);
+            }
 
 
             //A
@@ -372,7 +425,8 @@ window.onload = function (event) {
                 model.skeleton.bones[12].rotation.z = 0;
                 model.skeleton.bones[17].rotation.z = 0;
 
-
+                var x1 = model.skeleton.bones[19].rotation.x;
+                console.log(x1 + " <- x1");
 
             }
 
@@ -471,6 +525,8 @@ window.onload = function (event) {
                 model.skeleton.bones[12].rotation.z = 0.09;
                 model.skeleton.bones[17].rotation.z = -0.07;
 
+                var x1 = model.skeleton.bones[19].rotation.x;
+                console.log(x1 + " <- x1");
 
             }
 
@@ -569,6 +625,8 @@ window.onload = function (event) {
                 model.skeleton.bones[12].rotation.z = 0;
                 model.skeleton.bones[17].rotation.z = 0;
 
+                var x1 = model.skeleton.bones[19].rotation.x;
+                console.log(x1 + " <- x1");
            
 
             }
@@ -671,11 +729,7 @@ window.onload = function (event) {
 
             }
 
-            if (e.keyCode == '81') {
-                console.log("hlihuhuhu")
 
-                rotateBoneX(model.skeleton.bones[19], 0, 0.9, counter, 0.1);
-            }
 
             render();
 
