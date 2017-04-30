@@ -1,3 +1,17 @@
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url(../logo/preload.png) center no-repeat $Sinbad;
+
+}
+
+
 
 .main-content{
 	height: 100vh;
@@ -6,7 +20,7 @@
 			content: '';
 			height: 2px;
 			width: 24%;
-			bottom: 160px;
+			bottom: 20%;
 			left: 13%;
 			background-color: $black-opacity;
 			position: absolute;
@@ -48,16 +62,16 @@
 		flex-direction: row;
 		justify-content: space-around;
 		align-items: center;
-		margin-bottom: 64px;
+		margin-bottom: 8%;
 		position: relative;
-	// &:before {
-	// 		content: '';
-	// 		height: 2px;
-	// 		bottom: 80px;
-	// 		width: 350px;
-	// 		background-color: $black-opacity;
-	// 		position: absolute; 
-	// }
+
+	.firstLine {
+			height: 2px;
+			width: 80%;
+			top: -100%;
+			background-color: $black-opacity;
+			position: absolute;
+	}
 		// .control {
 		// 	margin: 20px;
 		// }
@@ -81,7 +95,7 @@
 	
 	}
 	#btn-share {
-		margin-bottom: 64px;
+		margin-bottom: 10%;
 	}
 }
 
@@ -93,23 +107,31 @@
 	position: absolute;
 	height: 100vh;
 	right: -100%;
+	opacity: 0;
 	.letters-row {
 		margin: auto;
 	}
 	.letters{
 		justify-content: center;
 	}
-	.letter img {
-		height: 60px;
+	.letter svg {
+		// height: 60px;
 		margin: 15px 20px;
 		width: auto;
 	}
 	.alphabet-filter {
 		align-self: flex-end;
 		justify-content: center;
-		margin-bottom: 64px;
+		margin-bottom: 8%;
 		height: 42px;
 		position: relative;
+		.firstLine {
+			height: 2px;
+			width: 80%;
+			top: -100%;
+			background-color: $black-opacity;
+			position: absolute;
+	}
 	// &:before {
 	// 		content: '';
 	// 		bottom: 80px;

@@ -3,22 +3,49 @@
 
 (function($) {
 
-	var content = $('.main-content')
+		// Wait for window load
+	
+
+	const loadScreen = $(".se-pre-con")
+		content = $('.main-content')
 		btnAlpha = $('#btn-alpha')
 		btnWrite = $('#btn-write')
 		background = $('#background')
 		firstHalf = $('.first-half')
-		hand = $('.second-half')
-		thirdHalf = $('.third-half')
+		
 		endlessLoop = $('#btn-loop ')
+		isLooping = $('.ball')
+
 		pausePlay = $('#btn-pause ')
 		wordPlay = $('#btn-word ')
-		line = $('.line ')
-		backgroundSvg = $('#backgroundSvg')
-		bgsvg = $('#bgsvg'),
 
-		TweenMax.to(bgsvg, 1, {attr:{viewBox:"0 0 350 1024"}});
+		hand = $('.second-half')
+		
+		thirdHalf = $('.third-half')
+		
+		line = $('.firstLine ')
+		lettersRow = $('.letters-row '),
+		
+		// alphaRow1 = $('.row-1')
+		// alphaRow2 = $('.row-2')
+		// alphaRow3 = $('.row-3')
+		// alphaRow4 = $('.row-4')
+		// alphaRow5 = $('.row-5')
+		// alphaRow6 = $('.row-6'),
 
+		// backgroundSvg = $('#backgroundSvg')
+		// bgsvg = $('#bgsvg'),
+
+		// TweenMax.to(bgsvg, 1, {attr:{viewBox:"0 0 350 1024"}});
+
+	$(window).load(function() {
+		tlPreload = new TimelineMax();
+		// Animate loader off screen
+		tlPreload
+		.to(content, .7, { autoAlpha: 0,  ease:Power4.easeIn})
+		.to(loadScreen, .4, {delay: 1, autoAlpha: 0,  ease:Power4.easeOut})
+		.to(content, .4, { autoAlpha: 1,  ease:Power3.easeIn})
+	});
 
 // viewBox="0 0 350 1024"
 // points="820 0 1440 0 1440 1024 639 1024"
@@ -27,21 +54,23 @@
 // points="820 0 1440 0 1440 1024 639 1024"
 
 	// Hover effect above line move
-		endlessLoop.hover(function() {
-		  TweenMax.to(line, .35, {width: '7%'})
-		}, function() {
-		  TweenMax.to(line, .5, {width: '24%'})
-		})
-		pausePlay.hover(function() {
-		  TweenMax.to(line, .35, {left: '22%', width: '6%'})
-		}, function() {
-		  TweenMax.to(line, .5, {left: '13%', width: '24%'})
-		})
-		wordPlay.hover(function() {
-		  TweenMax.to(line, .35, {left: '30%', width: '7%'})
-		}, function() {
-		  TweenMax.to(line, .5, {left: '13%', width: '24%'})
-		})
+		// endlessLoop.hover(function() {
+		//   TweenMax.to(line, .35, {x:'30%', ease:Power1.easeInOut})
+		//   TweenMax.to(line, .35, {x:'-90%', width: '30%', ease:Power1.easeInOut})
+		// }, function() {
+		//   TweenMax.to(line, .5, {x:'30%'})
+		//   TweenMax.to(line, .5, {x:'0%', width: '90%'})
+		// })
+		// pausePlay.hover(function() {
+		//   TweenMax.to(line, .35, {x: '30%', width: '30%'})
+		// }, function() {
+		//   TweenMax.to(line, .5, {x:'0%', width: '90%'})
+		// })
+		// wordPlay.hover(function() {
+		//   TweenMax.to(line, .35, {x: '60%', width: '30%'})
+		// }, function() {
+		//   TweenMax.to(line, .5, {x:'0%', width: '90%'})
+		// })
 
 
 
@@ -56,21 +85,29 @@
 
 	// Transformation Points - SVG and HTML
 	tl
-		.to(firstHalf, 0.7, { x: '-100%', ease:Power1.easeInOut})
-		// .to(backgroundSvg, 1, {attr:{points:"0 0 1440 0 1440 1024 639 1024"}})
-		// .to(backgroundSvg, 1, {attr:{points:"0 0 1440 0 1440 1024 639 1024"}})
-		.to(bgsvg, 1, {attr:{viewBox:"0 400 850 1024"}})
-		.to(backgroundSvg, 1, {attr:{points:"0 0 820 0 1440 1024 0 1024"}})
-		.to(backgroundSvg, 1, {attr:{points:"0 0 820 0 1440 1024 0 1024"}})
-		.to(bgsvg, 1, {attr:{viewBox:"0 0 850 1024"}})
-		// .to(background, 0.7, {left: '0%', ease:Power1.easeInOut})
-		.to(hand, 0.7, {position: 'absolute', x: '-100%', ease:Power1.easeInOut}, '-=0.5')
-		.to(line, .05, {width: '67%', left: '13%'},'-=0.5')
-		.to(line, .06, {width: '16%', left: '67%'})
-		.to(btnWrite, 0.7, {position: 'absolute', left: '0%', ease:Power1.easeInOut}, '-=0.5')
-		.to(btnAlpha, 0.7, {opacity: 0, ease:Power1.easeInOut} , '-=0.5')
-		.to(thirdHalf, 0.7, {position: 'absolute', x: '-200%', ease:Power1.easeInOut}, '-=0.5')
 
+		.to(firstHalf, 0.7, { opacity: 0, ease:Power1.easeInOut},'-=.6')
+		// .to(backgroundSvg, 1, {attr:{points:"0 0 1440 0 1440 1024 639 1024"}})
+		// .to(backgroundSvg, 1, {attr:{points:"0 0 1440 0 1440 1024 639 1024"}})
+		// .to(bgsvg, 1, {attr:{viewBox:"0 400 850 1024"}})
+		// .to(backgroundSvg, 1, {attr:{points:"0 0 820 0 1440 1024 0 1024"}})
+		// .to(backgroundSvg, 1, {attr:{points:"0 0 820 0 1440 1024 0 1024"}})
+		// .to(bgsvg, 1, {attr:{viewBox:"0 0 850 1024"}})
+		// .to(background, 0.5, {width: '100%', ease:Power1.easeInOut})
+		.to(background, 0.3, {x: '45%',  ease:Power1.easeInOut})
+		.to(background, 0.5, {borderLeft: '0px solid transparent', ease:Power1.easeInOut}, '-=.2')
+		.to(hand, 0.3, {position: 'absolute', x: '-100%', ease:Power1.easeInOut}, '-=.5')
+		.to(background, 0.3, {x: '-45%',borderRight: '180px solid transparent', ease:Power1.easeInOut}, '-=.2')
+		// .to(background, 0.5, { ease:Power1.easeInOut})
+		
+		
+		// .to(line, .05, {width: '67%', left: '13%', ease:Power1.easeInOut},'-=0.5')
+		// .to(line, .06, {width: '16%', left: '67%', ease:Power1.easeInOut})
+		.to(btnWrite, 0.7, {opacity: 1,position: 'absolute', left: '0%', ease:Power1.easeInOut}, '-=0.5')
+		.to(btnAlpha, 0.7, {opacity: 0, ease:Power1.easeInOut} , '-=0.5')
+		.to(thirdHalf, 0.7, {position: 'relative', x: '-200%', ease:Power1.easeInOut}, '-=0.5')
+		.to(thirdHalf, 0.7, {opacity: 1, ease:Power1.easeInOut})
+		// .to(alphaRow1, 0.7, {osition: 'absolute', x: '0%', delay:0.5,ease:Power1.easeInOut}, '=0.5')
 		.addPause()
 
 	// tlFinal
@@ -91,6 +128,7 @@
 	$('#btn-alpha').on('click',function(){
 		tl.play();
 	});
+
 	$('#btn-write').on('click',function(){
 		tl.reverse();
 	});
@@ -100,6 +138,11 @@
 	// $('#btn-alpha').on('click',function(){
 	// 	tl.reverse();
 	// });
+
+
+
+
+
 
 })(jQuery);
 

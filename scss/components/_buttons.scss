@@ -29,7 +29,11 @@ button {
     position: relative;
     text-align: center;
     margin: 20px;
-    path {
+    &:hover:after{
+      content: '';
+      width: 100px;
+      height: 30px;
+      background-color: $Sinbad;
     }
    .ball {
     width: 9px;
@@ -100,6 +104,7 @@ button {
     position: absolute;
     // left: -100%;
     z-index: 10;
+    opacity: 0;
     font-family: $nunito-bold;
     color: $black-opacity;
     align-self:center;
