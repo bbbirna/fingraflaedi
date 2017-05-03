@@ -26,7 +26,7 @@ window.onload = function (event) {
         
         // Create scene
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xffeeee);
+        scene.background = new THREE.Color(0x0);
         
         // Create camera and position it in space
         camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 10000);
@@ -35,6 +35,10 @@ window.onload = function (event) {
         
         // Allows navigating the scene via mouse
         controls = new THREE.OrbitControls(camera, element);
+
+        var light = new THREE.AmbientLight( 0xffffff ); // soft white light
+        //var pointLight = new THREE.PointLight(0xFFFFFF, 1, 100000);
+        scene.add( light );
         
         // Adds texture
         var texture = new THREE.Texture();
@@ -49,15 +53,16 @@ window.onload = function (event) {
         var model;
         loader.load( 'hand19.json', function( geometry, materials ) {
             // console.log(geometry, materials)
-            var material = new THREE.MeshBasicMaterial( {skinning: true, map: texture} );
+            var material = new THREE.MeshStandardMaterial( {skinning: true, color: 0x00ff00, emissive: 0x000000, roughness: 0, metalness: 0.5} );
+            //var material = new THREE.MeshBasicMaterial( {skinning: true, map: texture} );
             material.side = THREE.BackSide;
             model = new THREE.SkinnedMesh( geometry, material );
             model.scale.set(-1,1,1);
-            for(var i = 0; i < model.skeleton.bones.length; i++) {
-                console.log(model.skeleton.bones[i]);
-                bones[model.skeleton.bones[i].name] = model.skeleton.bones[i];
+            // for(var i = 0; i < model.skeleton.bones.length; i++) {
+            //     console.log(model.skeleton.bones[i]);
+            //     bones[model.skeleton.bones[i].name] = model.skeleton.bones[i];
 
-            }
+            // }
             scene.add( model );
 
            
@@ -301,51 +306,109 @@ window.onload = function (event) {
             e = e || window.event;
 
 
-            if (e.keyCode == '81') {
-                console.log("Q PRESS")
+            // if (e.keyCode == '81') {
+            //     console.log("Q PRESS")
                 
-                // rotateBoneX(model.skeleton.bones[19], 0, 0.9, counter, 0.1);
-                // rotateBoneX(model.skeleton.bones[20], 0, 0.9, counter, 0.1);
-                // rotateBoneX(model.skeleton.bones[21], 0, 0.9, counter, 0.1);
+            //     // rotateBoneX(model.skeleton.bones[19], 0, 0.9, counter, 0.1);
+            //     // rotateBoneX(model.skeleton.bones[20], 0, 0.9, counter, 0.1);
+            //     // rotateBoneX(model.skeleton.bones[21], 0, 0.9, counter, 0.1);
 
-                var x1 = model.skeleton.bones[19].rotation.x;
+            //     var x1 = model.skeleton.bones[19].rotation.x;
                 
-                var move = setInterval(function() {
-                    var pos = Math.sin(x1) * 2;
-                    var neg = - pos;
-                    console.log(x1 + " <- x1");
-                    
-                    // if (pos > 0.9) {
-                    //     clearInterval(move);
-                    // }
-                    //console.log(model.skeleton.bones[19].rotation.x + " model skeleton rot x");
-                    if (x1 <= pos) {
-                        if (pos > 0.9) {
-                            clearInterval(move);
-                        }
-                        console.log("if nr 1")
-                        model.skeleton.bones[19].rotation.x = pos;
-                        model.skeleton.bones[20].rotation.x = pos;
-                        model.skeleton.bones[21].rotation.x = pos;
-                        
-                    }
+            //     var move = setInterval(function() {
+            //         var pos = Math.sin(x1) * 2;
 
-                    else if (x1 > pos) {
-                        if (pos < 0.9) {
-                            clearInterval(move);
-                        }
-                        console.log("if nr 2")
-                        model.skeleton.bones[19].rotation.x = pos;
-                        model.skeleton.bones[20].rotation.x = pos;
-                        model.skeleton.bones[21].rotation.x = pos;
-                        
-                    }
+            //         console.log(x1 + " <- x1");
+            //         console.log(pos + " <- pos")
                     
-                    x1 += 0.01;
-                    console.log(pos + " POS")
+            //         // if (pos > 0.9) {
+            //         //     clearInterval(move);
+            //         // }
+            //         //console.log(model.skeleton.bones[19].rotation.x + " model skeleton rot x");
+            //         if (x1 <= pos) {
+            //             if (pos > 0.9) {
+            //                 clearInterval(move);
+            //             }
+            //             console.log("if nr 1")
+            //             model.skeleton.bones[19].rotation.x = pos;
+            //             model.skeleton.bones[20].rotation.x = pos;
+            //             model.skeleton.bones[21].rotation.x = pos;
+                        
+            //         }
 
-                }, 20);
+            //         else if (x1 > pos) {
+            //             if (pos < 0.9) {
+            //                 clearInterval(move);
+            //             }
+            //             console.log("if nr 2")
+            //             model.skeleton.bones[19].rotation.x = pos;
+            //             model.skeleton.bones[20].rotation.x = pos;
+            //             model.skeleton.bones[21].rotation.x = pos;
+                        
+            //         }
+                    
+            //         x1 += 0.01;
+            //         console.log(pos + " POS")
+
+            //     }, 20);
+            // }
+
+
+
+            var letterPress = function( keyCode, startingPoint, endPoint) {
+
+                if (e.keyCode == keyCode) {
+                    console.log(keyCode);
+                    
+                    // rotateBoneX(model.skeleton.bones[19], 0, 0.9, counter, 0.1);
+                    // rotateBoneX(model.skeleton.bones[20], 0, 0.9, counter, 0.1);
+                    // rotateBoneX(model.skeleton.bones[21], 0, 0.9, counter, 0.1);
+
+                    var x1 = startingPoint;
+                    
+                    var move = setInterval(function() {
+                        var pos = Math.sin(x1) * 2;
+
+                        console.log(x1 + " <- x1");
+                        console.log(pos + " <- pos")
+                        
+                        // if (pos > 0.9) {
+                        //     clearInterval(move);
+                        // }
+                        //console.log(model.skeleton.bones[19].rotation.x + " model skeleton rot x");
+                        if (x1 <= pos) {
+                            if (pos > endPoint) {
+                                clearInterval(move);
+                            }
+                            console.log("if nr 1")
+                            model.skeleton.bones[19].rotation.x = pos;
+                            model.skeleton.bones[20].rotation.x = pos;
+                            model.skeleton.bones[21].rotation.x = pos;
+                            
+                        }
+
+                        else if (x1 > pos) {
+                            if (pos < endPoint) {
+                                clearInterval(move);
+                            }
+                            console.log("if nr 2")
+                            model.skeleton.bones[19].rotation.x = pos;
+                            model.skeleton.bones[20].rotation.x = pos;
+                            model.skeleton.bones[21].rotation.x = pos;
+                            
+                        }
+                        
+                        x1 += 0.01;
+                        console.log(pos + " POS")
+
+                    }, 20);
+                }
+
             }
+
+            letterPress( '81', model.skeleton.bones[19].rotation.x, 0.9);
+
+            letterPress( '87', model.skeleton.bones[19].rotation.x, 0.3);
 
 
             //A
