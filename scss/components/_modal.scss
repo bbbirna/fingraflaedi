@@ -2,7 +2,7 @@
     opacity: 0;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 100; /* Sit on top */
     left: 0;
     top: 0;
     display: flex;
@@ -12,41 +12,115 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: $LightSinbad; /* Black w/ opacity */
     /* Modal Content/Box */
+}
     .modal-content {
         background-color: rgba($Sinbad, .35);
         margin: auto; /* 15% from the top and centered */
-        padding: 30px;
-        height: 70%;
-        // width: 30%; 
+        padding: 20px;
+        height: 70%; 
+        width: 30%;
         position: relative;
         display: flex;
-        justify-content: center;
-            .hand-gif{
-            height: 80%;
-            // width: 90%;    
-            background-color: $Sinbad;
-            position: relative;
-            display: flex;
-            justify-content: center;
-                #gif {
-                height: auto;
-                width: 200px;
-                }
-        }
+        justify-content: space-around;
+        align-content: space-between;
         .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+            color: $black-opacity;
+            font-size: 48px;
+            font-family: $nunito-light;
             position: absolute;
-            right: 20px;
-            top: 20px;
-                &:hover,
-                &:focus {
-                color: black;
-                text-decoration: none;
-                cursor: pointer;
-                }
+            right: -50px;
+            top: -60px;
+        &:hover,
+        &:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            }
+        }
+
+}
+    
+.hand-gif{
+    height: 70%;
+    margin: auto;  
+    background-color: $Sinbad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+        #gif {
+        height: auto;
+        max-width: 200px;
+        width: 100%;
         }
     }
+
+.color-pick {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // margin: 6% 0;
+    .gif-bg-color{
+        height: 20px;
+        width: 20px;
+        border-radius: 100%;
+        margin: 2%;
+    }
+    .pick {
+        &-pink{background-color: $BabyPink;}
+        &-green{background-color: $Sinbad;}
+        &-yellow{background-color: $Honeysuckle;}
+        &-orange{background-color: $CreamCan;}
+        &-blue{background-color: $Malibu;}
+    }
 }
+
+.modalLine {
+        content: '';
+        height: 2px;
+        width: 80%;
+        background-color: $black-opacity;
+        }
+
+.social-icons {
+    display: flex;
+    position: relative;
+    // margin: 2%;
+    justify-content: center;
+
+ 
+    .icon {
+        margin: 2%;
+    }
+}
+        #twitter { opacity: 50%;}
+        #instagram { opacity: 50%;}
+        #facebook { opacity: 50%;}
+        #messenger { opacity: 50%;}
+        #download { opacity: 50%;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

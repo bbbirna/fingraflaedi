@@ -1,17 +1,3 @@
-.no-js #loader { display: none;  }
-.js #loader { display: block; position: absolute; left: 100px; top: 0; }
-.se-pre-con {
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 9999;
-	background: url(../logo/preload.png) center no-repeat $Sinbad;
-
-}
-
-
 
 .main-content{
 	height: 100vh;
@@ -102,53 +88,129 @@
 .third-half {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: flex-end;
+	align-items: center;
 	margin: 0 auto;
 	position: absolute;
 	height: 100vh;
 	right: -100%;
-	opacity: 0;
+	// opacity: 0;
 	.letters-row {
-		margin: auto;
+		&-an{
+			position: absolute;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin-left: 16px;
+		}
+		&-oo{
+			@extend .letters-row-an; 
+		}
+		&-110{
+			@extend .letters-row-an;	
+		}
+
 	}
 	.letters{
 		justify-content: center;
 	}
 	.letter svg {
-		// height: 60px;
-		margin: 15px 20px;
+		height: 60px;
+		margin: auto;
 		width: auto;
+			margin-left:10
 	}
 	.alphabet-filter {
 		align-self: flex-end;
 		justify-content: center;
 		margin-bottom: 8%;
-		height: 42px;
-		position: relative;
+		
+     	position: relative;
+    	z-index: 200;
+	    // bottom: 64px;
+
 		.firstLine {
 			height: 2px;
 			width: 80%;
 			top: -100%;
 			background-color: $black-opacity;
 			position: absolute;
+			justify-content: center;
 	}
-	// &:before {
-	// 		content: '';
-	// 		bottom: 80px;
-	// 		height: 2px;
-	// 		width: 200px;
-	// 		background-color: $black-opacity;
-	// 		position: absolute; 
-	// }
 	}
 	.alphabet-filter .filter {
 		margin: 0 30px;
-		text-align: center;
+		#btn-filter {
+			height: 42px;
+		}
 	}
 }
 
 
 
+
+// id='letter-outline' class='letter-outline'
+
+// id="palm" class="palm"
+
+#letter-outline, #Shape {
+	fill: none;
+	
+}
+#letter-outline {
+	width: 200px;
+	height: auto;
+}
+#A {
+	width: 200px;
+	height: auto;
+}
+.letters #letter-outline { /*stafurinn*/
+
+	stroke: #000;
+	stroke-dasharray: 430px;
+	stroke-dashoffset: 430px;
+	// animation: lettersFill 4s forwards;
+	fill: none;
+}
+
+.letters .palm { /*fyllingin inni höndinni*/
+	fill: $White;
+	// animation: lettersFillHand 4s forwards;
+}
+
+.letters #Shape { /*höndin*/
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	// stroke: #000;
+	stroke-dasharray: 110px;
+	stroke-dashoffset: 110px;
+	// animation: lettersHandLines 3s forwards;
+}
+
+.numbers .start.stafur { /*stafurinn*/
+	stroke-miterlimit: 10;
+	stroke: #616161;
+	stroke-dasharray: 430px;
+	stroke-dashoffset: 430px;
+	// animation: numbersFill 3s forwards;
+	fill: none;
+}
+
+.numbers .start.palm {
+	fill: #4a4a4a;
+	// animation: numbersFillHand 3s forwards;
+}
+
+.numbers .start#Shape { /*höndin*/
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke: #616161;
+	stroke-dasharray: 110px;
+	stroke-dashoffset: 110px;
+	// animation: numbersHandLines 3s forwards;
+}
 
 
 

@@ -1,3 +1,60 @@
 %textRight {
  text-align: right;
 }
+
+.hover {
+	// cursor: url(../img/hand5.png), auto;
+	cursor: pointer;
+}
+
+.squareButton {
+  font-family: $nunito-regular;
+  border: solid 1px $white;
+  color: $white;
+  opacity: 50%;
+  background-color: transparent;
+  height: 42px;
+  width: 192px;
+  font-size: 16px;
+  transition: .5s ease;
+  letter-spacing: 5px;
+  &:hover {
+    @extend .hover;
+    background-color: $White;
+    color: $Sinbad;
+    border: none;
+	
+  }
+  &:active {
+    background-color: $white-opacity;
+    color: $Sinbad;
+    border: none;
+  }
+}
+
+
+.sideButton {
+	position: absolute;
+    z-index: 10;
+    font-family: $nunito-bold;
+    color: $Sinbad;
+    align-self:center;
+    background-color: $white-opacity;
+    font-size: 24px;
+    width: 40px;
+    border:  none;
+    height: 50px;
+    transition: .3s ease;
+	&:hover {
+      @extend .hover;
+      border: none;
+      background-color: $White;
+      width: 50px;
+      height: 50px;
+    }
+    &:active {
+      transition: .01s ease;
+      border: none;
+    }
+
+}

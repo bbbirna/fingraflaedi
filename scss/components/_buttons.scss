@@ -24,16 +24,21 @@ button {
 
 
 
+
 #btn {
   &-loop {
     position: relative;
     text-align: center;
     margin: 20px;
-    &:hover:after{
-      content: '';
-      width: 100px;
-      height: 30px;
-      background-color: $Sinbad;
+    // &:hover:after{
+    
+    //   content: '';
+    //   width: 100px;
+    //   height: 30px;
+    //   background-color: $Sinbad;
+    // }
+    &:hover {
+      @extend .hover;
     }
    .ball {
     width: 9px;
@@ -45,84 +50,55 @@ button {
     animation: endlessloop linear 2s infinite;
   }
   }
+
   &-pause {
     text-align: center;
     margin: 20px;
-    
+    &:hover {
+      @extend .hover;
+    }
   }
   &-word {
     text-align: center;
     margin: 20px;
+    &:hover {
+      @extend .hover;
+    }
   }
   &-share{
-  font-family: $nunito-light;
-  border: solid 1px $white;
-  color: $white;
-  opacity: 50%;
-  background-color: transparent;
-  height: 42px;
-  width: 192px;
-  font-size: 16px;
-  transition: .5s ease;
-  letter-spacing: 5px;
-  &:hover {
-    background-color: $black-opacity;
-    color: $Sinbad;
-    border: none;
+    @extend .squareButton;
   }
-  &:active {
-    background-color: $black-opacity;
-    color: $Sinbad;
-    border: none;
-  }
-  }
+
   &-alpha {
-    position: absolute;
+    @extend .sideButton;
     right: 0;
-    z-index: 10;
-    font-family: $nunito-bold;
-    color: $black-opacity;
-    align-self:center;
-    background-color: $white-opacity;
-    font-size: 18px;
-    width: 70px;
-    border:  none;
-    height: 50px;
     border-radius: 100px 0 0 100px;
-    transition: .3s ease;
-    
-    &:hover {
-      border: none;
-      width: 90px;
-    }
-    &:active {
-      transition: .01s ease;
-      border: none;
-    }
+
   }
+
   &-write{
-    position: absolute;
-    // left: -100%;
-    z-index: 10;
+    @extend .sideButton;
+    left: -100%;
     opacity: 0;
-    font-family: $nunito-bold;
-    color: $black-opacity;
-    align-self:center;
-    background-color: $white-opacity;
-    font-size: 18px;
-    width: 70px;
-    border:  none;
-    height: 50px;
     border-radius: 0 100px 100px 0;
-    transition: .3s ease;
-    
-    &:hover {
-      border: none;
-      width: 90px;
+  }
+
+  &-filter {
+
+    :after{
+      @extend .hover;
+      font-family: $nunito-bold;
+      content: '';
+      width: 100px;
+      height: 30px;
+      // background-color: $Sinbad;
     }
-    &:active {
-      transition: .01s ease;
-      border: none;
+    &:hover {
+      @extend .hover;
+    }
+     &:visited {
+      color: yellow;
     }
   }
 }
+
