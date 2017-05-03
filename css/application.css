@@ -1669,7 +1669,13 @@ html, body {
   height: 100%;
   z-index: 9999;
   background: center no-repeat #AFDBD1;
-  background-image: url(../logo/preload.png); }
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .se-pre-con img {
+    height: 200px;
+    width: auto;
+    opacity: 0; }
 
 header {
   width: 100vw;
@@ -2403,11 +2409,11 @@ a {
 button {
   outline: none; }
 
-#btn-loop {
+#btn-loop, #btn-pause, #btn-word {
   position: relative;
   text-align: center;
   margin: 20px; }
-  #btn-loop .ball {
+  #btn-loop .ball, #btn-pause .ball, #btn-word .ball {
     width: 9px;
     height: 9px;
     background-color: #000;
@@ -2415,12 +2421,6 @@ button {
     border-radius: 100%;
     position: absolute;
     animation: endlessloop linear 2s infinite; }
-#btn-pause {
-  text-align: center;
-  margin: 20px; }
-#btn-word {
-  text-align: center;
-  margin: 20px; }
 #btn-alpha {
   right: 0;
   border-radius: 100px 0 0 100px; }

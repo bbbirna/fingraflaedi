@@ -30,13 +30,6 @@ button {
     position: relative;
     text-align: center;
     margin: 20px;
-    // &:hover:after{
-    
-    //   content: '';
-    //   width: 100px;
-    //   height: 30px;
-    //   background-color: $Sinbad;
-    // }
     &:hover {
       @extend .hover;
     }
@@ -52,15 +45,14 @@ button {
   }
 
   &-pause {
-    text-align: center;
-    margin: 20px;
+    @extend #btn-loop;
+
     &:hover {
       @extend .hover;
     }
   }
   &-word {
-    text-align: center;
-    margin: 20px;
+    @extend #btn-loop;
     &:hover {
       @extend .hover;
     }

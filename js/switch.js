@@ -9,8 +9,11 @@
 		background = $('#background')
 		firstHalf = $('.first-half')
 		logo = $('.logo')
-		
-		endlessLoop = $('#btn-loop ')
+		preloadLogo = $('.se-pre-con img')
+
+		btnLoop = $('#btn-loop ')
+		btnPause = $('#btn-pause ')
+		btnWord = $('#btn-word ')
 		isLooping = $('.ball')
 
 		pausePlay = $('#btn-pause ')
@@ -23,14 +26,22 @@
 		line = $('.firstLine ')
 		lettersRow = $('.letters-row ')
 
+
 		// Window Preloader
 	$(window).load(function() {
 		tlPreload = new TimelineMax();
 		// Animate loader off screen
 		tlPreload
+		// .fromTo(preloadLogo, 2, { opacity: 0,  ease:Power4.easeOut},{ opacity: '100%',  ease:Power4.easeOut})
+		.fromTo(preloadLogo, 2, { autoAlpha: 0,  ease:Power4.easeIn}, { autoAlpha:1,  ease:Power4.easeOut})
+		.to(preloadLogo, 1, { autoAlpha: 0,  ease:Power4.easeOut})
 		.to(content, .7, { autoAlpha: 0,  ease:Power4.easeIn})
 		.to(loadScreen, .4, {delay: 1, autoAlpha: 0,  ease:Power4.easeOut})
 		.to(content, .4, { autoAlpha: 1,  ease:Power3.easeIn})
+		.fromTo(background, 1, {x: '100%',  ease:Power4.ease},{x: '45%',  ease:Power4.ease})
+		.fromTo(btnLoop, .4, {x:'-10%', autoAlpha: 0,  ease:Power3.easeIn},{x:'0%', autoAlpha: 1,  ease:Power3.easeIn})
+		.fromTo(btnPause, .4, { autoAlpha: 0,  ease:Power3.easeIn},{ autoAlpha: 1,  ease:Power3.easeIn})
+		.fromTo(btnWord, .4, { autoAlpha: 0,  ease:Power3.easeIn},{ autoAlpha: 1,  ease:Power3.easeIn})
 	});
 
 
@@ -105,6 +116,7 @@
 		tlsvg.reverse();
 		tlsvg3.play();
 	});
+
 
 
 

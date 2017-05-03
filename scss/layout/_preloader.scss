@@ -8,7 +8,14 @@
 	height: 100%;
 	z-index: 9999;
 	background:  center no-repeat $Sinbad;
-	background-image: url(../logo/preload.png);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	img {
+		height: 200px;
+		width: auto;
+		opacity: 0;
+	}
 }
 
 
