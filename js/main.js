@@ -26,7 +26,7 @@ window.onload = function (event) {
         
         // Create scene
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x0);
+        scene.background = new THREE.Color(0xffffff);
         
         // Create camera and position it in space
         camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 10000);
@@ -36,7 +36,7 @@ window.onload = function (event) {
         // Allows navigating the scene via mouse
         controls = new THREE.OrbitControls(camera, element);
 
-        var light = new THREE.AmbientLight( 0xffffff ); // soft white light
+        var light = new THREE.AmbientLight( 0x0 ); // soft white light
         //var pointLight = new THREE.PointLight(0xFFFFFF, 1, 100000);
         scene.add( light );
         
@@ -53,8 +53,9 @@ window.onload = function (event) {
         var model;
         loader.load( 'hand19.json', function( geometry, materials ) {
             // console.log(geometry, materials)
-            var material = new THREE.MeshStandardMaterial( {skinning: true, color: 0x00ff00, emissive: 0x000000, roughness: 0, metalness: 0.5} );
+            var material = new THREE.MeshStandardMaterial( {skinning: true, color: 0xff0000, emissive: 0x000000, roughness: 0, metalness: 0.2} );
             //var material = new THREE.MeshBasicMaterial( {skinning: true, map: texture} );
+            material.shading = THREE.SmoothShading;
             material.side = THREE.BackSide;
             model = new THREE.SkinnedMesh( geometry, material );
             model.scale.set(-1,1,1);
