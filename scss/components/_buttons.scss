@@ -33,6 +33,9 @@ button {
     &:hover {
       @extend .hover;
     }
+    .iconFill {
+      opacity: 50%;
+    }
    .ball {
     width: 9px;
     height: 9px;
@@ -40,13 +43,14 @@ button {
     transform: translate(150%, -60%);
     border-radius: 100%;
     position: absolute;
+    opacity: 0;
     animation: endlessloop linear 2s infinite;
   }
   }
 
   &-pause {
     @extend #btn-loop;
-
+    
     &:hover {
       @extend .hover;
     }
@@ -92,5 +96,31 @@ button {
       color: yellow;
     }
   }
+
 }
+
+
+
+  .path {
+  &-loop-stroke{
+    stroke: $LightGrey;
+  }
+  &-loop-fill {
+    fill: $LightGrey;
+  }
+  &-play{    
+    fill: $Black;
+  }
+  &-word{
+       fill: $LightGrey;
+  }
+}
+
+
+
+
+
+
+
+
 

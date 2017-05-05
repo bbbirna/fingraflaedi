@@ -23,3 +23,18 @@ input {
 }
 
 
+textarea {
+  width:200px;
+  resize:none;
+  font-family: $nunito-regular;
+  text-align: center;
+  color: $black-opacity;
+  // letter-spacing: 2px;
+  overflow:hidden;
+  font-size: 24px;
+  height:1.1em;
+  padding:2px;
+
+
+
+}

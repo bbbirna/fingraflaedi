@@ -10,11 +10,16 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: $LightSinbad; /* Black w/ opacity */
+    background-color: rgba($White, .85);
+    &:hover {
+        cursor: url(../icon/close-btn.png),auto;
+    }
+
     /* Modal Content/Box */
 }
     .modal-content {
-        background-color: rgba($Sinbad, .35);
+        background-color: $LightSinbad;
+        border-radius: 3px;
         margin: auto; /* 15% from the top and centered */
         padding: 20px;
         height: 70%; 
@@ -23,25 +28,29 @@
         display: flex;
         justify-content: space-around;
         align-content: space-between;
-        .close {
-            color: $black-opacity;
-            font-size: 48px;
-            font-family: $nunito-light;
-            position: absolute;
-            right: -50px;
-            top: -60px;
-        &:hover,
-        &:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-            }
+        &:hover {
+            cursor: initial;
         }
+        // .close {
+        //     color: $black-opacity;
+        //     font-size: 48px;
+        //     font-family: $nunito-light;
+        //     position: absolute;
+        //     right: -50px;
+        //     top: -60px;
+        // &:hover,
+        // &:focus {
+        //     color: black;
+        //     text-decoration: none;
+        //     cursor: pointer;
+        //     }
+        // }
 
 }
     
 .hand-gif{
     height: 70%;
+    border-radius: 3px;
     margin: auto;  
     background-color: $Sinbad;
     display: flex;
@@ -60,10 +69,13 @@
     justify-content: center;
     // margin: 6% 0;
     .gif-bg-color{
-        height: 20px;
-        width: 20px;
+        height: 12px;
+        width: 12px;
         border-radius: 100%;
         margin: 2%;
+        &:hover {
+            @extend .hover;
+        }
     }
     .pick {
         &-pink{background-color: $BabyPink;}
@@ -84,19 +96,22 @@
 .social-icons {
     display: flex;
     position: relative;
-    // margin: 2%;
+    margin: 2%;
     justify-content: center;
-
+    align-items: center;
+    height: 20px;
+    width: 20px;
  
     .icon {
-        margin: 2%;
+        margin:0% 4% 4%;
     }
+        #twitter { @extend .socialIcon;}
+        #instagram { @extend .socialIcon;}
+        #facebook { @extend .socialIcon;}
+        #messenger { @extend .socialIcon;}
+        #download { @extend .socialIcon;}
 }
-        #twitter { opacity: 50%;}
-        #instagram { opacity: 50%;}
-        #facebook { opacity: 50%;}
-        #messenger { opacity: 50%;}
-        #download { opacity: 50%;}
+
 
 
 
