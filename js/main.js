@@ -1,818 +1,676 @@
+window.onload = function(event) {
 
-
-window.onload = function (event) {
-    
     // Some variables we will be using later
     var camera, scene, renderer;
-    var controls;
+    //var controls;
     var element, container;
-    
+
+    var targetRotationX = 0;
+    var targetRotationXOnMouseDown = 0;
+    var mouseXOnMouseDown = 0;
+
+    var targetRotationY = 0;
+    var targetRotationYOnMouseDown = 0;
+    var mouseYOnMouseDown = 0;
+
     // A clock to keep track of time in a convenient way
     var clock = new THREE.Clock();
     
-    // Initialize the scene, cameras, objects
+
+    // Setup
     init();
-    
+
     // Start animating (updates and render)
     animate();
 
-    function init () {
+    function init() {
         
-        // Create render, append canvas to the DOM
-        renderer = new THREE.WebGLRenderer({ antialias: true, });
+        // Set the scenete
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0);
+
+        // Set the camera (angle, aspect ratio, near, far)
+        camera = new THREE.PerspectiveCamera( 50, window.innerWidth/window.innerHeight, 0.1, 1000 );
+        // Distance camera from the center
+        camera.position.set(0, 0, 0.4);
+        camera.lookAt(new THREE.Vector3( 0, 0, 0 ));
+        scene.add(camera);
+        
+        // Set the renderer
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        // Set renderer's background color
+        renderer.setClearColor(0xeeeeee, 1);
+        // Set renderer size
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        // Insert scene into the DOM
+        document.body.appendChild( renderer.domElement );
         element = renderer.domElement;
         container = document.getElementById('container');
         container.appendChild(element);
-        
-        // Create scene
-        scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xffffff);
-        
-        // Create camera and position it in space
-        camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 10000);
-        camera.position.set(0, 0, 0.2);
-        scene.add(camera);
-        
-        // Allows navigating the scene via mouse
-        controls = new THREE.OrbitControls(camera, element);
 
-        var light = new THREE.AmbientLight( 0x0 ); // soft white light
-        //var pointLight = new THREE.PointLight(0xFFFFFF, 1, 100000);
-        scene.add( light );
         
+        var light = new THREE.AmbientLight( 0xffffff ); // soft white light
+        scene.add( light );
+
+
+
+        var lightPoint = new THREE.PointLight( 0xffffff, 1.1, 100 );
+        lightPoint.position.set( 0, 0.1, 0.3);
+        scene.add( lightPoint );
+
+        var sphere = new THREE.SphereGeometry( 0.01, 16, 8 );
+        lightPoint.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0000 } ) ) );
+        
+
+
         // Adds texture
         var texture = new THREE.Texture();
         var loader = new THREE.ImageLoader();
-        loader.load( 'textures/luv.png', function ( image ) {
+        loader.load( 'textures/HAND_invert3.jpg', function ( image ) {
             texture.image = image;
             texture.needsUpdate = true;
         } );
 
         var loader = new THREE.JSONLoader();
-        var bones = {};
-        var model;
-        loader.load( 'hand19.json', function( geometry, materials ) {
-            // console.log(geometry, materials)
-            var material = new THREE.MeshStandardMaterial( {skinning: true, color: 0xff0000, emissive: 0x000000, roughness: 0, metalness: 0.2} );
-            //var material = new THREE.MeshBasicMaterial( {skinning: true, map: texture} );
+
+        var fingers;
+        loader.load( 'hand25.json', function( geometry, materials ) {
+ 
+            var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xffc300, emissive: 0x0000000, roughness: 0.4, metalness: 0.8 } );
+
             material.shading = THREE.SmoothShading;
             material.side = THREE.BackSide;
             model = new THREE.SkinnedMesh( geometry, material );
-            model.scale.set(-1,1,1);
-            // for(var i = 0; i < model.skeleton.bones.length; i++) {
-            //     console.log(model.skeleton.bones[i]);
-            //     bones[model.skeleton.bones[i].name] = model.skeleton.bones[i];
+            fingers = initModel(model);
+            //model.scale.set(-1,1,1);
 
-            // }
+
+            var textureLoader = new THREE.TextureLoader();
+            textureLoader.load('textures/HAND_S.jpg');
+            // Add the event listener
+            window.addEventListener( 'load', function(event){
+
+                // The actual texture is returned in the event.content
+                model.material.map = event.content;
+
+            });
+
+
+
             scene.add( model );
 
            
         } );
-        
 
-        
-    
-
-        
-
-                
         // Adjust everything in case there is a window resize
         window.addEventListener('resize', handleResize);
         // Set up these adjustments for the first time right away
         setTimeout(handleResize, 1);
 
-        var counter = 0;
-        var max = 1.4;
-        var min = 0 ;
 
 
-        function rotateChildX( bone, rotation ) {
-            //console.log(bone.name);
-            if(rotation < min) rotation = max;
-            if(rotation > max) rotation = min;
-            bone.rotation.x = rotation;
-            for(var i = 0; i < bone.children.length; i++) {
-                rotateChildX(bone.children[i], rotation);
-            }
-        }
-
-        function rotateChildY( bone, rotation ) {
-            //console.log(bone.name);
-            if(rotation < min) rotation = max;
-            if(rotation > max) rotation = min;
-            bone.rotation.y = rotation*0.5;
-            for(var i = 0; i < bone.children.length; i++) {
-                rotateChildY(bone.children[i], rotation*0.1);
-            }
-        }
-
-        var reverse = false;
-        function rotateBoneX ( bone, minVal, maxVal, rotation, counterAdd) {
-            min = minVal;
-            max = maxVal;
-
-            // if(rotation < min) rotation = max;
-            // if(rotation > max) rotation = min;
-            //console.log(rotation)
-
-            bone.rotation.x = rotation;
-
-           
-            if(reverse) {
-                counter -= counterAdd;
-                if(counter < min) {
-                    counter = min;
-                    reverse = false;
-                }
-            } 
-            if(!reverse) {
-                counter += counterAdd;
-                if(counter > max) {
-                    counter = max;
-                    reverse = true;
-                }
-            }
-            
-        }
-
-        
-
-
-  
-
-
-        
-        function render() {
-            requestAnimationFrame( render );
-            // if(reverse) {
-            //     counter -= 0.01;
-            //     if(counter < min) {
-            //         counter = min;
-            //         reverse = false;
-            //     }
-            // } 
-            // else {
-            //     counter += 0.01;
-            //     if(counter > max) {
-            //         counter = max;
-            //         reverse = true;
-            //     }
-            // }
-
-            //console.log(counter);
-
-            // rotateBoneX(model.skeleton.bones[14], 0, 1.2, counter, 0.001);
-            // rotateBoneX(model.skeleton.bones[15], 0, 2.7, counter, 0.001);
-            // rotateBoneX(model.skeleton.bones[16], 0, 3.3, counter, 0.001);
-
-
-            
-
-           
-
-
-            //rotateBoneX(model.skeleton.bones[19], 0, 1, counter);
-
-            // if (counter > 0 && counter < 1.3) {
-            //     rotateChildX(model.skeleton.bones[14], counter)
-            // }
-
-            // if (counter > 0 && counter < 1.3) {
-            //     rotateChildX(model.skeleton.bones[15], counter)
-            // }
-
-            // if (counter > 0 && counter < 0.5) {
-            //     rotateChildX(model.skeleton.bones[16], counter)
-            // }
-
-            // if (counter > -0.6) {
-            //     rotateChildY(model.skeleton.bones[14], counter)
-            // }
-
-            // if (counter > -0.2) {
-            //     rotateChildY(model.skeleton.bones[15], counter)
-            // }
-
-            // if (counter > 0) {
-            //     rotateChildY(model.skeleton.bones[16], counter)
-            // }
-
-            
-
-
-            // model.skeleton.bones[14].rotation.x = count0;
-            // model.skeleton.bones[15].rotation.x = count1;
-            // model.skeleton.bones[16].rotation.x = count2;
-
-            // model.skeleton.bones[14].rotation.y = count3;
-            // model.skeleton.bones[15].rotation.y = count4;
-            // model.skeleton.bones[16].rotation.y = count5;
-
-            // model.skeleton.bones[14].rotation.z = count6;
-            // model.skeleton.bones[15].rotation.z = count7;
-            // model.skeleton.bones[16].rotation.z = count8;
-
-
-            // //VISIFINGUR
-
-            // model.skeleton.bones[19].rotation.x = count9;
-            // model.skeleton.bones[20].rotation.x = count10;
-            // model.skeleton.bones[21].rotation.x = count11;
-
-            // model.skeleton.bones[19].rotation.y = count12;
-            // model.skeleton.bones[20].rotation.y = count13;
-            // model.skeleton.bones[21].rotation.y = count14;
-
-            // model.skeleton.bones[19].rotation.z = count15;
-            // model.skeleton.bones[20].rotation.z = count16;
-            // model.skeleton.bones[21].rotation.z = count17;
-
-
-            // //BAUGFINGUR
-
-            // model.skeleton.bones[9].rotation.x = count18;
-            // model.skeleton.bones[10].rotation.x = count19;
-            // model.skeleton.bones[11].rotation.x = count20;
-
-            // model.skeleton.bones[9].rotation.y = count21;
-            // model.skeleton.bones[10].rotation.y = count22;
-            // model.skeleton.bones[11].rotation.y = count23;
-
-            // model.skeleton.bones[9].rotation.z = count24;
-            // model.skeleton.bones[10].rotation.z = count25;
-            // model.skeleton.bones[11].rotation.z = count26;
-
-
-            // //FU
-
-            // model.skeleton.bones[4].rotation.x = count27;
-            // model.skeleton.bones[5].rotation.x = count28;
-            // model.skeleton.bones[6].rotation.x = count29;
-
-            // model.skeleton.bones[4].rotation.y = count30;
-            // model.skeleton.bones[5].rotation.y = count31;
-            // model.skeleton.bones[6].rotation.y = count32;
-
-            // model.skeleton.bones[4].rotation.z = count33;
-            // model.skeleton.bones[5].rotation.z = count34;
-            // model.skeleton.bones[6].rotation.z = count35;
-
-
-            // //THUMB
-
-            // model.skeleton.bones[23].rotation.x = count36;
-            // model.skeleton.bones[24].rotation.x = count37;
-            // model.skeleton.bones[25].rotation.x = count38;
-
-            // model.skeleton.bones[23].rotation.y = count39;
-            // model.skeleton.bones[24].rotation.y = count40;
-            // model.skeleton.bones[25].rotation.y = count41;
-
-            // model.skeleton.bones[23].rotation.z = count42;
-            // model.skeleton.bones[24].rotation.z = count43;
-            // model.skeleton.bones[25].rotation.z = count44;
-
-
-            // //ULNLIÐUR
-
-            // model.skeleton.bones[1].rotation.x = count45;
-            // model.skeleton.bones[1].rotation.y = count46;
-            // model.skeleton.bones[1].rotation.z = count47;
-
-
-
-
-
-
-           
-
-
-
-
-
-
-            renderer.render( scene, camera );
-
-        }
-
-        render();
-
-
-
-
+        //-- 
         document.onkeydown = checkKey;
+
+
+        // fyrsta utgafa 
+
+        // function checkKey(e) {
+
+        //     e = e || window.event;
+
+        //     let letterArray = [];
+        //     letterArray.push(e.keyCode);
+        //     console.log(letterArray);
+
+
+
+        //     var letterPress = ( keyCode, bone, xVal, yVal, zVal) => {
+
+
+
+        //         if (e.keyCode == keyCode) {
+
+        //             console.log(keyCode);
+
+        //             var rotX = bone.x;
+        //             var rotY = bone.y;
+        //             var rotZ = bone.z;
+
+
+        //             let directionX = 0.01;
+        //             let directionY = 0.01;
+        //             let directionZ = 0.003;
+
+        //             if (rotX > xVal) {
+        //                 directionX = -0.01;
+        //             }
+
+        //             if (rotY > yVal) {
+        //                 directionY = -0.01;
+        //             }
+
+        //             if (rotZ > zVal) {
+        //                 directionZ = -0.003;
+        //             }
+                    
+        //             var moveX = setInterval(function() {
+                    
+        //                 if (rotX >= xVal && directionX == 0.01) {
+        //                     clearInterval(moveX);
+        //                 }
+                      
+        //                 if (rotX <= xVal && directionX == -0.01) {
+        //                     clearInterval(moveX);
+        //                 }
+                       
+        //                 bone.x = rotX;
+        //                 rotX += directionX;
+
+        //                 renderer.render( scene, camera );
+
+        //             }, 20);
+
+        //             var moveY = setInterval(function() {
+                    
+        //                 if (rotY >= yVal && directionY == 0.01) {
+        //                     clearInterval(moveY);
+        //                 }
+                      
+        //                 if (rotY <= yVal && directionY == -0.01) {
+        //                     clearInterval(moveY);
+        //                 }
+                       
+        //                 bone.y = rotY;
+        //                 rotY += directionY;
+
+        //                 renderer.render( scene, camera );
+
+        //             }, 20);
+
+        //             var moveZ = setInterval(function() {
+                    
+        //                 if (rotZ >= zVal && directionZ == 0.003) {
+        //                     clearInterval(moveZ);
+        //                 }
+                      
+        //                 if (rotZ <= zVal && directionZ == -0.003) {
+        //                     clearInterval(moveZ);
+        //                 }
+                       
+        //                 bone.z = rotZ;
+        //                 rotZ += directionZ;
+
+        //                 renderer.render( scene, camera );
+
+        //             }, 20);
+        //         }
+
+        //     }
+
+
+        //     letterPress( '65', fingers.pinky_1, 1.5, 0, -0.5);
+        //     letterPress( '65', fingers.pinky_2, 1, 0, -0.2);
+        //     letterPress( '65', fingers.pinky_3, 0.5, 0.3, -0.2);
+
+        //     letterPress( '65', fingers.ring_1, 1.4, 0, -0.1);
+        //     letterPress( '65', fingers.ring_2, 1.7, 0, -0.2);
+        //     letterPress( '65', fingers.ring_3, 0.3, 0, 0);
+
+        //     letterPress( '65', fingers.middle_1, 1.3, 0, 0);
+        //     letterPress( '65', fingers.middle_2, 1.8, 0, 0);
+        //     letterPress( '65', fingers.middle_3, 0.3, 0, 0);
+
+        //     letterPress( '65', fingers.index_1, 1.15, 0, 0.15);
+        //     letterPress( '65', fingers.index_2, 1.9, 0, 0.25);
+        //     letterPress( '65', fingers.index_3, 0.6, 0, 0);
+
+        //     letterPress( '65', fingers.thumb_1, 0, -0.6, 0.5);
+        //     letterPress( '65', fingers.thumb_2, 0, 0, 0);
+        //     letterPress( '65', fingers.thumb_3, 0, 0, 0);
+
+        //     letterPress( '65', fingers.wrist, 0, 0, 0);
+
+        //     letterPress( '65', fingers.palm_1, 0, 0, -0.055); //ring
+        //     letterPress( '65', fingers.palm_2, 0, 0, -0.085); //pinky
+        //     letterPress( '65', fingers.palm_3, 0, 0, 0.055); //index
+            
+
+
+        //     // ----- B -----
+        //     letterPress( '66', fingers.pinky_1, 0, 0, -0.3);
+        //     letterPress( '66', fingers.pinky_2, 0.1, 0, 0);
+        //     letterPress( '66', fingers.pinky_3, 0.1, 0, 0);
+
+        //     letterPress( '66', fingers.ring_1, 0, 0, -0.1);
+        //     letterPress( '66', fingers.ring_2, 0.1, 0, 0);
+        //     letterPress( '66', fingers.ring_3, 0.1, 0, 0);
+
+        //     letterPress( '66', fingers.middle_1, 0, 0, 0);
+        //     letterPress( '66', fingers.middle_2, 0.1, 0, 0);
+        //     letterPress( '66', fingers.middle_3, 0.1, 0, 0);
+
+        //     letterPress( '66', fingers.index_1, 0, 0, 0.1);
+        //     letterPress( '66', fingers.index_2, 0.1, 0, 0);
+        //     letterPress( '66', fingers.index_3, 0.1, 0, 0);
+
+        //     letterPress( '66', fingers.thumb_1, -0.1, -0.4, 0.4);
+        //     letterPress( '66', fingers.thumb_2, 0, 0, 0.2);
+        //     letterPress( '66', fingers.thumb_3, 0, 0, -0.1);
+
+        //     letterPress( '66', fingers.wrist, -0.1, 0, 0);
+
+        //     letterPress( '66', fingers.palm_1, 0, 0, -0.04);
+        //     letterPress( '66', fingers.palm_2, 0, 0, -0.12);
+        //     letterPress( '66', fingers.palm_3, 0, 0, 0.08);
+
+        //     // ----- C -----
+        //     letterPress( '67', fingers.pinky_1, 1.1, 0, -0.5);
+        //     letterPress( '67', fingers.pinky_2, 1.3, 0.1, -0.4);
+        //     letterPress( '67', fingers.pinky_3, 0.8, 0.2, -0.3);
+
+        //     letterPress( '67', fingers.ring_1, 1.2, 0, -0.2);
+        //     letterPress( '67', fingers.ring_2, 1.9, 0.1, -0.2);
+        //     letterPress( '67', fingers.ring_3, 0.3, 0, 0);
+
+        //     letterPress( '67', fingers.middle_1, 1.1, 0, 0);
+        //     letterPress( '67', fingers.middle_2, 2, 0, 0);
+        //     letterPress( '67', fingers.middle_3, 0.3, 0, 0);
+
+        //     letterPress( '67', fingers.index_1, 0.6, -0.1, 0);
+        //     letterPress( '67', fingers.index_2, 0.7, 0, 0);
+        //     letterPress( '67', fingers.index_3, 0.7, 0, 0);
+
+        //     letterPress( '67', fingers.thumb_1, 0.1, -1.2, 0);
+        //     letterPress( '67', fingers.thumb_2, 0.1, 0.2, 0.1);
+        //     letterPress( '67', fingers.thumb_3, 0, -0.2, 0.4);
+
+        //     letterPress( '67', fingers.wrist, -0.1, 0, 0);
+
+        //     letterPress( '67', fingers.palm_1, 0, 0, -0.02);
+        //     letterPress( '67', fingers.palm_2, 0, 0, -0.07);
+        //     letterPress( '67', fingers.palm_3, 0, 0, 0.05);
+
+        //     // ----- D -----
+        //     letterPress( '68', fingers.pinky_1, 0.1, 0, 0);
+        //     letterPress( '68', fingers.pinky_2,0.1, 0, 0);
+        //     letterPress( '68', fingers.pinky_3, 0.1, 0, 0);
+
+        //     letterPress( '68', fingers.ring_1, 0.3, 0.1, 0);
+        //     letterPress( '68', fingers.ring_2, 0.3, 0, 0);
+        //     letterPress( '68', fingers.ring_3, 0.1, 0, 0);
+
+        //     letterPress( '68', fingers.middle_1, 0.6, 0, 0);
+        //     letterPress( '68', fingers.middle_2, 1.4, 0, 0);
+        //     letterPress( '68', fingers.middle_3, 0.7, 0, 0);
+
+        //     letterPress( '68', fingers.index_1, 0.1, 0, 0);
+        //     letterPress( '68', fingers.index_2, 0.2, 0, 0);
+        //     letterPress( '68', fingers.index_3, 0.1, 0, 0);
+
+        //     letterPress( '68', fingers.thumb_1, 0, -1.7, -0.1);
+        //     letterPress( '68', fingers.thumb_2, 0.6, 0.5, 0.1);
+        //     letterPress( '68', fingers.thumb_3, 0, 0, 0.2);
+
+        //     letterPress( '68', fingers.wrist, -0.1, 0, 0);
+
+        //     letterPress( '68', fingers.palm_1, 0, 0, 0);
+        //     letterPress( '68', fingers.palm_2, 0, 0, 0);
+        //     letterPress( '68', fingers.palm_3, 0, 0, 0);
+
+        //       // ----- SPACE -----
+        //     letterPress( '32', fingers.pinky_1, 0, 0, 0);
+        //     letterPress( '32', fingers.pinky_2, 0, 0, 0);
+        //     letterPress( '32', fingers.pinky_3, 0, 0, 0);
+
+        //     letterPress( '32', fingers.ring_1, 0, 0, 0);
+        //     letterPress( '32', fingers.ring_2, 0, 0, 0);
+        //     letterPress( '32', fingers.ring_3, 0, 0, 0);
+
+        //     letterPress( '32', fingers.middle_1, 0, 0, 0);
+        //     letterPress( '32', fingers.middle_2, 0, 0, 0);
+        //     letterPress( '32', fingers.middle_3, 0, 0, 0);
+
+        //     letterPress( '32', fingers.index_1, 0, 0, 0);
+        //     letterPress( '32', fingers.index_2, 0, 0, 0);
+        //     letterPress( '32', fingers.index_3, 0, 0, 0);
+
+        //     letterPress( '32', fingers.thumb_1, 0, 0, 0);
+        //     letterPress( '32', fingers.thumb_2, 0, 0, 0);
+        //     letterPress( '32', fingers.thumb_3, 0, 0, 0);
+
+        //     letterPress( '32', fingers.wrist, 0, 0, 0);
+
+        //     letterPress( '32', fingers.palm_1, 0, 0, 0);
+        //     letterPress( '32', fingers.palm_2, 0, 0, 0);
+        //     letterPress( '32', fingers.palm_3, 0, 0, 0);
+
+        //     render();
+
+        // }
+
+        // fyrsta utgafa hættir
+
+
+        //önnur utgafa--- kannski léttari?
 
         function checkKey(e) {
 
             e = e || window.event;
 
+            // let letterArray = [];
+            // letterArray.push(e.keyCode);
+            // console.log(letterArray);
 
-            // if (e.keyCode == '81') {
-            //     console.log("Q PRESS")
-                
-            //     // rotateBoneX(model.skeleton.bones[19], 0, 0.9, counter, 0.1);
-            //     // rotateBoneX(model.skeleton.bones[20], 0, 0.9, counter, 0.1);
-            //     // rotateBoneX(model.skeleton.bones[21], 0, 0.9, counter, 0.1);
+            console.log(e.keyCode)
 
-            //     var x1 = model.skeleton.bones[19].rotation.x;
-                
-            //     var move = setInterval(function() {
-            //         var pos = Math.sin(x1) * 2;
-
-            //         console.log(x1 + " <- x1");
-            //         console.log(pos + " <- pos")
-                    
-            //         // if (pos > 0.9) {
-            //         //     clearInterval(move);
-            //         // }
-            //         //console.log(model.skeleton.bones[19].rotation.x + " model skeleton rot x");
-            //         if (x1 <= pos) {
-            //             if (pos > 0.9) {
-            //                 clearInterval(move);
-            //             }
-            //             console.log("if nr 1")
-            //             model.skeleton.bones[19].rotation.x = pos;
-            //             model.skeleton.bones[20].rotation.x = pos;
-            //             model.skeleton.bones[21].rotation.x = pos;
-                        
-            //         }
-
-            //         else if (x1 > pos) {
-            //             if (pos < 0.9) {
-            //                 clearInterval(move);
-            //             }
-            //             console.log("if nr 2")
-            //             model.skeleton.bones[19].rotation.x = pos;
-            //             model.skeleton.bones[20].rotation.x = pos;
-            //             model.skeleton.bones[21].rotation.x = pos;
-                        
-            //         }
-                    
-            //         x1 += 0.01;
-            //         console.log(pos + " POS")
-
-            //     }, 20);
-            // }
+            
 
 
 
-            var letterPress = function( keyCode, startingPoint, endPoint) {
+            var letterPress = (bone, xVal, yVal, zVal) => {
 
-                if (e.keyCode == keyCode) {
-                    console.log(keyCode);
-                    
-                    // rotateBoneX(model.skeleton.bones[19], 0, 0.9, counter, 0.1);
-                    // rotateBoneX(model.skeleton.bones[20], 0, 0.9, counter, 0.1);
-                    // rotateBoneX(model.skeleton.bones[21], 0, 0.9, counter, 0.1);
 
-                    var x1 = startingPoint;
-                    
-                    var move = setInterval(function() {
-                        var pos = Math.sin(x1) * 2;
+                var rotX = bone.x;
+                var rotY = bone.y;
+                var rotZ = bone.z;
 
-                        console.log(x1 + " <- x1");
-                        console.log(pos + " <- pos")
-                        
-                        // if (pos > 0.9) {
-                        //     clearInterval(move);
-                        // }
-                        //console.log(model.skeleton.bones[19].rotation.x + " model skeleton rot x");
-                        if (x1 <= pos) {
-                            if (pos > endPoint) {
-                                clearInterval(move);
-                            }
-                            console.log("if nr 1")
-                            model.skeleton.bones[19].rotation.x = pos;
-                            model.skeleton.bones[20].rotation.x = pos;
-                            model.skeleton.bones[21].rotation.x = pos;
-                            
-                        }
 
-                        else if (x1 > pos) {
-                            if (pos < endPoint) {
-                                clearInterval(move);
-                            }
-                            console.log("if nr 2")
-                            model.skeleton.bones[19].rotation.x = pos;
-                            model.skeleton.bones[20].rotation.x = pos;
-                            model.skeleton.bones[21].rotation.x = pos;
-                            
-                        }
-                        
-                        x1 += 0.01;
-                        console.log(pos + " POS")
+                let directionX = 0.01;
+                let directionY = 0.01;
+                let directionZ = 0.003;
 
-                    }, 20);
+                if (rotX > xVal) {
+                    directionX = -0.01;
                 }
 
+                if (rotY > yVal) {
+                    directionY = -0.01;
+                }
+
+                if (rotZ > zVal) {
+                    directionZ = -0.003;
+                }
+                
+                var moveX = setInterval(function() {
+                
+                    if (rotX >= xVal && directionX == 0.01) {
+                        clearInterval(moveX);
+                    }
+                  
+                    if (rotX <= xVal && directionX == -0.01) {
+                        clearInterval(moveX);
+                    }
+                   
+                    bone.x = rotX;
+                    rotX += directionX;
+
+                    renderer.render( scene, camera );
+
+                }, 20);
+
+                var moveY = setInterval(function() {
+                
+                    if (rotY >= yVal && directionY == 0.01) {
+                        clearInterval(moveY);
+                    }
+                  
+                    if (rotY <= yVal && directionY == -0.01) {
+                        clearInterval(moveY);
+                    }
+                   
+                    bone.y = rotY;
+                    rotY += directionY;
+
+                    renderer.render( scene, camera );
+
+                }, 20);
+
+                var moveZ = setInterval(function() {
+                
+                    if (rotZ >= zVal && directionZ == 0.003) {
+                        clearInterval(moveZ);
+                    }
+                  
+                    if (rotZ <= zVal && directionZ == -0.003) {
+                        clearInterval(moveZ);
+                    }
+                   
+                    bone.z = rotZ;
+                    rotZ += directionZ;
+
+                    renderer.render( scene, camera );
+
+                }, 20);
+                
+
             }
 
-            letterPress( '81', model.skeleton.bones[19].rotation.x, 0.9);
-
-            letterPress( '87', model.skeleton.bones[19].rotation.x, 0.3);
-
-
-            //A
             if (e.keyCode == '65') {
-                console.log("A");
+                 // ----- A 65 ------
+                letterPress(fingers.pinky_1, 1.5, 0, -0.5);
+                letterPress(fingers.pinky_2, 1, 0, -0.2);
+                letterPress(fingers.pinky_3, 0.5, 0.3, -0.2);
 
-               // letterA();
+                letterPress(fingers.ring_1, 1.4, 0, -0.1);
+                letterPress(fingers.ring_2, 1.7, 0, -0.2);
+                letterPress(fingers.ring_3, 0.3, 0, 0);
 
-                model.skeleton.bones[14].rotation.x = 1.2;
-                model.skeleton.bones[15].rotation.x = 1.5;
-                model.skeleton.bones[16].rotation.x = 0.3;
+                letterPress(fingers.middle_1, 1.3, 0, 0);
+                letterPress(fingers.middle_2, 1.8, 0, 0);
+                letterPress(fingers.middle_3, 0.3, 0, 0);
 
-                model.skeleton.bones[14].rotation.y = -0.2;
-                model.skeleton.bones[15].rotation.y = -0.2;
-                model.skeleton.bones[16].rotation.y = -0.1;
+                letterPress(fingers.index_1, 1.15, 0, 0.15);
+                letterPress(fingers.index_2, 1.9, 0, 0.25);
+                letterPress(fingers.index_3, 0.6, 0, 0);
 
-                model.skeleton.bones[14].rotation.z = 0.5;
-                model.skeleton.bones[15].rotation.z = 0.3;
-                model.skeleton.bones[16].rotation.z = 0.1;
+                letterPress(fingers.thumb_1, 0, -0.6, 0.5);
+                letterPress(fingers.thumb_2, 0, 0, 0);
+                letterPress(fingers.thumb_3, 0, 0, 0);
 
+                letterPress(fingers.wrist, 0, 0, 0);
 
-                //BAUGFINGUR
-
-                model.skeleton.bones[9].rotation.x = 1.2;
-                model.skeleton.bones[10].rotation.x = 1.9;
-                model.skeleton.bones[11].rotation.x = 0.4;
-
-                model.skeleton.bones[9].rotation.y = -0.3;
-                model.skeleton.bones[10].rotation.y = 0.1;
-                model.skeleton.bones[11].rotation.y = 0;
-
-                model.skeleton.bones[9].rotation.z = 0.1;
-                model.skeleton.bones[10].rotation.z = 0;
-                model.skeleton.bones[11].rotation.z = 0;
-
-
-                //FU
-
-                model.skeleton.bones[4].rotation.x = 1.2;
-                model.skeleton.bones[5].rotation.x = 1.9;
-                model.skeleton.bones[6].rotation.x = 0.7;
-
-                model.skeleton.bones[4].rotation.y = 0;
-                model.skeleton.bones[5].rotation.y = 0;
-                model.skeleton.bones[6].rotation.y = 0;
-
-                model.skeleton.bones[4].rotation.z = 0;
-                model.skeleton.bones[5].rotation.z = 0;
-                model.skeleton.bones[6].rotation.z = 0;
-
-
-
-
-                //VISIFINGUR
-
-                model.skeleton.bones[19].rotation.x = 1.3;
-                model.skeleton.bones[20].rotation.x = 1.8;
-                model.skeleton.bones[21].rotation.x = 0.5;
-
-                model.skeleton.bones[19].rotation.y = 0.2;
-                model.skeleton.bones[20].rotation.y = 0.3;
-                model.skeleton.bones[21].rotation.y = 0;
-
-                model.skeleton.bones[19].rotation.z = -0.3;
-                model.skeleton.bones[20].rotation.z = 0;
-                model.skeleton.bones[21].rotation.z = 0;
-
-                //ULNLIÐUR
-
-                model.skeleton.bones[1].rotation.x = 0;
-                model.skeleton.bones[1].rotation.y = 0;
-                model.skeleton.bones[1].rotation.z = 0;
-
-                //ANNAÐ
-
-                model.skeleton.bones[7].rotation.z = 0;
-                model.skeleton.bones[12].rotation.z = 0;
-                model.skeleton.bones[17].rotation.z = 0;
-
-                var x1 = model.skeleton.bones[19].rotation.x;
-                console.log(x1 + " <- x1");
-
+                letterPress(fingers.palm_1, 0, 0, -0.055); //ring
+                letterPress(fingers.palm_2, 0, 0, -0.085); //pinky
+                letterPress(fingers.palm_3, 0, 0, 0.055); //index
             }
 
-            //B
+           
+            
+
             else if (e.keyCode == '66') {
-                console.log("B");
+                // ----- B  66 -----
+                letterPress(fingers.pinky_1, 0, 0, -0.3);
+                letterPress(fingers.pinky_2, 0.1, 0, 0);
+                letterPress(fingers.pinky_3, 0.1, 0, 0);
 
-                 //LITLIPUTTI
+                letterPress(fingers.ring_1, 0, 0, -0.1);
+                letterPress(fingers.ring_2, 0.1, 0, 0);
+                letterPress(fingers.ring_3, 0.1, 0, 0);
 
-                model.skeleton.bones[14].rotation.x = 0;
-                model.skeleton.bones[15].rotation.x = 0;
-                model.skeleton.bones[16].rotation.x = 0;
+                letterPress(fingers.middle_1, 0, 0, 0);
+                letterPress(fingers.middle_2, 0.1, 0, 0);
+                letterPress(fingers.middle_3, 0.1, 0, 0);
 
-                model.skeleton.bones[14].rotation.y = 0;
-                model.skeleton.bones[15].rotation.y = 0;
-                model.skeleton.bones[16].rotation.y = 0;
+                letterPress(fingers.index_1, 0, 0, 0.1);
+                letterPress(fingers.index_2, 0.1, 0, 0);
+                letterPress(fingers.index_3, 0.1, 0, 0);
 
-                model.skeleton.bones[14].rotation.z = 0.3;
-                model.skeleton.bones[15].rotation.z = 0;
-                model.skeleton.bones[16].rotation.z = 0;
+                letterPress(fingers.thumb_1, -0.1, -0.4, 0.4);
+                letterPress(fingers.thumb_2, 0, 0, 0.2);
+                letterPress(fingers.thumb_3, 0, 0, -0.1);
 
+                letterPress(fingers.wrist, -0.1, 0, 0);
 
-                //BAUGFINGUR
-
-                model.skeleton.bones[9].rotation.x = 0;
-                model.skeleton.bones[10].rotation.x = 0;
-                model.skeleton.bones[11].rotation.x = 0;
-
-                model.skeleton.bones[9].rotation.y = 0;
-                model.skeleton.bones[10].rotation.y = 0;
-                model.skeleton.bones[11].rotation.y = 0;
-
-                model.skeleton.bones[9].rotation.z = 0.1;
-                model.skeleton.bones[10].rotation.z = 0;
-                model.skeleton.bones[11].rotation.z = 0;
-
-
-                //FU
-
-                model.skeleton.bones[4].rotation.x = 0;
-                model.skeleton.bones[5].rotation.x = 0;
-                model.skeleton.bones[6].rotation.x = 0;
-
-                model.skeleton.bones[4].rotation.y = 0;
-                model.skeleton.bones[5].rotation.y = 0;
-                model.skeleton.bones[6].rotation.y = 0;
-
-                model.skeleton.bones[4].rotation.z = 0;
-                model.skeleton.bones[5].rotation.z = 0;
-                model.skeleton.bones[6].rotation.z = 0;
-
-
-
-
-                //VISIFINGUR
-
-                model.skeleton.bones[19].rotation.x = 0;
-                model.skeleton.bones[20].rotation.x = 0;
-                model.skeleton.bones[21].rotation.x = 0;
-
-                model.skeleton.bones[19].rotation.y = 0;
-                model.skeleton.bones[20].rotation.y = 0;
-                model.skeleton.bones[21].rotation.y = 0;
-
-                model.skeleton.bones[19].rotation.z = -0.1;
-                model.skeleton.bones[20].rotation.z = 0;
-                model.skeleton.bones[21].rotation.z = 0;
-
-
-
-
-                //THUMB
-
-                model.skeleton.bones[23].rotation.x = 0;
-                model.skeleton.bones[24].rotation.x = 0;
-                model.skeleton.bones[25].rotation.x = 0;
-
-                model.skeleton.bones[23].rotation.y = 0.3;
-                model.skeleton.bones[24].rotation.y = 0;
-                model.skeleton.bones[25].rotation.y = 0;
-
-                model.skeleton.bones[23].rotation.z = -0.3;
-                model.skeleton.bones[24].rotation.z = -0.3;
-                model.skeleton.bones[25].rotation.z = 0.5;
-
-
-                //ULNLIÐUR
-
-                model.skeleton.bones[1].rotation.x = 0;
-                model.skeleton.bones[1].rotation.y = 0;
-                model.skeleton.bones[1].rotation.z = 0;
-
-                //ANNAÐ
-
-                model.skeleton.bones[7].rotation.z = 0.03;
-                model.skeleton.bones[12].rotation.z = 0.09;
-                model.skeleton.bones[17].rotation.z = -0.07;
-
-                var x1 = model.skeleton.bones[19].rotation.x;
-                console.log(x1 + " <- x1");
-
+                letterPress(fingers.palm_1, 0, 0, -0.04);
+                letterPress(fingers.palm_2, 0, 0, -0.12);
+                letterPress(fingers.palm_3, 0, 0, 0.08);
             }
 
-
-            //C
             else if (e.keyCode == '67') {
-                console.log("c");
 
-                model.skeleton.bones[14].rotation.x = 1.2;
-                model.skeleton.bones[15].rotation.x = 1.5;
-                model.skeleton.bones[16].rotation.x = 0.3;
+                // ----- C 67 -----
+                letterPress(fingers.pinky_1, 1.1, 0, -0.5);
+                letterPress(fingers.pinky_2, 1.3, 0.1, -0.4);
+                letterPress(fingers.pinky_3, 0.8, 0.2, -0.3);
 
-                model.skeleton.bones[14].rotation.y = -0.2;
-                model.skeleton.bones[15].rotation.y = -0.2;
-                model.skeleton.bones[16].rotation.y = -0.1;
+                letterPress(fingers.ring_1, 1.2, 0, -0.2);
+                letterPress(fingers.ring_2, 1.9, 0.1, -0.2);
+                letterPress(fingers.ring_3, 0.3, 0, 0);
 
-                model.skeleton.bones[14].rotation.z = 0.5;
-                model.skeleton.bones[15].rotation.z = 0.3;
-                model.skeleton.bones[16].rotation.z = 0.1;
+                letterPress(fingers.middle_1, 1.1, 0, 0);
+                letterPress(fingers.middle_2, 2, 0, 0);
+                letterPress(fingers.middle_3, 0.3, 0, 0);
 
+                letterPress(fingers.index_1, 0.6, -0.1, 0);
+                letterPress(fingers.index_2, 0.7, 0, 0);
+                letterPress(fingers.index_3, 0.7, 0, 0);
 
-                //BAUGFINGUR
+                letterPress(fingers.thumb_1, 0.1, -1.2, 0);
+                letterPress(fingers.thumb_2, 0.1, 0.2, 0.1);
+                letterPress(fingers.thumb_3, 0, -0.2, 0.4);
 
-                model.skeleton.bones[9].rotation.x = 1.2;
-                model.skeleton.bones[10].rotation.x = 1.8;
-                model.skeleton.bones[11].rotation.x = 0.7;
+                letterPress(fingers.wrist, -0.1, 0, 0);
 
-                model.skeleton.bones[9].rotation.y = -0.3;
-                model.skeleton.bones[10].rotation.y = -0.1;
-                model.skeleton.bones[11].rotation.y = -0.1;
-
-                model.skeleton.bones[9].rotation.z = 0.1;
-                model.skeleton.bones[10].rotation.z = 0;
-                model.skeleton.bones[11].rotation.z = 0;
-
-
-                //FU
-
-                model.skeleton.bones[4].rotation.x = 1;
-                model.skeleton.bones[5].rotation.x = 1.9;
-                model.skeleton.bones[6].rotation.x = 0.9;
-
-                model.skeleton.bones[4].rotation.y = 0;
-                model.skeleton.bones[5].rotation.y = 0;
-                model.skeleton.bones[6].rotation.y = 0;
-
-                model.skeleton.bones[4].rotation.z = 0;
-                model.skeleton.bones[5].rotation.z = 0;
-                model.skeleton.bones[6].rotation.z = 0;
-
-
-
-
-                //VISIFINGUR
-
-                model.skeleton.bones[19].rotation.x = 0.3;
-                model.skeleton.bones[20].rotation.x = 1.0;
-                model.skeleton.bones[21].rotation.x = 0.6;
-
-                model.skeleton.bones[19].rotation.y = -0.1;
-                model.skeleton.bones[20].rotation.y = 0;
-                model.skeleton.bones[21].rotation.y = 0;
-
-                model.skeleton.bones[19].rotation.z = 0;
-                model.skeleton.bones[20].rotation.z = 0;
-                model.skeleton.bones[21].rotation.z = 0;
-
-
-
-
-                //THUMB
-
-                model.skeleton.bones[23].rotation.x = 0.1;
-                model.skeleton.bones[24].rotation.x = 0;
-                model.skeleton.bones[25].rotation.x = 0;
-
-                model.skeleton.bones[23].rotation.y = 0.9;
-                model.skeleton.bones[24].rotation.y = 0;
-                model.skeleton.bones[25].rotation.y = 0;
-
-                model.skeleton.bones[23].rotation.z = 0;
-                model.skeleton.bones[24].rotation.z = -0.1;
-                model.skeleton.bones[25].rotation.z = -0.5;
-
-
-                //ULNLIÐUR
-
-                model.skeleton.bones[1].rotation.x = 0;
-                model.skeleton.bones[1].rotation.y = 0;
-                model.skeleton.bones[1].rotation.z = 0;
-
-
-                //ANNAÐ
-
-                model.skeleton.bones[7].rotation.z = 0;
-                model.skeleton.bones[12].rotation.z = 0;
-                model.skeleton.bones[17].rotation.z = 0;
-
-                var x1 = model.skeleton.bones[19].rotation.x;
-                console.log(x1 + " <- x1");
-           
-
+                letterPress(fingers.palm_1, 0, 0, -0.02);
+                letterPress(fingers.palm_2, 0, 0, -0.07);
+                letterPress(fingers.palm_3, 0, 0, 0.05);
             }
 
-            //SPACE
+
+            else if (e.keyCode == '68') {
+                // ----- D 68 -----
+                letterPress(fingers.pinky_1, 0.1, 0, 0);
+                letterPress(fingers.pinky_2,0.1, 0, 0);
+                letterPress(fingers.pinky_3, 0.1, 0, 0);
+
+                letterPress(fingers.ring_1, 0.3, 0.1, 0);
+                letterPress(fingers.ring_2, 0.3, 0, 0);
+                letterPress(fingers.ring_3, 0.1, 0, 0);
+
+                letterPress(fingers.middle_1, 0.6, 0, 0);
+                letterPress(fingers.middle_2, 1.4, 0, 0);
+                letterPress(fingers.middle_3, 0.7, 0, 0);
+
+                letterPress(fingers.index_1, 0.1, 0, 0);
+                letterPress(fingers.index_2, 0.2, 0, 0);
+                letterPress(fingers.index_3, 0.1, 0, 0);
+
+                letterPress(fingers.thumb_1, 0, -1.7, -0.1);
+                letterPress(fingers.thumb_2, 0.6, 0.5, 0.1);
+                letterPress(fingers.thumb_3, 0, 0, 0.2);
+
+                letterPress(fingers.wrist, -0.1, 0, 0);
+
+                letterPress(fingers.palm_1, 0, 0, 0);
+                letterPress(fingers.palm_2, 0, 0, 0);
+                letterPress(fingers.palm_3, 0, 0, 0);
+            }
+
             else if (e.keyCode == '32') {
-                console.log("space");
+                // ----- SPACE 32 -----
+                letterPress(fingers.pinky_1, 0, 0, 0);
+                letterPress(fingers.pinky_2, 0, 0, 0);
+                letterPress(fingers.pinky_3, 0, 0, 0);
 
-                model.skeleton.bones[14].rotation.x = 0;
-                model.skeleton.bones[15].rotation.x = 0;
-                model.skeleton.bones[16].rotation.x = 0;
+                letterPress(fingers.ring_1, 0, 0, 0);
+                letterPress(fingers.ring_2, 0, 0, 0);
+                letterPress(fingers.ring_3, 0, 0, 0);
 
-                model.skeleton.bones[14].rotation.y = 0;
-                model.skeleton.bones[15].rotation.y = 0;
-                model.skeleton.bones[16].rotation.y = 0;
+                letterPress(fingers.middle_1, 0, 0, 0);
+                letterPress(fingers.middle_2, 0, 0, 0);
+                letterPress(fingers.middle_3, 0, 0, 0);
 
-                model.skeleton.bones[14].rotation.z = 0;
-                model.skeleton.bones[15].rotation.z = 0;
-                model.skeleton.bones[16].rotation.z = 0;
+                letterPress(fingers.index_1, 0, 0, 0);
+                letterPress(fingers.index_2, 0, 0, 0);
+                letterPress(fingers.index_3, 0, 0, 0);
 
+                letterPress(fingers.thumb_1, 0, 0, 0);
+                letterPress(fingers.thumb_2, 0, 0, 0);
+                letterPress(fingers.thumb_3, 0, 0, 0);
 
-                //BAUGFINGUR
+                letterPress(fingers.wrist, 0, 0, 0);
 
-                model.skeleton.bones[9].rotation.x = 0;
-                model.skeleton.bones[10].rotation.x = 0;
-                model.skeleton.bones[11].rotation.x = 0;
-
-                model.skeleton.bones[9].rotation.y = 0;
-                model.skeleton.bones[10].rotation.y = 0;
-                model.skeleton.bones[11].rotation.y = 0;
-
-                model.skeleton.bones[9].rotation.z = 0;
-                model.skeleton.bones[10].rotation.z = 0;
-                model.skeleton.bones[11].rotation.z = 0;
-
-
-                //FU
-
-                model.skeleton.bones[4].rotation.x = 0;
-                model.skeleton.bones[5].rotation.x = 0;
-                model.skeleton.bones[6].rotation.x = 0;
-
-                model.skeleton.bones[4].rotation.y = 0;
-                model.skeleton.bones[5].rotation.y = 0;
-                model.skeleton.bones[6].rotation.y = 0;
-
-                model.skeleton.bones[4].rotation.z = 0;
-                model.skeleton.bones[5].rotation.z = 0;
-                model.skeleton.bones[6].rotation.z = 0;
-
-
-
-
-                //VISIFINGUR
-
-                model.skeleton.bones[19].rotation.x = 0;
-                model.skeleton.bones[20].rotation.x = 0;
-                model.skeleton.bones[21].rotation.x = 0;
-
-                model.skeleton.bones[19].rotation.y = 0;
-                model.skeleton.bones[20].rotation.y = 0;
-                model.skeleton.bones[21].rotation.y = 0;
-
-                model.skeleton.bones[19].rotation.z = 0;
-                model.skeleton.bones[20].rotation.z = 0;
-                model.skeleton.bones[21].rotation.z = 0;
-
-
-
-
-                //THUMB
-
-                model.skeleton.bones[23].rotation.x = 0;
-                model.skeleton.bones[24].rotation.x = 0;
-                model.skeleton.bones[25].rotation.x = 0;
-
-                model.skeleton.bones[23].rotation.y = 0;
-                model.skeleton.bones[24].rotation.y = 0;
-                model.skeleton.bones[25].rotation.y = 0;
-
-                model.skeleton.bones[23].rotation.z = 0;
-                model.skeleton.bones[24].rotation.z = 0;
-                model.skeleton.bones[25].rotation.z = 0;
-
-
-                //ULNLIÐUR
-
-                model.skeleton.bones[1].rotation.x = 0;
-                model.skeleton.bones[1].rotation.y = 0;
-                model.skeleton.bones[1].rotation.z = 0;
-
-
-                //ANNAÐ
-
-                model.skeleton.bones[7].rotation.z = 0;
-                model.skeleton.bones[12].rotation.z = 0;
-                model.skeleton.bones[17].rotation.z = 0;
-
-           
-
+                letterPress(fingers.palm_1, 0, 0, 0);
+                letterPress(fingers.palm_2, 0, 0, 0);
+                letterPress(fingers.palm_3, 0, 0, 0);
             }
+
 
 
 
             render();
 
         }
+
+        // önnur utgafa hættir
+
+        window.addEventListener('mousedown', mouseDownHandler);
+        
+        // Start rendering
+        render();
+        
+    } // init ends
+
+
+
+    // Set render loop
+    function render () {
+
+        // With easing
+        model.rotation.y += ( targetRotationX - model.rotation.y ) * 0.05;
+
+        // With easing
+        //model.rotation.x += ( targetRotationY - model.rotation.x ) * 0.05;
+
+        renderer.render( scene, camera );
+        window.requestAnimationFrame( render );
+
+    };
+
+    function mouseDownHandler(e) {
+        
+        mouseXOnMouseDown = e.clientX;
+        targetRotationXOnMouseDown = targetRotationX;
+
+        mouseYOnMouseDown = e.clientY;
+        targetRotationXOnMouseDown = targetRotationY;
+        
+        window.addEventListener('mousemove', mouseMoveHandler);                
+        window.addEventListener('mouseup', stopRotation);
+        window.addEventListener('mouseout', stopRotation);
         
     }
+
+    function mouseMoveHandler(e) {
+        var attenuationFactor = 0.005;
+        var xDelta = e.clientX - mouseXOnMouseDown
+        targetRotationX = targetRotationXOnMouseDown + ( xDelta * attenuationFactor );
+
+
+        var yDelta = e.clientY - mouseYOnMouseDown
+        targetRotationY = targetRotationYOnMouseDown + ( yDelta * attenuationFactor );
+
+
+    }
+
+    function stopRotation() {
+        window.removeEventListener('mousemove', mouseMoveHandler);                
+        window.removeEventListener('mouseup', stopRotation);
+        window.removeEventListener('mouseout', stopRotation);
+    }
+
+
 
     // Update whatever changed in this iteration:
     // object angles, camera movement, controls 
     // positioning, screen size, etc.
     function update(timeDelta) {
         camera.updateProjectionMatrix();
-        controls.update(timeDelta);
+        //controls.update(timeDelta);
     }
 
-    // Make things move a bit in this iteration
-    function render() {
-        renderer.render(scene, camera);
-    }
+
 
     // Keep the loop happening (60fps)
     function animate(t) {
@@ -830,6 +688,7 @@ window.onload = function (event) {
         renderer.setSize(width, height);
     }
 
+
     // Go fullscreen (different triggers for different browser)
     function switchToFullscreen() {
         if (container.requestFullscreen) {
@@ -844,113 +703,487 @@ window.onload = function (event) {
         else if (container.webkitRequestFullscreen) {
             container.webkitRequestFullscreen();
         }
+
     }
 
+
+
+
+
+} //---------- window on load
+
+
+
+
+
+
+
+
+
+
+
+// window.onload = function (event) {
     
-}       
+//     // Some variables we will be using later
+//     var camera, scene, renderer;
+//     //var controls;
+//     var element, container;
+
+//     // var model;
+    
+//     // A clock to keep track of time in a convenient way
+//     var clock = new THREE.Clock();
+    
+//     // Initialize the scene, cameras, objects
+//     init();
+    
+//     // Start animating (updates and render)
+//     animate();
+
+//     var targetRotationX = 0;
+//     var targetRotationXOnMouseDown = 0;
+//     var mouseXOnMouseDown = 0;
+
+//     var targetRotationY = 0;
+//     var targetRotationYOnMouseDown = 0;
+//     var mouseYOnMouseDown = 0;
+
+//     function init () {
+        
+//         // Create render, append canvas to the DOM
+//         renderer = new THREE.WebGLRenderer({ antialias: true, });
+//         // Set renderer size
+//         renderer.setSize( window.innerWidth, window.innerHeight );
+//         // Insert scene into the DOM
+//         document.body.appendChild( renderer.domElement );
+//         element = renderer.domElement;
+//         container = document.getElementById('container');
+//         container.appendChild(element);
+        
+//         // Create scene
+//         scene = new THREE.Scene();
+//         scene.background = new THREE.Color(0x0);
+        
+//         // Create camera and position it in space
+//         camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 10000);
+//         camera.position.set(0, 0, 0.2);
+//         camera.lookAt(new THREE.Vector3( 0, 0, 0 ));
+//         scene.add(camera);
+        
+//         // Allows navigating the scene via mouse
+//         //controls = new THREE.OrbitControls(camera, element);
+
+//         var light = new THREE.AmbientLight( 0xffffff ); // soft white light
+//         //var pointLight = new THREE.PointLight(0xFFFFFF, 1, 100000);
+//         scene.add( light );
+
+//         var lightPoint = new THREE.PointLight( 0xffffff, 1, 1000 );
+//         lightPoint.position.set( 0, 0.1, 0.2);
+//         scene.add( lightPoint );
+
+//         var sphere = new THREE.SphereGeometry( 0.01, 16, 8 );
+//         lightPoint.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0000 } ) ) );
+        
+//         // Adds texture
+//         var texture = new THREE.Texture();
+//         var loader = new THREE.ImageLoader();
+//         loader.load( 'textures/HAND_S.jpg', function ( image ) {
+//             texture.image = image;
+//             texture.needsUpdate = true;
+//         } );
+
+//         var loader = new THREE.JSONLoader();
+
+//         var fingers;
+//         loader.load( 'hand25.json', function( geometry, materials ) {
+ 
+//             var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xffc300, emissive: 0x000000, roughness: 0, metalness: 0 } );
+
+//             material.shading = THREE.SmoothShading;
+//             material.side = THREE.BackSide;
+//             model = new THREE.SkinnedMesh( geometry, material );
+//             fingers = initModel(model);
+//             //model.scale.set(-1,1,1);
+
+
+//             var textureLoader = new THREE.TextureLoader();
+//             textureLoader.load('textures/HAND_S.jpg');
+//             // Add the event listener
+//             window.addEventListener( 'load', function(event){
+
+//                 // The actual texture is returned in the event.content
+//                 model.material.map = event.content;
+
+//             });
 
 
 
+//             scene.add( model );
+
+           
+//         } );
+        
 
 
-//document.onkeydown = checkKey;
 
-// function checkKey(e) {
+                
+//         // Adjust everything in case there is a window resize
+//         window.addEventListener('resize', handleResize);
+//         // Set up these adjustments for the first time right away
+//         setTimeout(handleResize, 1);
+
+
+//         document.onkeydown = checkKey;
+
+//         function checkKey(e) {
 
 //             e = e || window.event;
 
-//             if (e.keyCode == '65') {
-//                 console.log("A");
+//             let letterArray = [];
+//             letterArray.push(e.keyCode);
+//             //console.log(letterArray);
 
 
 
-
-
-//                 //LITLIPUTTI
-
-//                 model.skeleton.bones[14].rotation.x = 1.2;
-//                 model.skeleton.bones[15].rotation.x = 1.5;
-//                 model.skeleton.bones[16].rotation.x = 0.3;
-
-//                 model.skeleton.bones[14].rotation.y = -0.2;
-//                 model.skeleton.bones[15].rotation.y = -0.2;
-//                 model.skeleton.bones[16].rotation.y = -0.1;
-
-//                 model.skeleton.bones[14].rotation.z = 0.5;
-//                 model.skeleton.bones[15].rotation.z = 0.3;
-//                 model.skeleton.bones[16].rotation.z = 0.1;
-
-
-//                 //BAUGFINGUR
-
-//                 model.skeleton.bones[9].rotation.x = 1.2;
-//                 model.skeleton.bones[10].rotation.x = 1.9;
-//                 model.skeleton.bones[11].rotation.x = 0.4;
-
-//                 model.skeleton.bones[9].rotation.y = -0.3;
-//                 model.skeleton.bones[10].rotation.y = 0.1;
-//                 model.skeleton.bones[11].rotation.y = 0;
-
-//                 model.skeleton.bones[9].rotation.z = 0.1;
-//                 model.skeleton.bones[10].rotation.z = 0;
-//                 model.skeleton.bones[11].rotation.z = 0;
-
-
-//                 //FU
-
-//                 model.skeleton.bones[4].rotation.x = 1.2;
-//                 model.skeleton.bones[5].rotation.x = 1.9;
-//                 model.skeleton.bones[6].rotation.x = 0.7;
-
-//                 model.skeleton.bones[4].rotation.y = 0;
-//                 model.skeleton.bones[5].rotation.y = 0;
-//                 model.skeleton.bones[6].rotation.y = 0;
-
-//                 model.skeleton.bones[4].rotation.z = 0;
-//                 model.skeleton.bones[5].rotation.z = 0;
-//                 model.skeleton.bones[6].rotation.z = 0;
+//             var letterPress = ( keyCode, bone, xVal, yVal, zVal) => {
 
 
 
+//                 if (e.keyCode == keyCode) {
 
-//                 //VISIFINGUR
+//                     //console.log(keyCode);
 
-//                 model.skeleton.bones[19].rotation.x = 1.3;
-//                 model.skeleton.bones[20].rotation.x = 1.8;
-//                 model.skeleton.bones[21].rotation.x = 0.5;
-
-//                 model.skeleton.bones[19].rotation.y = 0.2;
-//                 model.skeleton.bones[20].rotation.y = 0.3;
-//                 model.skeleton.bones[21].rotation.y = 0;
-
-//                 model.skeleton.bones[19].rotation.z = -0.3;
-//                 model.skeleton.bones[20].rotation.z = 0;
-//                 model.skeleton.bones[21].rotation.z = 0;
+//                     var rotX = bone.x;
+//                     var rotY = bone.y;
+//                     var rotZ = bone.z;
 
 
+//                     let directionX = 0.01;
+//                     let directionY = 0.01;
+//                     let directionZ = 0.003;
 
+//                     if (rotX > xVal) {
+//                         directionX = -0.01;
+//                     }
 
-//                 //THUMB
+//                     if (rotY > yVal) {
+//                         directionY = -0.01;
+//                     }
 
-//                 model.skeleton.bones[23].rotation.x = 0;
-//                 model.skeleton.bones[24].rotation.x = 0.1;
-//                 model.skeleton.bones[25].rotation.x = 0;
+//                     if (rotZ > zVal) {
+//                         directionZ = -0.003;
+//                     }
+                    
+//                     var moveX = setInterval(function() {
+                    
+//                         if (rotX >= xVal && directionX == 0.01) {
+//                             clearInterval(moveX);
+//                         }
+                      
+//                         if (rotX <= xVal && directionX == -0.01) {
+//                             clearInterval(moveX);
+//                         }
+                       
+//                         bone.x = rotX;
+//                         rotX += directionX;
 
-//                 model.skeleton.bones[23].rotation.y = 1;
-//                 model.skeleton.bones[24].rotation.y = 0;
-//                 model.skeleton.bones[25].rotation.y = 0;
+//                         renderer.render( scene, camera );
 
-//                 model.skeleton.bones[23].rotation.z = -0.4;
-//                 model.skeleton.bones[24].rotation.z = 0;
-//                 model.skeleton.bones[25].rotation.z = 0;
+//                     }, 20);
 
+//                     var moveY = setInterval(function() {
+                    
+//                         if (rotY >= yVal && directionY == 0.01) {
+//                             clearInterval(moveY);
+//                         }
+                      
+//                         if (rotY <= yVal && directionY == -0.01) {
+//                             clearInterval(moveY);
+//                         }
+                       
+//                         bone.y = rotY;
+//                         rotY += directionY;
 
-//                 //ULNLIÐUR
+//                         renderer.render( scene, camera );
 
-//                 model.skeleton.bones[1].rotation.x = 0;
-//                 model.skeleton.bones[1].rotation.y = 0;
-//                 model.skeleton.bones[1].rotation.z = 0;
+//                     }, 30);
+
+//                     var moveZ = setInterval(function() {
+                    
+//                         if (rotZ >= zVal && directionZ == 0.003) {
+//                             clearInterval(moveZ);
+//                         }
+                      
+//                         if (rotZ <= zVal && directionZ == -0.003) {
+//                             clearInterval(moveZ);
+//                         }
+                       
+//                         bone.z = rotZ;
+//                         rotZ += directionZ;
+
+//                         renderer.render( scene, camera );
+
+//                     }, 20);
+//                 }
 
 //             }
+
+
+//             letterPress( '65', fingers.pinky_1, 1.5, 0, -0.5);
+//             letterPress( '65', fingers.pinky_2, 1, 0, -0.2);
+//             letterPress( '65', fingers.pinky_3, 0.5, 0.3, -0.2);
+
+//             letterPress( '65', fingers.ring_1, 1.4, 0, -0.1);
+//             letterPress( '65', fingers.ring_2, 1.7, 0, -0.2);
+//             letterPress( '65', fingers.ring_3, 0.3, 0, 0);
+
+//             letterPress( '65', fingers.middle_1, 1.3, 0, 0);
+//             letterPress( '65', fingers.middle_2, 1.8, 0, 0);
+//             letterPress( '65', fingers.middle_3, 0.3, 0, 0);
+
+//             letterPress( '65', fingers.index_1, 1.15, 0, 0.15);
+//             letterPress( '65', fingers.index_2, 1.9, 0, 0.25);
+//             letterPress( '65', fingers.index_3, 0.6, 0, 0);
+
+//             letterPress( '65', fingers.thumb_1, 0, -0.6, 0.5);
+//             letterPress( '65', fingers.thumb_2, 0, 0, 0);
+//             letterPress( '65', fingers.thumb_3, 0, 0, 0);
+
+//             letterPress( '65', fingers.wrist, 0, 0, 0);
+
+//             letterPress( '65', fingers.palm_1, 0, 0, -0.055); //ring
+//             letterPress( '65', fingers.palm_2, 0, 0, -0.085); //pinky
+//             letterPress( '65', fingers.palm_3, 0, 0, 0.055); //index
             
+
+
+//             // ----- B -----
+//             letterPress( '66', fingers.pinky_1, 0, 0, -0.3);
+//             letterPress( '66', fingers.pinky_2, 0.1, 0, 0);
+//             letterPress( '66', fingers.pinky_3, 0.1, 0, 0);
+
+//             letterPress( '66', fingers.ring_1, 0, 0, -0.1);
+//             letterPress( '66', fingers.ring_2, 0.1, 0, 0);
+//             letterPress( '66', fingers.ring_3, 0.1, 0, 0);
+
+//             letterPress( '66', fingers.middle_1, 0, 0, 0);
+//             letterPress( '66', fingers.middle_2, 0.1, 0, 0);
+//             letterPress( '66', fingers.middle_3, 0.1, 0, 0);
+
+//             letterPress( '66', fingers.index_1, 0, 0, 0.1);
+//             letterPress( '66', fingers.index_2, 0.1, 0, 0);
+//             letterPress( '66', fingers.index_3, 0.1, 0, 0);
+
+//             letterPress( '66', fingers.thumb_1, -0.1, -0.4, 0.4);
+//             letterPress( '66', fingers.thumb_2, 0, 0, 0.2);
+//             letterPress( '66', fingers.thumb_3, 0, 0, -0.1);
+
+//             letterPress( '66', fingers.wrist, -0.1, 0, 0);
+
+//             letterPress( '66', fingers.palm_1, 0, 0, -0.04);
+//             letterPress( '66', fingers.palm_2, 0, 0, -0.12);
+//             letterPress( '66', fingers.palm_3, 0, 0, 0.08);
+
+//             // ----- C -----
+//             letterPress( '67', fingers.pinky_1, 1.1, 0, -0.5);
+//             letterPress( '67', fingers.pinky_2, 1.3, 0.1, -0.4);
+//             letterPress( '67', fingers.pinky_3, 0.8, 0.2, -0.3);
+
+//             letterPress( '67', fingers.ring_1, 1.2, 0, -0.2);
+//             letterPress( '67', fingers.ring_2, 1.9, 0.1, -0.2);
+//             letterPress( '67', fingers.ring_3, 0.3, 0, 0);
+
+//             letterPress( '67', fingers.middle_1, 1.1, 0, 0);
+//             letterPress( '67', fingers.middle_2, 2, 0, 0);
+//             letterPress( '67', fingers.middle_3, 0.3, 0, 0);
+
+//             letterPress( '67', fingers.index_1, 0.6, -0.1, 0);
+//             letterPress( '67', fingers.index_2, 0.7, 0, 0);
+//             letterPress( '67', fingers.index_3, 0.7, 0, 0);
+
+//             letterPress( '67', fingers.thumb_1, 0.1, -1.2, 0);
+//             letterPress( '67', fingers.thumb_2, 0.1, 0.2, 0.1);
+//             letterPress( '67', fingers.thumb_3, 0, -0.2, 0.4);
+
+//             letterPress( '67', fingers.wrist, -0.1, 0, 0);
+
+//             letterPress( '67', fingers.palm_1, 0, 0, -0.02);
+//             letterPress( '67', fingers.palm_2, 0, 0, -0.07);
+//             letterPress( '67', fingers.palm_3, 0, 0, 0.05);
+
+//             // ----- D -----
+//             letterPress( '68', fingers.pinky_1, 0.1, 0, 0);
+//             letterPress( '68', fingers.pinky_2,0.1, 0, 0);
+//             letterPress( '68', fingers.pinky_3, 0.1, 0, 0);
+
+//             letterPress( '68', fingers.ring_1, 0.3, 0.1, 0);
+//             letterPress( '68', fingers.ring_2, 0.3, 0, 0);
+//             letterPress( '68', fingers.ring_3, 0.1, 0, 0);
+
+//             letterPress( '68', fingers.middle_1, 0.6, 0, 0);
+//             letterPress( '68', fingers.middle_2, 1.4, 0, 0);
+//             letterPress( '68', fingers.middle_3, 0.7, 0, 0);
+
+//             letterPress( '68', fingers.index_1, 0.1, 0, 0);
+//             letterPress( '68', fingers.index_2, 0.2, 0, 0);
+//             letterPress( '68', fingers.index_3, 0.1, 0, 0);
+
+//             letterPress( '68', fingers.thumb_1, 0, -1.7, -0.1);
+//             letterPress( '68', fingers.thumb_2, 0.6, 0.5, 0.1);
+//             letterPress( '68', fingers.thumb_3, 0, 0, 0.2);
+
+//             letterPress( '68', fingers.wrist, -0.1, 0, 0);
+
+//             letterPress( '68', fingers.palm_1, 0, 0, 0);
+//             letterPress( '68', fingers.palm_2, 0, 0, 0);
+//             letterPress( '68', fingers.palm_3, 0, 0, 0);
+
+//               // ----- SPACE -----
+//             letterPress( '32', fingers.pinky_1, 0, 0, 0);
+//             letterPress( '32', fingers.pinky_2, 0, 0, 0);
+//             letterPress( '32', fingers.pinky_3, 0, 0, 0);
+
+//             letterPress( '32', fingers.ring_1, 0, 0, 0);
+//             letterPress( '32', fingers.ring_2, 0, 0, 0);
+//             letterPress( '32', fingers.ring_3, 0, 0, 0);
+
+//             letterPress( '32', fingers.middle_1, 0, 0, 0);
+//             letterPress( '32', fingers.middle_2, 0, 0, 0);
+//             letterPress( '32', fingers.middle_3, 0, 0, 0);
+
+//             letterPress( '32', fingers.index_1, 0, 0, 0);
+//             letterPress( '32', fingers.index_2, 0, 0, 0);
+//             letterPress( '32', fingers.index_3, 0, 0, 0);
+
+//             letterPress( '32', fingers.thumb_1, 0, 0, 0);
+//             letterPress( '32', fingers.thumb_2, 0, 0, 0);
+//             letterPress( '32', fingers.thumb_3, 0, 0, 0);
+
+//             letterPress( '32', fingers.wrist, 0, 0, 0);
+
+//             letterPress( '32', fingers.palm_1, 0, 0, 0);
+//             letterPress( '32', fingers.palm_2, 0, 0, 0);
+//             letterPress( '32', fingers.palm_3, 0, 0, 0);
+
+
+
+
 //             render();
+
+//         }
+
+//         window.addEventListener('mousedown', mouseDownHandler);
+
+//         // Start rendering
+//         render();
+
+//     } // init ends
+
+
+//     function render() {
+
+//         //console.log("render");
+
+
+//         window.requestAnimationFrame( render );
+
+//         renderer.render( scene, camera );
+
+//     }
+
+//     // render();
+
+//     function mouseDownHandler(e) {
+//         console.log("mouse down");
+
+//         mouseXOnMouseDown = e.clientX;
+//         targetRotationXOnMouseDown = targetRotationX;
+
+//         mouseYOnMouseDown = e.clientY;
+//         targetRotationXOnMouseDown = targetRotationY;
+        
+//         window.addEventListener('mousemove', mouseMoveHandler);                
+//         window.addEventListener('mouseup', stopRotation);
+//         window.addEventListener('mouseout', stopRotation);
+        
+//     }
+
+//     function mouseMoveHandler(e) {
+//         console.log("mouse move");
+
+//         var attenuationFactor = 0.005;
+//         var xDelta = e.clientX - mouseXOnMouseDown
+//         targetRotationX = targetRotationXOnMouseDown + ( xDelta * attenuationFactor );
+
+
+//         var yDelta = e.clientY - mouseYOnMouseDown
+//         targetRotationY = targetRotationYOnMouseDown + ( yDelta * attenuationFactor );
+
+
+//         model.rotation.y += ( targetRotationX - model.rotation.y ) * 0.05;
+
+//         //model.rotation.x += ( targetRotationY - model.rotation.x ) * 0.05;
+
+
+//     }
+
+//     function stopRotation() {
+//         console.log("stop rotation")
+
+//         window.removeEventListener('mousemove', mouseMoveHandler);                
+//         window.removeEventListener('mouseup', stopRotation);
+//         window.removeEventListener('mouseout', stopRotation);
+//     }
+
+//     // Update whatever changed in this iteration:
+//     // object angles, camera movement, controls 
+//     // positioning, screen size, etc.
+//     function update(timeDelta) {
+//         camera.updateProjectionMatrix();
+//         //controls.update(timeDelta);
+//     }
+
+//     // // Make things move a bit in this iteration
+//     // function render() {
+//     //     renderer.render(scene, camera);
+//     // }
+
+//     // Keep the loop happening (60fps)
+//     function animate(t) {
+//         requestAnimationFrame(animate);
+//         update(clock.getDelta());
+//         render();
+//     }
+
+//     // Adjust sizes on window resize
+//     function handleResize() {
+//         var width = container.offsetWidth;
+//         var height = container.offsetHeight;
+//         camera.aspect = width / height;
+//         camera.updateProjectionMatrix();
+//         renderer.setSize(width, height);
+//     }
+
+//     // Go fullscreen (different triggers for different browser)
+//     function switchToFullscreen() {
+//         if (container.requestFullscreen) {
+//             container.requestFullscreen();
+//         }
+//         else if (container.msRequestFullscreen) {
+//             container.msRequestFullscreen();
+//         }
+//         else if (container.mozRequestFullScreen) {
+//             container.mozRequestFullScreen();
+//         }
+//         else if (container.webkitRequestFullscreen) {
+//             container.webkitRequestFullscreen();
+//         }
+//     }
+
+    
+// }       
+
+
+
+
+
