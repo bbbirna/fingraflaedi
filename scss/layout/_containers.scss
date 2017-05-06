@@ -78,7 +78,6 @@
 		margin: auto;
 		height: calc(100vh - 200px);
 		width: calc(50vw - 200px);
-	
 	}
 	#btn-share {
 		margin-bottom: 10%;
@@ -115,11 +114,15 @@
 	.letters{
 		justify-content: center;
 	}
-	.letter svg {
+	.letter {
+	margin: 6px;
+
+	svg {
 		height: 60px;
 		margin: auto;
 		width: auto;
-			margin-left:10
+		margin-left:10
+	}
 	}
 	.alphabet-filter {
 		align-self: flex-end;
@@ -133,7 +136,7 @@
 		.firstLine {
 			height: 2px;
 			width: 80%;
-			top: -100%;
+			top: -90%;
 			background-color: $black-opacity;
 			position: absolute;
 			justify-content: center;

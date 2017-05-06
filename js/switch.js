@@ -1,4 +1,4 @@
-(function($) {
+(($)=> {
 
 
 	// Variables
@@ -11,37 +11,56 @@
 		logo = $('.logo')
 		preloadLogo = $('.se-pre-con img')
 
+		// Loop Play/Pause Word
 		btnLoop = $('#btn-loop ')
-		btnPause = $('#btn-pause ')
-		btnWord = $('#btn-word ')
+		loopStroke= $('.path-loop-stroke')
+		loopFill= $('.path-loop-fill')
 		isLooping = $('.ball')
+
+		btnPause = $('#btn-pause ')
+		playFill= $('.path-play')
+
+		btnWord = $('#btn-word ')
+		wordFill= $('.path-word')
+		
+
 
 		pausePlay = $('#btn-pause ')
 		wordPlay = $('#btn-word ')
 
 		hand = $('.second-half')
-		
+		model = $('#container')
 		thirdHalf = $('.third-half')
 		
 		line = $('.firstLine ')
 		lettersRow = $('.letters-row ')
+		modal = $('#shareHand')
 
+	 	morphPlay = $('#pausePath')
+ 		btnPause = $('#btn-pause')
+ 		btnPlay = $('.btn-play')
+ 		pause1 = $('.pause1')
+ 		pause2 = $('.pause2'),
 
+ 		
 		// Window Preloader
-	$(window).load(function() {
+	$(window).load(()=> {
 		tlPreload = new TimelineMax();
 		// Animate loader off screen
 		tlPreload
-		// .fromTo(preloadLogo, 2, { opacity: 0,  ease:Power4.easeOut},{ opacity: '100%',  ease:Power4.easeOut})
-		.fromTo(preloadLogo, 2, { autoAlpha: 0,  ease:Power4.easeIn}, { autoAlpha:1,  ease:Power4.easeOut})
-		.to(preloadLogo, 1, { autoAlpha: 0,  ease:Power4.easeOut})
+		.to(preloadLogo, 2, { autoAlpha: 0,  ease:Power4.easeOut})
+		.fromTo(preloadLogo, .6, { y:'60%',  ease:Power4.easeOut},{ y:'0%',  ease:Power4.easeOut},'-=.4')
+		.to(preloadLogo, 2, { autoAlpha: 1,  ease:Power4.easeOut},'-=.4')
+		.to(modal, .1, { autoAlpha: 0,  ease:Power4.easeIn})
+		.fromTo(preloadLogo, .4, { y:'0%', ease:Power2.easeInOut},{ y:'-60%',  ease:Power2.easeOut})
+		.to(preloadLogo, 1, { autoAlpha: 0,  ease:Power4.easeOut},'-=.6')
 		.to(content, .7, { autoAlpha: 0,  ease:Power4.easeIn})
 		.to(loadScreen, .4, {delay: 1, autoAlpha: 0,  ease:Power4.easeOut})
 		.to(content, .4, { autoAlpha: 1,  ease:Power3.easeIn})
 		.fromTo(background, 1, {x: '100%',  ease:Power4.ease},{x: '45%',  ease:Power4.ease})
-		.fromTo(btnLoop, .4, {x:'-10%', autoAlpha: 0,  ease:Power3.easeIn},{x:'0%', autoAlpha: 1,  ease:Power3.easeIn})
-		.fromTo(btnPause, .4, { autoAlpha: 0,  ease:Power3.easeIn},{ autoAlpha: 1,  ease:Power3.easeIn})
-		.fromTo(btnWord, .4, { autoAlpha: 0,  ease:Power3.easeIn},{ autoAlpha: 1,  ease:Power3.easeIn})
+		.fromTo(btnLoop, .3, {y:'30%', autoAlpha: 0,  ease:Power3.easeIn},{y:'0%', autoAlpha: 1,  ease:Power3.easeIn})
+		.fromTo(btnPause, .3, {y:'30%', autoAlpha: 0,  ease:Power3.easeIn},{y:'0%', autoAlpha: 1,  ease:Power3.easeIn},'-=.2')
+		.fromTo(btnWord, .3, {y:'30%', autoAlpha: 0,  ease:Power3.easeIn},{y:'0%', autoAlpha: 1,  ease:Power3.easeIn},'-=.2')
 	});
 
 
@@ -58,9 +77,13 @@
 			letterfill2 = $('.letters-row-oo #letter-outline')
 			letterfill3 = $('.letters-row-110 #letter-outline')
 			
-			palmOutline = ('.letters-row-an #Shape')
-			palmOutline2 = ('.letters-row-oo #Shape')
-			palmOutline3 = ('.letters-row-110 #Shape'),
+			palmOutline = $('.letters-row-an #Shape')
+			palmOutline2 = $('.letters-row-oo #Shape')
+			palmOutline3 = $('.letters-row-110 #Shape')
+			
+			btnAN = $('.btn-a-n')
+			btnOO = $('.btn-o-o')
+			btnOne = $('.btn-1-10'),
 	
 
 	// Alphabet SVG Timelines
@@ -101,17 +124,17 @@
 		.addPause()
 
 	// SVG alphabet filter buttons
-	$('.filter-a-n').on('click',function(){
+	$(btnAN ).on('click',()=>{
 		tlsvg2.reverse();
 		tlsvg3.reverse();
 		tlsvg.play();
 	});
-	$('.filter-o-o').on('click',function(){
+	$(btnOO).on('click',()=>{
 		tlsvg.reverse();
 		tlsvg3.reverse();
 		tlsvg2.play();
 	});
-	$('.filter-1-10').on('click',function(){
+	$(btnOne).on('click',()=>{
 		tlsvg2.reverse();
 		tlsvg.reverse();
 		tlsvg3.play();
@@ -124,27 +147,30 @@
 		tl = new TimelineMax({paused: true}),
 
 	tl
-		.to(background, 0.6, {x: '45%',  ease:Power4.ease})
+		.to(modal, .35, {autoAlpha:0, ease:Power1.easeInOut})
+		.to(thirdHalf, 0.7, {autoAlpha: 0, ease:Power1.easeInOut}, '-=0.7')
+		.to(background, 0.6, {x: '45%',  ease:Power4.easeInOut},'-=.35')
 		.to(firstHalf, 0.7, {css: {zIndex:-3},  ease:Power1.easeInOut})
-		
-		.to(hand, 0.3, {position: 'absolute', x: '-100%', ease:Power1.easeInOut})
-		.to(background, 0.3, {x: '-45%',borderRight: '180px solid transparent', ease:Power1.easeInOut}, '-=.2')
+
+		.to(hand, 0.5, {position: 'absolute', x: '-100%', ease:Power4.easeInOut})
+		.to(background, 0.5, {x: '-45%',borderRight: '180px solid transparent', ease:Power3.easeInOut}, '-=.5')
 		.to(logo, 0.5, {content: "url('../logo/logo-circle-bl-on-yel.png')", ease:Power1.easeInOut}, '-=.2')
 
 		.to(btnWrite, 0.7, {opacity: 1,position: 'absolute', left: '0%', ease:Power1.easeInOut}, '-=0.5')
 		.to(btnAlpha, 0.7, {opacity: 0, ease:Power1.easeInOut} , '-=0.5')
+		
 		.to(thirdHalf, 0.7, {position: 'relative', x: '-200%', ease:Power1.easeInOut}, '-=0.5')
-		.to(thirdHalf, 0.7, {opacity: 1, ease:Power1.easeInOut})
+		.fromTo(thirdHalf, 0.7,{autoAlpha: 0, ease:Power1.easeInOut}, {autoAlpha: 1, ease:Power1.easeInOut}, '-=0.2')
 
 		.addPause()
 
 	
 	// Window change 
-	$('#btn-alpha').on('click',function(){
+	$('#btn-alpha').on('click',()=>{
 		tl.play();
 	});
 
-	$('#btn-write').on('click',function(){
+	$('#btn-write').on('click',()=>{
 		tl.reverse();
 	});
 
@@ -153,7 +179,100 @@
 
 
 
+
+// btnLoop = $('#btn-loop ')
+// 		loopStroke= $('.path-loop-stroke')
+// 		loopFill= $('.path-loop-fill')
+// 		isLooping = $('.ball')
+
+// 		btnPause = $('#btn-pause ')
+// 		playFill= $('.path-play')
+
+// 		btnWord = $('#btn-word ')
+// 		wordFill= $('.path-word')
+
+
+
+
+
+tlMorph = new TimelineMax({paused: true})
+	
+tlMorph
+	
+	.to(pause1, 0.3, {attr: {points:"23 0 23 26 15 26 15 0"}, ease:Power2.easeInOut})
+	.to(pause2, 0.3, {attr: {points:"8 0 8 26 0 26 0 0"}, ease:Power2.easeInOut},'-=.3')
+	.to(pause1, 0.3, {attr: {points:"23 13 23 13 0 26 0 0"}, ease:Power2.easeInOut})
+	.to(pause2, 0.3, {attr: {points:"23 13 23 13 0 26 0 0"}, ease:Power2.easeInOut},'-=.3')
+	.to(pause1, 0.3, {x:'2px', ease:Power2.easeInOut},'-=.3')
+	.to(pause2, 0.3, {x:'2px', ease:Power2.easeInOut},'-=.3')
+	.to(playFill, 0.3, {fill: '#7f7f7f', ease:Power2.easeInOut},'-=.3')
+	.addPause()
+
+
+$(btnPause).on('click', (event) => {
+    event.preventDefault();
+   	// tlMorph.reverse();
+   	tlMorph.reversed() ? tlMorph.play() : tlMorph.reverse();
+    tlLoop.reverse();
+});
+
+
+
+tlLoop = new TimelineMax({paused: true})
+	.to(isLooping, 0.3, {autoAlpha: 0, ease:Power2.easeInOut})
+	.to(isLooping, 0.3, {height:'0px', width:'0px', ease:Power2.easeInOut})
+	.to(loopFill, 0.3, {fill: '#000', ease:Power2.easeInOut})
+	.to(loopStroke, 0.3, {stroke: '#000', ease:Power2.easeInOut},'-=.3')
+	.to(isLooping, 0.3, {autoAlpha: 1, ease:Power2.easeInOut}, '-=.3')
+	.to(isLooping, 0.5, {height:'9px', width:'9px', ease:Power2.easeInOut}, '-=.3')
+	
+
+
+ $(btnLoop).on('click',(event) => {
+    event.preventDefault();
+    tlLoop.play()
+    tlMorph.play();
+});
+
+
+// var tl = new TimelineLite({paused:true});
+// tl.to('.sidebar, .main', 1,  {x:-231, ease:Power2.easeIn});
+    
+// $('.home').on('click', function(event) {
+//     event.preventDefault();
+//     tl.reversed() ? tl.play() : tl.reverse();
+// });
+
+
+var span = $('<span>').css('display','inline-block')
+.css('word-break','break-all').appendTo('body').css('visibility','hidden');
+
+ const initSpan = (textarea) => {
+  span.text(textarea.text())
+      .width(textarea.width())      
+      .css('font',textarea.css('font'));
+}
+$('textarea').on({
+    input: ()=>{
+      var text = $(this).val();      
+      span.text(text);      
+      $(this).height(text ? span.height() : '1.1em');
+    },
+    focus: ()=>{
+     initSpan($(this));
+    },
+    keypress: (e)=>{
+        if(e.which == 13) e.preventDefault();
+    }
+});
+
+
+
 })(jQuery);
+
+
+
+
 
 
 

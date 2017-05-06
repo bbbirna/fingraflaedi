@@ -1771,11 +1771,13 @@ header {
     margin-left: 16px; }
   .third-half .letters {
     justify-content: center; }
-  .third-half .letter svg {
-    height: 60px;
-    margin: auto;
-    width: auto;
-    margin-left: 10; }
+  .third-half .letter {
+    margin: 6px; }
+    .third-half .letter svg {
+      height: 60px;
+      margin: auto;
+      width: auto;
+      margin-left: 10; }
   .third-half .alphabet-filter {
     align-self: flex-end;
     justify-content: center;
@@ -1785,7 +1787,7 @@ header {
     .third-half .alphabet-filter .firstLine {
       height: 2px;
       width: 80%;
-      top: -100%;
+      top: -90%;
       background-color: rgba(0, 0, 0, 0.5);
       position: absolute;
       justify-content: center; }
@@ -1842,7 +1844,7 @@ header {
   stroke-dasharray: 110px;
   stroke-dashoffset: 110px; }
 
-.hover, .squareButton:hover, #btn-share:hover, .sideButton:hover, #btn-alpha:hover, #btn-write:hover, #btn-loop:hover, #btn-pause:hover, #btn-word:hover, #btn-filter :after, #btn-filter:hover {
+.hover, .squareButton:hover, #btn-share:hover, .sideButton:hover, #btn-alpha:hover, #btn-write:hover, #btn-loop:hover, #btn-pause:hover, #btn-word:hover, #btn-filter :after, #btn-filter:hover, .color-pick .gif-bg-color:hover {
   cursor: pointer; }
 
 .squareButton, #btn-share {
@@ -1885,6 +1887,10 @@ header {
   .sideButton:active, #btn-alpha:active, #btn-write:active {
     transition: .01s ease;
     border: none; }
+
+.socialIcon, .social-icons #twitter, .social-icons #instagram, .social-icons #facebook, .social-icons #messenger, .social-icons #download {
+  opacity: 50%;
+  height: 20px; }
 
 #background {
   border-bottom: 100vh solid #AFDBD1;
@@ -2413,6 +2419,8 @@ button {
   position: relative;
   text-align: center;
   margin: 20px; }
+  #btn-loop .iconFill, #btn-pause .iconFill, #btn-word .iconFill {
+    opacity: 50%; }
   #btn-loop .ball, #btn-pause .ball, #btn-word .ball {
     width: 9px;
     height: 9px;
@@ -2420,6 +2428,7 @@ button {
     transform: translate(150%, -60%);
     border-radius: 100%;
     position: absolute;
+    opacity: 0;
     animation: endlessloop linear 2s infinite; }
 #btn-alpha {
   right: 0;
@@ -2435,6 +2444,15 @@ button {
   height: 30px; }
 #btn-filter:visited {
   color: yellow; }
+
+.path-loop-stroke {
+  stroke: #d8d8d8; }
+.path-loop-fill {
+  fill: #d8d8d8; }
+.path-play {
+  fill: #000; }
+.path-word {
+  fill: #d8d8d8; }
 
 [type='text']:focus,
 textarea:focus {
@@ -2455,6 +2473,17 @@ input {
     box-shadow: none;
     outline: none; }
 
+textarea {
+  width: 200px;
+  resize: none;
+  font-family: nunito-regular;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  font-size: 24px;
+  height: 1.1em;
+  padding: 2px; }
+
 .modal {
   opacity: 0;
   display: none;
@@ -2473,12 +2502,14 @@ input {
   /* Full height */
   overflow: auto;
   /* Enable scroll if needed */
-  background-color: #D7EDE8;
-  /* Black w/ opacity */
+  background-color: rgba(255, 255, 255, 0.85);
   /* Modal Content/Box */ }
+  .modal:hover {
+    cursor: url(../icon/close-btn.png), auto; }
 
 .modal-content {
-  background-color: rgba(175, 219, 209, 0.35);
+  background-color: #D7EDE8;
+  border-radius: 3px;
   margin: auto;
   /* 15% from the top and centered */
   padding: 20px;
@@ -2488,20 +2519,12 @@ input {
   display: flex;
   justify-content: space-around;
   align-content: space-between; }
-  .modal-content .close {
-    color: rgba(0, 0, 0, 0.5);
-    font-size: 48px;
-    font-family: nunito-light;
-    position: absolute;
-    right: -50px;
-    top: -60px; }
-    .modal-content .close:hover, .modal-content .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer; }
+  .modal-content:hover {
+    cursor: initial; }
 
 .hand-gif {
   height: 70%;
+  border-radius: 3px;
   margin: auto;
   background-color: #AFDBD1;
   display: flex;
@@ -2517,8 +2540,8 @@ input {
   align-items: center;
   justify-content: center; }
   .color-pick .gif-bg-color {
-    height: 20px;
-    width: 20px;
+    height: 12px;
+    width: 12px;
     border-radius: 100%;
     margin: 2%; }
   .color-pick .pick-pink {
@@ -2541,23 +2564,12 @@ input {
 .social-icons {
   display: flex;
   position: relative;
-  justify-content: center; }
+  margin: 2%;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px; }
   .social-icons .icon {
-    margin: 2%; }
-
-#twitter {
-  opacity: 50%; }
-
-#instagram {
-  opacity: 50%; }
-
-#facebook {
-  opacity: 50%; }
-
-#messenger {
-  opacity: 50%; }
-
-#download {
-  opacity: 50%; }
+    margin: 0% 4% 4%; }
 
 /*# sourceMappingURL=application.css.map */
