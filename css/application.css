@@ -1762,7 +1762,8 @@ header {
   .second-half #container {
     margin: auto;
     height: calc(100vh - 200px);
-    width: calc(50vw - 200px); }
+    width: calc(50vw - 200px);
+    cursor: pointer; }
   .second-half #btn-share {
     margin-bottom: 10%; }
 
@@ -1913,7 +1914,17 @@ header {
   transform: translate(45%);
   background-color: grey;
   transform: rotate(7deg);
-  right: -4%; }
+  right: -4%;
+  background: #F5D04C;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#F5D04C, #FFB000);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#F5D04C, #FFB000);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#F5D04C, #FFB000);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#F5D04C, #FFB000);
+  /* Standard syntax */ }
 
 @keyframes endlessloop {
   0% {

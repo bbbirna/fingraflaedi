@@ -21,5 +21,11 @@
 	// 	position: absolute;
 	// }
 	// }
+
+	background: $mustard; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient($mustard, $mustardDark); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient($mustard, $mustardDark); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient($mustard, $mustardDark); /* For Firefox 3.6 to 15 */
+    background: linear-gradient($mustard, $mustardDark); /* Standard syntax */
 }
 
