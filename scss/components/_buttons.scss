@@ -67,16 +67,22 @@ button {
 
   &-alpha {
     @extend .sideButton;
-    right: 0;
+    right: -1px;
     border-radius: 100px 0 0 100px;
-
+      &:after {
+      right:0;
+      border-radius: 100px 0 0 100px;
+    }
   }
 
   &-write{
     @extend .sideButton;
-    left: -100%;
-    opacity: 0;
+    left: -1px;
     border-radius: 0 100px 100px 0;
+    &:after {
+      left:0;
+      border-radius: 0 100px 100px 0;
+    }
   }
 
   &-filter {

@@ -6,7 +6,11 @@
 		content = $('.main-content')
 		btnAlpha = $('#btn-alpha')
 		btnWrite = $('#btn-write')
+		
 		background = $('#background')
+		model = $('#container')
+		shareBtn = $('#btn-share')
+		
 		firstHalf = $('.first-half')
 		logo = $('.logo')
 		preloadLogo = $('.se-pre-con img')
@@ -17,6 +21,8 @@
 		loopFill= $('.path-loop-fill')
 		isLooping = $('.ball')
 
+		filter = $('.filter ')
+		
 		btnPause = $('#btn-pause ')
 		playFill= $('.path-play')
 
@@ -51,16 +57,16 @@
 		.to(preloadLogo, 2, { autoAlpha: 0,  ease:Power4.easeOut})
 		.fromTo(preloadLogo, .6, { y:'60%',  ease:Power4.easeOut},{ y:'0%',  ease:Power4.easeOut},'-=.4')
 		.to(preloadLogo, 2, { autoAlpha: 1,  ease:Power4.easeOut},'-=.4')
-		.to(modal, .1, { autoAlpha: 0,  ease:Power4.easeIn})
+		.to(modal, 0, { autoAlpha: 0,  ease:Power4.easeIn})
 		.fromTo(preloadLogo, .4, { y:'0%', ease:Power2.easeInOut},{ y:'-60%',  ease:Power2.easeOut})
-		.to(preloadLogo, 1, { autoAlpha: 0,  ease:Power4.easeOut},'-=.6')
+		.to(preloadLogo, 1, { autoAlpha: 0,  ease:Power4.ease },'-=.6')
 		.to(content, .7, { autoAlpha: 0,  ease:Power4.easeIn})
 		.to(loadScreen, .4, {delay: 1, autoAlpha: 0,  ease:Power4.easeOut})
 		.to(content, .4, { autoAlpha: 1,  ease:Power3.easeIn})
 		.fromTo(background, 1, {x: '100%',  ease:Power4.ease},{x: '45%',  ease:Power4.ease})
-		.fromTo(btnLoop, .3, {y:'30%', autoAlpha: 0,  ease:Power3.easeIn},{y:'0%', autoAlpha: 1,  ease:Power3.easeIn})
-		.fromTo(btnPause, .3, {y:'30%', autoAlpha: 0,  ease:Power3.easeIn},{y:'0%', autoAlpha: 1,  ease:Power3.easeIn},'-=.2')
-		.fromTo(btnWord, .3, {y:'30%', autoAlpha: 0,  ease:Power3.easeIn},{y:'0%', autoAlpha: 1,  ease:Power3.easeIn},'-=.2')
+		.staggerFromTo([btnLoop,btnPause,btnWord], .3, {y:'30%', autoAlpha: 0,  ease:Power3.easeIn},{y:'0%', autoAlpha: 1,  ease:Power3.easeIn}, 0.2)
+		// .fromTo(btnPause, .3, {y:'30%', autoAlpha: 0,  ease:Power3.easeIn},{y:'0%', autoAlpha: 1,  ease:Power3.easeIn},'-=.2')
+		// .fromTo(btnWord, .3, {y:'30%', autoAlpha: 0,  ease:Power3.easeIn},{y:'0%', autoAlpha: 1,  ease:Power3.easeIn},'-=.2')
 	});
 
 
@@ -141,37 +147,96 @@
 	});
 
 
-
+	const staggerRowAN = $('.letters-row-an .row')
 
 	// Window slide - 1 - 2 - 3
-		tl = new TimelineMax({paused: true}),
+		tlSwitch = new TimelineMax({paused: true}),
 
-	tl
-		.to(modal, .35, {autoAlpha:0, ease:Power1.easeInOut})
-		.to(thirdHalf, 0.7, {autoAlpha: 0, ease:Power1.easeInOut}, '-=0.7')
-		.to(background, 0.6, {x: '45%',  ease:Power4.easeInOut},'-=.35')
-		.to(firstHalf, 0.7, {css: {zIndex:-3},  ease:Power1.easeInOut})
+	tlSwitch
+		// .to(modal, .35, {autoAlpha:0, ease:Power1.easeInOut})
 
-		.to(hand, 0.5, {position: 'absolute', x: '-100%', ease:Power4.easeInOut})
-		.to(background, 0.5, {x: '-45%',borderRight: '180px solid transparent', ease:Power3.easeInOut}, '-=.5')
-		.to(logo, 0.5, {content: "url('../logo/logo-circle-bl-on-yel.png')", ease:Power1.easeInOut}, '-=.2')
+		// .to(thirdHalf, 0, {autoAlpha: 0, ease:Power1.easeInOut})
+		// .to(background, 0.6, {x: '45%',  ease:Power4.easeInOut},'-=.35')
+		.fromTo(firstHalf, 0.5,{autoAlpha: 1, x:'0%', opacity: '100%', ease:Power1.easeInOut}, {autoAlpha: 0, opacity: '0%', x: '-100%', ease:Power1.easeInOut})
+		// .to(firstHalf, 0.5, {  ease:Power1.easeInOut}, '-=0.5')
+		// .to(firstHalf, 0.7, {css: {zIndex:-3},  ease:Power1.easeInOut})
+		.to(btnAlpha, 0.2, {opacity: 0, ease:Power1.easeInOut})
 
-		.to(btnWrite, 0.7, {opacity: 1,position: 'absolute', left: '0%', ease:Power1.easeInOut}, '-=0.5')
-		.to(btnAlpha, 0.7, {opacity: 0, ease:Power1.easeInOut} , '-=0.5')
+		// .to(hand, 0.5, {position: 'absolute', x: '100%', ease:Back.easeInOut}, '-=.5')
+		// .to(background, 0.5, {x: '100%',borderRight: '180px solid transparent', ease:Power3.easeInOut}, '-=.5')
 		
-		.to(thirdHalf, 0.7, {position: 'relative', x: '-200%', ease:Power1.easeInOut}, '-=0.5')
-		.fromTo(thirdHalf, 0.7,{autoAlpha: 0, ease:Power1.easeInOut}, {autoAlpha: 1, ease:Power1.easeInOut}, '-=0.2')
+		// .to(hand, 0, {autoAlpha:0, ease:Power4.easeInOut})
+		// .to(background, 0, {autoAlpha:0, ease:Power3.easeInOut})
+		
+		// .to(hand, 0, {position: 'absolute', x: '-200%', ease:Power4.easeInOut})
+		// .to(background, 0, {x: '-100%',borderRight: '180px solid transparent', ease:Power3.easeInOut})
+		// .to(hand, 0.5, {autoAlpha:1, ease:Power4.easeInOut})
+		// .to(background, 0.5, {autoAlpha:1, ease:Power3.easeInOut}, '-=.5')
+		
+		.to(background, 0.5, {x: '100%',borderRight: '180px solid transparent', ease:Power3.easeInOut})
+		.to(background, 0, {autoAlpha:0, x: '-100%',borderRight: '180px solid transparent', ease:Power3.easeInOut})
+		.to(background, 0.5, {autoAlpha:1, x: '-45%',borderRight: '180px solid transparent', ease:Power3.easeInOut})
+		
 
-		.addPause()
+		// .from([model,shareBtn ], 0.5, { x:'0%', ease:Power1.easeIn}, 0.04)
+
+		.to(hand, 0.5, {position: 'absolute', x: '100%', ease:Back.easeInOut}, '-=.5')
+		// .staggerTo([model, shareBtn], 0.5, {autoAlpha:0, ease:Back.easeInOut}, 1)
+		
+
+		.to(hand, 0, {autoAlpha:0, position: 'absolute', x: '-200%',ease:Power4.easeInOut})
+		
+		
+		.to(hand, 0.5, {autoAlpha:1, position: 'absolute', x: '-100%', ease:Power4.easeInOut})
+
+
+		// .to([model,shareBtn ], 0.5, { x:'0%', ease:Power1.easeOut}, 0.04)
+		
+
+
 
 	
+
+
+		// .to(background, 0.5, {x: '-45%',borderRight: '180px solid transparent', ease:Power3.easeInOut}, '-=.5')
+		// .to(background, 0.5, {autoAlpha:0, ease:Power3.easeInOut}, '-=.5')
+		
+		.to(logo, 0.5, {content: "url('../logo/logo-circle-bl-on-yel.png')", ease:Power1.easeInOut}, '-=.2')
+
+
+
+		.to(btnWrite, 0.2, {opacity: 1,position: 'absolute', left: '0%', ease:Power1.easeInOut})
+		
+		// .to(thirdHalf, 0.5, {position: 'relative', x: '-200%', ease:Power1.easeInOut}, '-=0.5')
+
+		// .fromTo(thirdHalf, 0.5,{autoAlpha: 0, ease:Power1.easeInOut}, {autoAlpha: 1, ease:Power1.easeInOut}, '-=0.5')
+		
+		.to(thirdHalf, 0.5,{position: 'relative', x: '-200%', autoAlpha: 1, ease:Power1.easeInOut})
+		
+		
+		.staggerFromTo(staggerRowAN, 0.5, {opacity:1, x:'200%', ease:Power1.easeIn}, {opacity:1, x:'0%', ease:Power1.easeOut}, 0.04)
+		
+		.staggerFromTo(filter, 0.5, {opacity:0, x:'500%', ease:Power1.easeIn}, {opacity:1, x:'0%', ease:Power1.easeOut}, 0.04, '-=.3')
+
+		
+
+		
+		.addPause()
+	
+
+
+
+
+
+
+
 	// Window change 
 	$('#btn-alpha').on('click',()=>{
-		tl.play();
+		tlSwitch.play();
 	});
 
 	$('#btn-write').on('click',()=>{
-		tl.reverse();
+		tlSwitch.reverse();
 	});
 
 

@@ -76,11 +76,14 @@
 	right: 0;
 	#container {
 		margin: auto;
+		position: absolute;
 		height: calc(100vh - 200px);
 		width: calc(50vw - 200px);
 	}
 	#btn-share {
 		margin-bottom: 10%;
+		position: absolute;
+		bottom:0;
 	}
 }
 

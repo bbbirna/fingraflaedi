@@ -47,20 +47,33 @@
 	});
 
 
+
+	
+var FirstAlphabetCol =  rowOO,
+						letterfill2,
+						palmOutline2,
+						palmFill2;
+
+
 class SvgAnimation {
-	constructor(btnSvg, tlSvg, row, letterFill, palmOutline, letterfill, palmFill ){ // parameters
+	constructor(btnSvg, tlSvg, row, letterFill, palmOutline, palmFill ){ // parameters
 	this.btnSvg = btnSvg;
 	this.tlSvg = tlSvg;
 	this.row = row;
 	this.letterFill = letterFill;
 	this.palmOutline = palmOutline;
-	this.letterfill = letterfill;
+	// this.letterfill = letterfill;
 	this.palmFill = palmFill;
 }
+class SvgTl1 extends SvgAnimation {
+	constructor(btnSvg, tlSvg, row, letterFill, palmOutline, palmFill ){ 
+
+	}
+}
 svgEventListener() {
-	$(this.).on('click',()=>{
-		tlsvg2.reverse();
-		tlsvg3.reverse();
+	$(this.btnSvg).on('click',()=>{
+		// tlsvg2.reverse();
+		// tlsvg3.reverse();
 		tlsvg.play();
 	});
 }
@@ -76,9 +89,16 @@ svgAnimate(){
 		.to(this.palmFill, .4, {fill: '#AFDBD1',  ease:Power4.ease}, '-=.5' )
 }
 }
-const pinkButton = new ColorChange(pink, '#EDC8CD', '#F4DCDF');
-pinkButton.addEventListeners();
 
+const animateFirstSvg = new SvgAnimation(btnAN, FirstAlphabetCol);
+animateFirstSvg.svgEventListeners();
+animateFirstSvg.svgAnimate();
+
+if(svgAnimate.has(...)).....
+
+classroom.add(something)
+
+TweenLite.to(element, 1, {vars, ease: Power3.easeInOut});
 
 
 

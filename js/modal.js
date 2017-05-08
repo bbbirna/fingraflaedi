@@ -54,9 +54,6 @@ class ColorChange {
 	this.bgColor = bgColor;
 	this.boxColor = boxColor;
 	}
-	consoleLog() {
-		console.log(this.button);
-	}
 addEventListeners(){
 	$(this.button).on('click',()=>{
 		TweenMax.to(gifBg, .35, {backgroundColor: this.bgColor, ease:Power1.easeInOut})

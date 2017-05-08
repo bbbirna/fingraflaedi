@@ -1748,10 +1748,13 @@ header {
   right: 0; }
   .second-half #container {
     margin: auto;
+    position: absolute;
     height: calc(100vh - 200px);
     width: calc(50vw - 200px); }
   .second-half #btn-share {
-    margin-bottom: 10%; }
+    margin-bottom: 10%;
+    position: absolute;
+    bottom: 0; }
 
 .third-half {
   display: flex;
@@ -1844,7 +1847,7 @@ header {
   stroke-dasharray: 110px;
   stroke-dashoffset: 110px; }
 
-.hover, .squareButton:hover, #btn-share:hover, .sideButton:hover, #btn-alpha:hover, #btn-write:hover, #btn-loop:hover, #btn-pause:hover, #btn-word:hover, #btn-filter :after, #btn-filter:hover, .color-pick .gif-bg-color:hover {
+.hover, #btn-loop:hover, #btn-pause:hover, #btn-word:hover, #btn-filter :after, #btn-filter:hover, .color-pick .gif-bg-color:hover {
   cursor: pointer; }
 
 .squareButton, #btn-share {
@@ -1857,36 +1860,56 @@ header {
   width: 192px;
   font-size: 16px;
   transition: .5s ease;
-  letter-spacing: 5px; }
-  .squareButton:hover, #btn-share:hover {
-    background-color: #FFFFFF;
-    color: #AFDBD1;
-    border: none; }
-  .squareButton:active, #btn-share:active {
-    background-color: rgba(255, 255, 255, 0.5);
-    color: #AFDBD1;
-    border: none; }
+  letter-spacing: 5px;
+  transition: all 0.1s ease-out;
+  position: relative;
+  background: none; }
+  .squareButton:after, #btn-share:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+    width: 100%;
+    height: 0;
+    bottom: 0;
+    left: 0;
+    background: #fff; }
+  .squareButton:hover, #btn-share:hover, .squareButton:active, #btn-share:active {
+    color: #AFDBD1; }
+  .squareButton:hover:after, #btn-share:hover:after, .squareButton:active:after, #btn-share:active:after {
+    height: 100%; }
 
 .sideButton, #btn-alpha, #btn-write {
   position: absolute;
   z-index: 10;
   font-family: nunito-bold;
-  color: #AFDBD1;
+  color: #FFFFFF;
   align-self: center;
-  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px rgba(255, 255, 255, 0.5) solid;
   font-size: 24px;
   width: 40px;
-  border: none;
   height: 50px;
-  transition: .3s ease; }
-  .sideButton:hover, #btn-alpha:hover, #btn-write:hover {
-    border: none;
-    background-color: #FFFFFF;
+  transition: .2s ease-out;
+  position: absolute; }
+  .sideButton:after, #btn-alpha:after, #btn-write:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    height: 100%;
+    width: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5); }
+  .sideButton:hover, #btn-alpha:hover, #btn-write:hover, .sideButton:active, #btn-alpha:active, #btn-write:active {
     width: 50px;
-    height: 50px; }
-  .sideButton:active, #btn-alpha:active, #btn-write:active {
-    transition: .01s ease;
-    border: none; }
+    height: 50px;
+    color: #AFDBD1; }
+  .sideButton:hover:after, #btn-alpha:hover:after, #btn-write:hover:after, .sideButton:active:after, #btn-alpha:active:after, #btn-write:active:after {
+    width: 100%; }
 
 .socialIcon, .social-icons #twitter, .social-icons #instagram, .social-icons #facebook, .social-icons #messenger, .social-icons #download {
   opacity: 50%;
@@ -2431,12 +2454,17 @@ button {
     opacity: 0;
     animation: endlessloop linear 2s infinite; }
 #btn-alpha {
-  right: 0;
+  right: -1px;
   border-radius: 100px 0 0 100px; }
+  #btn-alpha:after {
+    right: 0;
+    border-radius: 100px 0 0 100px; }
 #btn-write {
-  left: -100%;
-  opacity: 0;
+  left: -1px;
   border-radius: 0 100px 100px 0; }
+  #btn-write:after {
+    left: 0;
+    border-radius: 0 100px 100px 0; }
 #btn-filter :after {
   font-family: nunito-bold;
   content: '';
