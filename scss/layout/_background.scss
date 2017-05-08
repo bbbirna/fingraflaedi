@@ -1,13 +1,17 @@
 #background {
-	border-bottom: 100vh solid $Sinbad;
-	border-left: 180px solid transparent;
-	border-right: transparent;
+	// border-bottom: 100vh solid #F5D04C;
+	// border-left: 180px solid transparent;
+	// border-right: transparent;
 	// border-right: 180px solid transparent;
 	// height: 100vh;
 	width: 100vw;
+	height: 150vh;
 	position: absolute;
 	z-index: -1;
 	transform: translate(45%);
+	background-color:  grey;
+	transform: rotate(7deg);
+	right: -4%;
 	// left: 45%;
 	// .bgsvg {
 	// 	width: 100vw;
@@ -18,5 +22,4 @@
 	// }
 	// }
 }
-
 
