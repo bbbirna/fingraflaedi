@@ -1650,7 +1650,20 @@ pre {
   animation-delay: 0.7s !important; }
 
 html, body {
-  overflow: hidden; }
+  overflow: hidden;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+     supported by Chrome and Opera */ }
 
 .no-js #loader {
   display: none; }
@@ -1878,7 +1891,7 @@ header {
     left: 0;
     background: #fff; }
   .squareButton:hover, #btn-share:hover, .squareButton:active, #btn-share:active {
-    color: #AFDBD1; }
+    color: #FFB000; }
   .squareButton:hover:after, #btn-share:hover:after, .squareButton:active:after, #btn-share:active:after {
     height: 100%; }
 

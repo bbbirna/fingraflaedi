@@ -174,10 +174,11 @@
 		// .to(background, 0.5, {autoAlpha:1, ease:Power3.easeInOut}, '-=.5')
 		
 		.to(background, 0.5, {x: '100%',borderRight: '180px solid transparent', ease:Power3.easeInOut})
-		.to(background, 0, {autoAlpha:0, x: '-100%',borderRight: '180px solid transparent', ease:Power3.easeInOut})
-		.to(background, 0.5, {autoAlpha:1, x: '-45%',borderRight: '180px solid transparent', ease:Power3.easeInOut})
+		.to(background, 0, {autoAlpha:0, x: '-200%',borderRight: '180px solid transparent', ease:Power3.easeInOut})
+		.to(background, 0.5, {autoAlpha:1, left: '-4%', x: '-45%', rotation:-7, borderRight: '180px solid transparent', ease:Power3.easeInOut})
 		
 
+	
 		// .from([model,shareBtn ], 0.5, { x:'0%', ease:Power1.easeIn}, 0.04)
 
 		.to(hand, 0.5, {position: 'absolute', x: '100%', ease:Back.easeInOut}, '-=.5')
