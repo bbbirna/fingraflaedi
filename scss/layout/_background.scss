@@ -22,6 +22,16 @@
 	// }
 	// }
 
+
+	//BACKGROUND LITIR NOTA
+	
+	// BLACK
+    background: $black; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient($DarkGrey, $black); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient($DarkGrey, $black); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient($DarkGrey, $black); /* For Firefox 3.6 to 15 */
+    background: linear-gradient($DarkGrey, $black); /* Standard syntax */
+
 	// YELLOW
 	// background: $Mustard; /* For browsers that do not support gradients */
 	// background: -webkit-linear-gradient($Mustard, $DarkMustard); /* For Safari 5.1 to 6.0 */
@@ -30,12 +40,18 @@
 	// background: linear-gradient($Mustard, $DarkMustard); /* Standard syntax */
 
 	// TEAL
- 	background: $Sinbad; /* For browsers that do not support gradients */
-  	background: -webkit-linear-gradient($LightSinbad, $Sinbad); /* For Safari 5.1 to 6.0 */
-  	background: -o-linear-gradient($LightSinbad, $Sinbad); /* For Opera 11.1 to 12.0 */
-  	background: -moz-linear-gradient($LightSinbad, $Sinbad); /* For Firefox 3.6 to 15 */
-  	background: linear-gradient($LightSinbad, $Sinbad); /* Standard syntax */
+ 	// background: $Sinbad; /* For browsers that do not support gradients */
+	// background: -webkit-linear-gradient($LightSinbad, $Sinbad); /* For Safari 5.1 to 6.0 */
+	// background: -o-linear-gradient($LightSinbad, $Sinbad); /* For Opera 11.1 to 12.0 */
+	// background: -moz-linear-gradient($LightSinbad, $Sinbad); /* For Firefox 3.6 to 15 */
+	// background: linear-gradient($LightSinbad, $Sinbad); /* Standard syntax */
 
+
+
+
+
+
+	// AUKA LITIR EKKI NOTA!
 	// BLUE
     // background: $Malibu; /* For browsers that do not support gradients */
     // background: -webkit-linear-gradient($LightMalibu, $Malibu); /* For Safari 5.1 to 6.0 */
@@ -43,17 +59,14 @@
     // background: -moz-linear-gradient($LightMalibu, $Malibu); /* For Firefox 3.6 to 15 */
     // background: linear-gradient($LightMalibu, $Malibu); /* Standard syntax */
 
+    // PINK
     // background: $BabyPink; /* For browsers that do not support gradients */
     // background: -webkit-linear-gradient($LightBabyPink, $BabyPink); /* For Safari 5.1 to 6.0 */
     // background: -o-linear-gradient($LightBabyPink, $BabyPink); /* For Opera 11.1 to 12.0 */
     // background: -moz-linear-gradient($LightBabyPink, $BabyPink); /* For Firefox 3.6 to 15 */
     // background: linear-gradient($LightBabyPink, $BabyPink); /* Standard syntax */
 
-    // background: $black; /* For browsers that do not support gradients */
-    // background: -webkit-linear-gradient($DarkGrey, $black); /* For Safari 5.1 to 6.0 */
-    // background: -o-linear-gradient($DarkGrey, $black); /* For Opera 11.1 to 12.0 */
-    // background: -moz-linear-gradient($DarkGrey, $black); /* For Firefox 3.6 to 15 */
-    // background: linear-gradient($DarkGrey, $black); /* Standard syntax */
+
 
     // background: $Grey; /* For browsers that do not support gradients */
     // background: -webkit-linear-gradient($LightGrey, $Grey); /* For Safari 5.1 to 6.0 */
