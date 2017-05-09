@@ -79,7 +79,7 @@ svgEventListener() {
 }
 svgAnimate(){
 		this.tlsvg
-		.to(this.row, .4, {autoAlpha:0,  ease:Power4.easeIn})
+		.to(this.row, 0.4, {autoAlpha:0,  ease:Power4.easeIn})
 		.to(this.row, .4, {zIndex:100,  ease:Power4.easeIn})
 		.to(this.row, .4, {autoAlpha:1,  ease:Power4.easeIn})
 		.to(this.letterfill, 1, {strokeDashoffset:30.30,  ease:Power4.easeIn})
@@ -98,7 +98,7 @@ if(svgAnimate.has(...)).....
 
 classroom.add(something)
 
-TweenLite.to(element, 1, {vars, ease: Power3.easeInOut});
+
 
 
 
