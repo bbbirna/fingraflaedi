@@ -85,18 +85,10 @@ window.onload = function(event) {
         var texture = new THREE.Texture();
         var loader = new THREE.ImageLoader();
 
-        // for gold hand
-        //loader.load( '../textures/HAND_emboss4.jpg', function ( image ) {
+       
 
-        // loader.load( '../textures/HAND_noise.jpg', function ( image ) {
-
-        // for green hand
-        //loader.load( '../textures/HAND_tiles2.jpg', function ( image ) {
-
-        loader.load( '../textures/HAND_S.jpg', function ( image ) {
-
-        // for
-        //loader.load( '../textures/HAND_S2.jpg', function ( image ) {
+        // MODEL TEXTURE
+        loader.load( '../textures/HAND_S2.jpg', function ( image ) {
             texture.image = image;
             texture.needsUpdate = true;
         } );
@@ -105,28 +97,35 @@ window.onload = function(event) {
 
 
         var fingers;
-        loader.load( '../hand25.json', function( geometry, materials ) {
+        loader.load( '../hand25.json', function( geometry, materials ) { //meiri contrast
+            
+
+            // MODEL LITIR NOTA
             
             // GOLD use HAND_S2.jpg with black background
-            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xffc300, emissive: 0x0000000, roughness: 0.4, metalness: 0.5 } );
+            var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xffc300, emissive: 0x0000000, roughness: 0.5, metalness: 0.5 } );
             
-            // SILVER
-            // var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x537b84, emissive: 0x111122, roughness: 0.5, metalness: 0.8 } );
-            
-            // GREEN with BabyPink background
-            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x6fba6c, emissive: 0x002d19, roughness: 0.6, metalness: 0.9 } );
-            
-            // PINK use HAND_S with Sinbad background color
-            var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xe5298a, emissive: 0x590038, roughness: 0.7, metalness: 0.8 } );
+            // PINK use HAND_S2 with Sinbad background color
+            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xffc2dc, emissive: 0x7c004f, roughness: 0.6, metalness: 0.6 } );
             
             // PURPLE use HAND_S2 with Mustard background
             //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xb358bf, emissive: 0x3a0d40, roughness: 0.5, metalness: 0.7 } );
             
+
+
+            // AUKALITIR EKKI NOTA
             // BLUE
-            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x3c50d6, emissive: 0x0, roughness: 0, metalness: 0 } );
+            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x00d0ff, emissive: 0x002360, roughness: 0.7, metalness: 0.5 } );
             
             // ORANGE/RED with Malibu background
-            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xdd0000, emissive: 0x420b00, roughness: 0.7, metalness: 0.8} );
+            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xdd0000, emissive: 0x420b00, roughness: 0.6, metalness: 0.6} );
+
+            // SILVER
+            // var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x537b84, emissive: 0x111122, roughness: 0.5, metalness: 0.8 } );
+            
+            // GREEN with BabyPink background
+            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x35a031, emissive: 0x002d19, roughness: 0.6, metalness: 0.5 } );
+
 
             material.shading = THREE.SmoothShading;
             material.side = THREE.BackSide;
@@ -655,7 +654,7 @@ window.onload = function(event) {
 
         // önnur utgafa hættir
 
-        window.addEventListener('mousedown', mouseDownHandler);
+        container.addEventListener('mousedown', mouseDownHandler);
         
         // Start rendering
         //render();
@@ -776,7 +775,7 @@ window.onload = function(event) {
     var directionY = "";
     var oldy = 0;
     
-    container.addEventListener('mousemove', function(event) {
+    window.addEventListener('mousemove', function(event) {
 
         
         if (event.pageX < oldx) {
@@ -802,11 +801,11 @@ window.onload = function(event) {
 
 
         console.log(event.clientX);
-        console.log(container.offsetWidth);
+        console.log(window.offsetWidth);
         let mouseX = event.layerX;
         let mouseY = event.layerY;
-        let windowWidth = container.offsetWidth;
-        let windowHeight = container.offsetHeight;
+        let windowWidth = window.offsetWidth;
+        let windowHeight = window.offsetHeight;
         if (model) {
             if (directionX == "right" && model.rotation.y < 0.1) {
                 model.rotation.y += 0.01;
