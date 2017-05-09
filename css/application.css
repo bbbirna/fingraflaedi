@@ -1937,7 +1937,6 @@ header {
   transform: translate(45%);
   background-color: grey;
   transform: rotate(7deg);
-  right: -4%;
   background: #000;
   /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(#383838, #000);
@@ -2499,9 +2498,9 @@ button {
   color: yellow; }
 
 .path-loop-stroke {
-  stroke: #d8d8d8; }
+  stroke: #000; }
 .path-loop-fill {
-  fill: #d8d8d8; }
+  fill: #000; }
 .path-play {
   fill: #000; }
 .path-word {
