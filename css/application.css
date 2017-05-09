@@ -1937,16 +1937,21 @@ header {
   transform: translate(45%);
   background-color: grey;
   transform: rotate(7deg);
+<<<<<<< HEAD
   left: 4%;
   background: #F5D04C;
+=======
+  right: -4%;
+  background: #AFDBD1;
+>>>>>>> 06899cf9dcbb7f5efae4b08c9b9ba5537481b612
   /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(#F5D04C, #FFB000);
+  background: -webkit-linear-gradient(#D7EDE8, #AFDBD1);
   /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#F5D04C, #FFB000);
+  background: -o-linear-gradient(#D7EDE8, #AFDBD1);
   /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#F5D04C, #FFB000);
+  background: -moz-linear-gradient(#D7EDE8, #AFDBD1);
   /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#F5D04C, #FFB000);
+  background: linear-gradient(#D7EDE8, #AFDBD1);
   /* Standard syntax */ }
 
 @keyframes endlessloop {

@@ -86,15 +86,17 @@ window.onload = function(event) {
         var loader = new THREE.ImageLoader();
 
         // for gold hand
-        //loader.load( '../textures/HAND_emboss3.jpg', function ( image ) {
+        //loader.load( '../textures/HAND_emboss4.jpg', function ( image ) {
 
-        //loader.load( '../textures/HAND_noise.jpg', function ( image ) {
+        // loader.load( '../textures/HAND_noise.jpg', function ( image ) {
 
         // for green hand
         //loader.load( '../textures/HAND_tiles2.jpg', function ( image ) {
 
+        loader.load( '../textures/HAND_S.jpg', function ( image ) {
+
         // for
-        loader.load( '../textures/HAND_S2.jpg', function ( image ) {
+        //loader.load( '../textures/HAND_S2.jpg', function ( image ) {
             texture.image = image;
             texture.needsUpdate = true;
         } );
@@ -105,23 +107,26 @@ window.onload = function(event) {
         var fingers;
         loader.load( '../hand25.json', function( geometry, materials ) {
             
-            // GOLD
+            // GOLD use HAND_S2.jpg with black background
             //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xffc300, emissive: 0x0000000, roughness: 0.4, metalness: 0.5 } );
             
             // SILVER
-            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xbbbbcc, emissive: 0x111111, roughness: 0.7, metalness: 0.9 } );
+            // var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x537b84, emissive: 0x111122, roughness: 0.5, metalness: 0.8 } );
             
-            // GREEN
-            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x6fba6c, emissive: 0x207019, roughness: 0.8, metalness: 0.7 } );
+            // GREEN with BabyPink background
+            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x6fba6c, emissive: 0x002d19, roughness: 0.6, metalness: 0.9 } );
             
-            // PINK
-            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0Xf598b2, emissive: 0xab358c, roughness: 0.5, metalness: 0.2 } );
+            // PINK use HAND_S with Sinbad background color
+            var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xe5298a, emissive: 0x590038, roughness: 0.7, metalness: 0.8 } );
             
-            // PURPLE
-            var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xb358bf, emissive: 0x3a0d40, roughness: 0.5, metalness: 0.5 } );
+            // PURPLE use HAND_S2 with Mustard background
+            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xb358bf, emissive: 0x3a0d40, roughness: 0.5, metalness: 0.7 } );
             
             // BLUE
             //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x3c50d6, emissive: 0x0, roughness: 0, metalness: 0 } );
+            
+            // ORANGE/RED with Malibu background
+            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xdd0000, emissive: 0x420b00, roughness: 0.7, metalness: 0.8} );
 
             material.shading = THREE.SmoothShading;
             material.side = THREE.BackSide;
