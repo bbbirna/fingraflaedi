@@ -113,36 +113,18 @@ window.onload = function(event) {
             
 
 
-            // AUKALITIR EKKI NOTA
-            // BLUE
-            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x00d0ff, emissive: 0x002360, roughness: 0.7, metalness: 0.5 } );
-            
-            // ORANGE/RED with Malibu background
-            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xdd0000, emissive: 0x420b00, roughness: 0.6, metalness: 0.6} );
-
-            // SILVER
-            // var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x537b84, emissive: 0x111122, roughness: 0.5, metalness: 0.8 } );
-            
-            // GREEN with BabyPink background
-            //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0x35a031, emissive: 0x002d19, roughness: 0.6, metalness: 0.5 } );
-
+           
 
             material.shading = THREE.SmoothShading;
             material.side = THREE.BackSide;
             model = new THREE.SkinnedMesh( geometry, material );
+
             fingers = initModel(model);
-            //model.scale.set(-1,1,1);
+            // letters = initLetters(model, fingers);
+           
+            //console.log(initLetters(model, fingers))
 
-
-            // var textureLoader = new THREE.TextureLoader();
-            // textureLoader.load('textures/HAND_S2.jpg');
-            // // Add the event listener
-            // window.addEventListener( 'load', function(event){
-
-            //     // The actual texture is returned in the event.content
-            //     model.material.map = event.content;
-
-            // });
+           
 
 
 
@@ -158,11 +140,10 @@ window.onload = function(event) {
 
 
 
-        //-- 
         document.onkeydown = checkKey;
 
 
-        // fyrsta utgafa 
+        // // fyrsta utgafa 
 
         function checkKey(e) {
 
@@ -1480,10 +1461,116 @@ window.onload = function(event) {
 
 
 
+        // // const inputFunc = (model) => {
+
+        //   let textInput = document.getElementById("textInput");
+
+        //   textInput.addEventListener('keyup', (model) => {
+            
+        //     const inputString = textInput.value
+
+        //     const lastLetter = inputString.slice(-1);
+        //     //console.log(letters)
+
+        //     //console.log(letters.a.no01.finger);
+
+        //     for (var i in letters) {
+        //         // console.log(i[0][0]);
+
+        //         console.log(i)
+                
+        //         // if (i[0][0] == lastLetter) {
+        //         //     //console.log(i[0][0] + " !!!");
+
+        //         //     // const initSign = (bone, xVal, yVal, zVal) => {
+
+        //         //     //     var rotX = bone.x;
+        //         //     //     var rotY = bone.y;
+        //         //     //     var rotZ = bone.z;
+
+
+        //         //     //     let directionX = 0.01;
+        //         //     //     let directionY = 0.01;
+        //         //     //     let directionZ = 0.003;
+
+        //         //     //     if (rotX > xVal) {
+        //         //     //         directionX = -0.01;
+        //         //     //     }
+
+        //         //     //     if (rotY > yVal) {
+        //         //     //         directionY = -0.01;
+        //         //     //     }
+
+        //         //     //     if (rotZ > zVal) {
+        //         //     //         directionZ = -0.003;
+        //         //     //     }
+                        
+        //         //     //     var moveX = setInterval(() => {
+                        
+        //         //     //         if (rotX >= xVal && directionX == 0.01) {
+        //         //     //             clearInterval(moveX);
+        //         //     //         }
+                          
+        //         //     //         if (rotX <= xVal && directionX == -0.01) {
+        //         //     //             clearInterval(moveX);
+        //         //     //         }
+                           
+        //         //     //         bone.x = rotX;
+        //         //     //         rotX += directionX;
+
+
+        //         //     //     }, 20);
+
+        //         //     //     var moveY = setInterval(() => {
+                        
+        //         //     //         if (rotY >= yVal && directionY == 0.01) {
+        //         //     //             clearInterval(moveY);
+        //         //     //         }
+                          
+        //         //     //         if (rotY <= yVal && directionY == -0.01) {
+        //         //     //             clearInterval(moveY);
+        //         //     //         }
+                           
+        //         //     //         bone.y = rotY;
+        //         //     //         rotY += directionY;
+
+
+        //         //     //     }, 20);
+
+        //         //     //     var moveZ = setInterval(() => {
+                        
+        //         //     //         if (rotZ >= zVal && directionZ == 0.003) {
+        //         //     //             clearInterval(moveZ);
+        //         //     //         }
+                          
+        //         //     //         if (rotZ <= zVal && directionZ == -0.003) {
+        //         //     //             clearInterval(moveZ);
+        //         //     //         }
+                           
+        //         //     //         bone.z = rotZ;
+        //         //     //         rotZ += directionZ;
+                            
+
+        //         //     //     }, 20);
+        //         //     // }
+
+        //         //     // initSign(i[0][1],i[0][2],i[0][3],i[0][4]);
+
+
+        //         //     // }
+
+        //         // }
+        //     }
+
+
+        //   });
+        // }
+
+
+
         container.addEventListener('mousedown', mouseDownHandler);
         
-        // Start rendering
-        //render();
+
         
     } // init ends
 
@@ -1500,9 +1587,6 @@ window.onload = function(event) {
             model.rotation.y += ( targetRotationX - model.rotation.y ) * 0.05;
             
         }
-
-        // With easing
-        //model.rotation.x += ( targetRotationY - model.rotation.x ) * 0.05;
 
         renderer.render( scene, camera );
         window.requestAnimationFrame( render );
@@ -1650,7 +1734,6 @@ window.onload = function(event) {
 
             if (directionY == "up" && model.rotation.x > -0.1) {
                 model.rotation.x -= 0.005;
-                //console.log(model.rotation.x)
             }
 
 
