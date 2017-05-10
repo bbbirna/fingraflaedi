@@ -85,8 +85,13 @@ button {
     }
   }
 
-  &-filter {
-
+  &-a-n {
+    transition: ease .3s;
+      @extend .hover;
+          &:hover {
+      transition: ease .3s;
+      color: $Grey;
+    }
     :after{
       @extend .hover;
       font-family: $nunito-bold;
@@ -95,12 +100,15 @@ button {
       height: 30px;
       // background-color: $Sinbad;
     }
-    &:hover {
-      @extend .hover;
-    }
-     &:visited {
-      color: yellow;
-    }
+    //  &:visited {
+    //   color: yellow;
+    // }
+  }
+  &-o-o {
+    @extend #btn-a-n; 
+  }
+  &-1-10 {
+    @extend #btn-a-n;
   }
 
 }

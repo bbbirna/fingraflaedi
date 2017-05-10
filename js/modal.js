@@ -1,3 +1,4 @@
+(($)=> {
 
 		// Get the modal
 		const modal = document.getElementById('shareHand');
@@ -56,9 +57,9 @@ class ColorChange {
 	}
 addEventListeners(){
 	$(this.button).on('click',()=>{
-		TweenMax.to(gifBg, .35, {backgroundColor: this.bgColor, ease:Power1.easeInOut})
-		TweenMax.to(modalContBg, .35, {backgroundColor: this.boxColor, ease:Power1.easeInOut})
-});
+	TweenMax.to(gifBg, .35, {backgroundColor: this.bgColor, ease:Power1.easeInOut})
+	TweenMax.to(modalContBg, .35, {backgroundColor: this.boxColor, ease:Power1.easeInOut})	
+	});
 }
 }
 
@@ -79,6 +80,8 @@ const blueButton = new ColorChange(blue, '#7BCFFD', '#BEE7FE');
 blueButton.addEventListeners();
 
 
+
+})(jQuery);
 
 
 

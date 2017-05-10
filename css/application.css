@@ -1744,7 +1744,7 @@ header {
     margin-bottom: 8%;
     position: relative; }
     .first-half .controls-icon .firstLine {
-      height: 2px;
+      height: 1px;
       width: 80%;
       top: -100%;
       background-color: rgba(0, 0, 0, 0.5);
@@ -1786,15 +1786,6 @@ header {
     flex-direction: column;
     justify-content: center;
     margin-left: 16px; }
-  .third-half .letters {
-    justify-content: center; }
-  .third-half .letter {
-    margin: 6px; }
-    .third-half .letter svg {
-      height: 60px;
-      margin: auto;
-      width: auto;
-      margin-left: 10; }
   .third-half .alphabet-filter {
     align-self: flex-end;
     justify-content: center;
@@ -1813,55 +1804,7 @@ header {
     .third-half .alphabet-filter .filter #btn-filter {
       height: 42px; }
 
-#letter-outline, #Shape {
-  fill: none; }
-
-#letter-outline {
-  width: 200px;
-  height: auto; }
-
-#A {
-  width: 200px;
-  height: auto; }
-
-.letters #letter-outline {
-  /*stafurinn*/
-  stroke: #000;
-  stroke-dasharray: 430px;
-  stroke-dashoffset: 430px;
-  fill: none; }
-
-.letters .palm {
-  /*fyllingin inni höndinni*/
-  fill: #FFFFFF; }
-
-.letters #Shape {
-  /*höndin*/
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 110px;
-  stroke-dashoffset: 110px; }
-
-.numbers .start.stafur {
-  /*stafurinn*/
-  stroke-miterlimit: 10;
-  stroke: #616161;
-  stroke-dasharray: 430px;
-  stroke-dashoffset: 430px;
-  fill: none; }
-
-.numbers .start.palm {
-  fill: #4a4a4a; }
-
-.numbers .start#Shape {
-  /*höndin*/
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke: #616161;
-  stroke-dasharray: 110px;
-  stroke-dashoffset: 110px; }
-
-.hover, #btn-loop:hover, #btn-pause:hover, #btn-word:hover, #btn-filter :after, #btn-filter:hover, .color-pick .gif-bg-color:hover {
+.hover, .squareButton, #btn-share, .sideButton, #btn-alpha, #btn-write, #btn-loop:hover, #btn-pause:hover, #btn-word:hover, #btn-a-n, #btn-o-o, #btn-1-10, #btn-a-n :after, #btn-o-o :after, #btn-1-10 :after, .color-pick .gif-bg-color:hover {
   cursor: pointer; }
 
 .squareButton, #btn-share {
@@ -1901,7 +1844,7 @@ header {
   font-family: nunito-bold;
   color: #FFFFFF;
   align-self: center;
-  border: 1px rgba(255, 255, 255, 0.5) solid;
+  border: 1px #FFFFFF solid;
   font-size: 24px;
   width: 40px;
   height: 50px;
@@ -2490,13 +2433,16 @@ button {
   #btn-write:after {
     left: 0;
     border-radius: 0 100px 100px 0; }
-#btn-filter :after {
-  font-family: nunito-bold;
-  content: '';
-  width: 100px;
-  height: 30px; }
-#btn-filter:visited {
-  color: yellow; }
+#btn-a-n, #btn-o-o, #btn-1-10 {
+  transition: ease .3s; }
+  #btn-a-n:hover, #btn-o-o:hover, #btn-1-10:hover {
+    transition: ease .3s;
+    color: #7f7f7f; }
+  #btn-a-n :after, #btn-o-o :after, #btn-1-10 :after {
+    font-family: nunito-bold;
+    content: '';
+    width: 100px;
+    height: 30px; }
 
 .path-loop-stroke {
   stroke: #000; }
@@ -2513,14 +2459,24 @@ textarea:focus {
   border-style: none;
   background-color: none;
   box-shadow: none;
-  transition: none; }
+  transition: none;
+  width: 200px;
+  resize: none;
+  font-family: nunito-regular;
+  text-align: center;
+  color: #383838;
+  letter-spacing: 8px;
+  overflow: hidden;
+  font-size: 24px;
+  height: 1.1em;
+  padding: 2px; }
 
 input {
   box-shadow: none;
   font-family: nunito-regular;
   font-size: 24px;
-  color: rgba(0, 0, 0, 0.5);
-  letter-spacing: 4px;
+  color: #383838;
+  letter-spacing: 8px;
   text-align: center; }
   input:focus {
     box-shadow: none;
@@ -2531,7 +2487,8 @@ textarea {
   resize: none;
   font-family: nunito-regular;
   text-align: center;
-  color: rgba(0, 0, 0, 0.5);
+  color: #383838;
+  letter-spacing: 8px;
   overflow: hidden;
   font-size: 24px;
   height: 1.1em;
@@ -2624,5 +2581,70 @@ textarea {
   width: 20px; }
   .social-icons .icon {
     margin: 0% 4% 4%; }
+
+#letter-outline, #Shape {
+  fill: none; }
+
+#letter-outline {
+  width: 200px;
+  height: auto; }
+
+#A {
+  width: 200px;
+  height: auto; }
+
+.letters #letter-outline {
+  /*stafurinn*/
+  stroke: #000;
+  stroke-dasharray: 430px;
+  stroke-dashoffset: 430px;
+  fill: none; }
+
+.letters .palm {
+  /*fyllingin inni höndinni*/
+  fill: none; }
+
+.letters #Shape {
+  /*höndin*/
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 110px;
+  stroke-dashoffset: 110px; }
+
+.numbers .start.stafur {
+  /*stafurinn*/
+  stroke-miterlimit: 10;
+  stroke: #616161;
+  stroke-dasharray: 430px;
+  stroke-dashoffset: 430px;
+  fill: none; }
+
+.numbers .start.palm {
+  fill: #4a4a4a; }
+
+.numbers .start#Shape {
+  /*höndin*/
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #616161;
+  stroke-dasharray: 110px;
+  stroke-dashoffset: 110px; }
+
+.svgHandMotion {
+  stroke: #FFFFFF; }
+
+.svgMotionFill {
+  fill: #FFFFFF; }
+
+.letters {
+  justify-content: center; }
+
+.letter {
+  margin: 6px; }
+  .letter svg {
+    height: 60px;
+    margin: auto;
+    width: auto;
+    margin-left: 10; }
 
 /*# sourceMappingURL=application.css.map */
