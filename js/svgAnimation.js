@@ -37,6 +37,7 @@ class SvgAnimation {
             this.palmOutline = palmOutline;
             this.palmFill = palmFill;
             this.tlSvg = new TimelineMax({paused: paused});
+            
         }
 
         Timeline(){
@@ -74,7 +75,24 @@ animateThirdSvg.Timeline();
 animateThirdSvg.svgPlayTl();
 
 
+// var tl = New TimelineMax(),
+//     forward = true;
 
+button.click(function()
+{
+  if(forward)//timeline is going forward so we should reverse it
+  {
+    tl.reverse();
+    element.removeClass('className');
+  }
+  else//timeline is going backwards, so we should make it go forward
+  {
+    tl.play();
+    element.addClass('className');
+  }
+  //this toggles the boolean on each click event
+  forward = forward  ? false : true;
+});
 
 
 

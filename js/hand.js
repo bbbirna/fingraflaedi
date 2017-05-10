@@ -101,9 +101,9 @@ window.onload = function(event) {
             
 
             // MODEL LITIR NOTA
-            
+
             // GOLD use HAND_S2.jpg with black background
-            var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xffc300, emissive: 0x0000000, roughness: 0.5, metalness: 0.5 } );
+            var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xffc300, emissive: 0x110b00, roughness: 0.5, metalness: 0.5 } );
             
             // PINK use HAND_S2 with Sinbad background color
             //var material = new THREE.MeshStandardMaterial( {skinning: true, map: texture, color: 0xffc2dc, emissive: 0x7c004f, roughness: 0.6, metalness: 0.6 } );
