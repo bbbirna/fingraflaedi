@@ -1,21 +1,21 @@
 window.onload = function(event) {
 
     // Some variables we will be using later
-    var camera, scene, renderer;
-    //var controls;
-    var element, container;
-    var model;
+    let camera, scene, renderer;
+    //const controls;
+    let element, container;
+    let model;
 
-    var targetRotationX = 0;
-    var targetRotationXOnMouseDown = 0;
-    var mouseXOnMouseDown = 0;
+    let targetRotationX = 0;
+    let targetRotationXOnMouseDown = 0;
+    let mouseXOnMouseDown = 0;
 
-    var targetRotationY = 0;
-    var targetRotationYOnMouseDown = 0;
-    var mouseYOnMouseDown = 0;
+    let targetRotationY = 0;
+    let targetRotationYOnMouseDown = 0;
+    let mouseYOnMouseDown = 0;
 
     // A clock to keep track of time in a convenient way
-    var clock = new THREE.Clock();
+    let clock = new THREE.Clock();
     
 
     // Setup
@@ -76,8 +76,8 @@ window.onload = function(event) {
         lightPoint.position.set( 0, 0.1, 0.3);
         scene.add( lightPoint );
 
-        var sphere = new THREE.SphereGeometry( 0.01, 16, 8 );
-        lightPoint.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0000 } ) ) );
+        // var sphere = new THREE.SphereGeometry( 0.01, 16, 8 );
+        // lightPoint.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0000 } ) ) );
         
 
 
