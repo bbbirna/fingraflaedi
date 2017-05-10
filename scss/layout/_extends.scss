@@ -61,7 +61,7 @@
     width: 40px;
     // border:  none;
     height: 50px;
-    transition: .2s ease-out;
+    transition: .1s ease-out;
     position:absolute;
 // 	&:hover {
 //       @extend .hover;
@@ -78,19 +78,20 @@
     content: '';
     position: absolute;
     z-index: -1;
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
     height: 100%;
     width: 0;
     bottom: 0;
-    background: $white-opacity;
+    background: $White;
     } 
     &:hover,
     &:active {
+      border: none;
       width: 50px;
       height: 50px;
-      color: $Sinbad;
+      color: $Mustard;
     }
 
     &:hover:after,

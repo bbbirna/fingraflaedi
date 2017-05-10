@@ -21,12 +21,12 @@
 		// Animate loader off screen
 		tlPreload
 		.to(preloadLogo, 2, { autoAlpha: 0,  ease:Power4.easeOut})
-		.fromTo(preloadLogo, .6, { y:'60%',  ease:Power4.easeOut},{ y:'0%',  ease:Power4.easeOut},'-=.4')
-		.to(preloadLogo, 2, { autoAlpha: 1,  ease:Power4.easeOut},'-=.4')
+		.fromTo(preloadLogo, .6, { y:'80%',  ease:Power4.easeOut},{ y:'0%',  ease:Power4.easeOut},'-=.4')
+		.to(preloadLogo, 2, { autoAlpha: 1,  ease:Power4.easeOut},'-=.6')
 		.to(modal, 0, { autoAlpha: 0,  ease:Power4.easeIn})
-		.fromTo(preloadLogo, .4, { y:'0%', ease:Power2.easeInOut},{ y:'-60%',  ease:Power2.easeOut})
-		.to(preloadLogo, 1, { autoAlpha: 0,  ease:Power4.ease },'-=.6')
-		.to(content, .7, { autoAlpha: 0,  ease:Power4.easeIn})
+		.to(preloadLogo, .4,{ y:'-80%',  ease:Power2.easeOut})
+                .to(preloadLogo, 1, { autoAlpha: 0,  ease:Power4.easeInOut },'-=.8')     
+		.to(content, .7, { autoAlpha: 0,  ease:Power4.easeInOut})
 		.to(loadScreen, .4, {delay: 1, autoAlpha: 0,  ease:Power4.easeOut})
 		.to(content, .4, { autoAlpha: 1,  ease:Power3.easeIn})
 		.fromTo(background, 1, {x: '100%',  ease:Power4.ease},{x: '45%',  ease:Power4.ease})

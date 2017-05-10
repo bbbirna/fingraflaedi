@@ -73,7 +73,7 @@ greenButton.addEventListeners();
 const yellowButton = new ColorChange(yellow, '#FAFD7B', '#FDFFB8');
 yellowButton.addEventListeners();
 
-const orangeButton = new ColorChange(orange, '#F3C362', '#F9DFA9');
+const orangeButton = new ColorChange(orange, '#FFB000', '#F5D04C');
 orangeButton.addEventListeners();
 
 const blueButton = new ColorChange(blue, '#7BCFFD', '#BEE7FE');
