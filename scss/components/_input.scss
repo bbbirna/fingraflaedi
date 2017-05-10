@@ -1,40 +1,45 @@
 
 [type='text']:focus, 
-  textarea:focus {
+  textarea:focus  {
     outline: none;
     border-style: none;
 	// border-bottom: solid 2px black;
     background-color: none;
     box-shadow: none;
-    transition: none; 
+    transition: none;
+      width:200px;
+  resize:none;
+  font-family: $nunito-regular;
+  text-align: center;
+  color: $DarkGrey;
+  letter-spacing: 8px;
+  overflow:hidden;
+  font-size: 24px;
+  height:1.1em;
+  padding:2px; 
 }
 input {
 		box-shadow: none;
 		font-family: $nunito-regular;
 		font-size: 24px;
-		color: $black-opacity;
-		letter-spacing: 4px;
+		color: $DarkGrey;
+		letter-spacing: 8px;
 		text-align: center;
 		// border-bottom: solid 2px black;
 		&:focus {
 		box-shadow: none;
-	    outline: none;
+	        outline: none;
 		}
 }
-
-
 textarea {
   width:200px;
   resize:none;
   font-family: $nunito-regular;
   text-align: center;
-  color: $black-opacity;
-  // letter-spacing: 2px;
+  color: $DarkGrey;
+  letter-spacing: 8px;
   overflow:hidden;
   font-size: 24px;
   height:1.1em;
   padding:2px;
-
-
-
 }

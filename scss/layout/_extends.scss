@@ -8,6 +8,7 @@
 }
 
 .squareButton {
+  @extend .hover;
   font-family: $nunito-regular;
   border: solid 1px $white;
   color: $white;
@@ -36,6 +37,7 @@
     } 
     &:hover,
     &:active {
+
             color: $mustardDark;
     }
 
@@ -47,13 +49,14 @@
 
 
 .sideButton {
+  @extend .hover;
     position: absolute;
     z-index: 10;
     font-family: $nunito-bold;
     color: $White;
     align-self:center;
     // background-color: $white-opacity;
-    border: 1px $white-opacity solid;
+    border: 1px $White solid;
     font-size: 24px;
     width: 40px;
     // border:  none;
