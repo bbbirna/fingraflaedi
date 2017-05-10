@@ -1,3 +1,8 @@
+            // ----- X -----
+
+            letterPress( '65', fingers.pinky_1, 0, 0, 0);
+            letterPress( '65', fingers.pinky_2, 0, 0, 0);
+            letterPress( '65', fingers.pinky_3, 0, 0, 0);
 
             letterPress( '65', fingers.ring_1, 0, 0, 0);
             letterPress( '65', fingers.ring_2, 0, 0, 0);
@@ -94,6 +99,284 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //önnur utgafa--- kannski léttari?
+
+        // function checkKey(e) {
+
+        //     e = e || window.event;
+
+        //     // let letterArray = [];
+        //     // letterArray.push(e.keyCode);
+        //     // console.log(letterArray);
+
+        //     console.log(e.keyCode)
+
+            
+
+
+
+        //     var letterPress = (bone, xVal, yVal, zVal) => {
+
+
+        //         var rotX = bone.x;
+        //         var rotY = bone.y;
+        //         var rotZ = bone.z;
+
+
+        //         let directionX = 0.01;
+        //         let directionY = 0.01;
+        //         let directionZ = 0.003;
+
+        //         if (rotX > xVal) {
+        //             directionX = -0.01;
+        //         }
+
+        //         if (rotY > yVal) {
+        //             directionY = -0.01;
+        //         }
+
+        //         if (rotZ > zVal) {
+        //             directionZ = -0.003;
+        //         }
+                
+        //         var moveX = setInterval(function() {
+                
+        //             if (rotX >= xVal && directionX == 0.01) {
+        //                 clearInterval(moveX);
+        //             }
+                  
+        //             if (rotX <= xVal && directionX == -0.01) {
+        //                 clearInterval(moveX);
+        //             }
+                   
+        //             bone.x = rotX;
+        //             rotX += directionX;
+
+        //             renderer.render( scene, camera );
+
+        //         }, 20);
+
+        //         var moveY = setInterval(function() {
+                
+        //             if (rotY >= yVal && directionY == 0.01) {
+        //                 clearInterval(moveY);
+        //             }
+                  
+        //             if (rotY <= yVal && directionY == -0.01) {
+        //                 clearInterval(moveY);
+        //             }
+                   
+        //             bone.y = rotY;
+        //             rotY += directionY;
+
+        //             renderer.render( scene, camera );
+
+        //         }, 20);
+
+        //         var moveZ = setInterval(function() {
+                
+        //             if (rotZ >= zVal && directionZ == 0.003) {
+        //                 clearInterval(moveZ);
+        //             }
+                  
+        //             if (rotZ <= zVal && directionZ == -0.003) {
+        //                 clearInterval(moveZ);
+        //             }
+                   
+        //             bone.z = rotZ;
+        //             rotZ += directionZ;
+
+        //             renderer.render( scene, camera );
+
+        //         }, 20);
+                
+
+        //     }
+
+        //     if (e.keyCode == '65') {
+        //          // ----- A 65 ------
+        //         letterPress(fingers.pinky_1, 1.5, 0, -0.5);
+        //         letterPress(fingers.pinky_2, 1, 0, -0.2);
+        //         letterPress(fingers.pinky_3, 0.5, 0.3, -0.2);
+
+        //         letterPress(fingers.ring_1, 1.4, 0, -0.1);
+        //         letterPress(fingers.ring_2, 1.7, 0, -0.2);
+        //         letterPress(fingers.ring_3, 0.3, 0, 0);
+
+        //         letterPress(fingers.middle_1, 1.3, 0, 0);
+        //         letterPress(fingers.middle_2, 1.8, 0, 0);
+        //         letterPress(fingers.middle_3, 0.3, 0, 0);
+
+        //         letterPress(fingers.index_1, 1.15, 0, 0.15);
+        //         letterPress(fingers.index_2, 1.9, 0, 0.25);
+        //         letterPress(fingers.index_3, 0.6, 0, 0);
+
+        //         letterPress(fingers.thumb_1, 0, -0.6, 0.5);
+        //         letterPress(fingers.thumb_2, 0, 0, 0);
+        //         letterPress(fingers.thumb_3, 0, 0, 0);
+
+        //         letterPress(fingers.wrist, 0, 0, 0);
+
+        //         letterPress(fingers.palm_1, 0, 0, -0.055); //ring
+        //         letterPress(fingers.palm_2, 0, 0, -0.085); //pinky
+        //         letterPress(fingers.palm_3, 0, 0, 0.055); //index
+        //     }
+
+           
+            
+
+        //     else if (e.keyCode == '66') {
+        //         // ----- B  66 -----
+        //         letterPress(fingers.pinky_1, 0, 0, -0.3);
+        //         letterPress(fingers.pinky_2, 0.1, 0, 0);
+        //         letterPress(fingers.pinky_3, 0.1, 0, 0);
+
+        //         letterPress(fingers.ring_1, 0, 0, -0.1);
+        //         letterPress(fingers.ring_2, 0.1, 0, 0);
+        //         letterPress(fingers.ring_3, 0.1, 0, 0);
+
+        //         letterPress(fingers.middle_1, 0, 0, 0);
+        //         letterPress(fingers.middle_2, 0.1, 0, 0);
+        //         letterPress(fingers.middle_3, 0.1, 0, 0);
+
+        //         letterPress(fingers.index_1, 0, 0, 0.1);
+        //         letterPress(fingers.index_2, 0.1, 0, 0);
+        //         letterPress(fingers.index_3, 0.1, 0, 0);
+
+        //         letterPress(fingers.thumb_1, -0.1, -0.4, 0.4);
+        //         letterPress(fingers.thumb_2, 0, 0, 0.2);
+        //         letterPress(fingers.thumb_3, 0, 0, -0.1);
+
+        //         letterPress(fingers.wrist, -0.1, 0, 0);
+
+        //         letterPress(fingers.palm_1, 0, 0, -0.04);
+        //         letterPress(fingers.palm_2, 0, 0, -0.12);
+        //         letterPress(fingers.palm_3, 0, 0, 0.08);
+        //     }
+
+        //     else if (e.keyCode == '67') {
+
+        //         // ----- C 67 -----
+        //         letterPress(fingers.pinky_1, 1.1, 0, -0.5);
+        //         letterPress(fingers.pinky_2, 1.3, 0.1, -0.4);
+        //         letterPress(fingers.pinky_3, 0.8, 0.2, -0.3);
+
+        //         letterPress(fingers.ring_1, 1.2, 0, -0.2);
+        //         letterPress(fingers.ring_2, 1.9, 0.1, -0.2);
+        //         letterPress(fingers.ring_3, 0.3, 0, 0);
+
+        //         letterPress(fingers.middle_1, 1.1, 0, 0);
+        //         letterPress(fingers.middle_2, 2, 0, 0);
+        //         letterPress(fingers.middle_3, 0.3, 0, 0);
+
+        //         letterPress(fingers.index_1, 0.6, -0.1, 0);
+        //         letterPress(fingers.index_2, 0.7, 0, 0);
+        //         letterPress(fingers.index_3, 0.7, 0, 0);
+
+        //         letterPress(fingers.thumb_1, 0.1, -1.2, 0);
+        //         letterPress(fingers.thumb_2, 0.1, 0.2, 0.1);
+        //         letterPress(fingers.thumb_3, 0, -0.2, 0.4);
+
+        //         letterPress(fingers.wrist, -0.1, 0, 0);
+
+        //         letterPress(fingers.palm_1, 0, 0, -0.02);
+        //         letterPress(fingers.palm_2, 0, 0, -0.07);
+        //         letterPress(fingers.palm_3, 0, 0, 0.05);
+        //     }
+
+
+        //     else if (e.keyCode == '68') {
+        //         // ----- D 68 -----
+        //         letterPress(fingers.pinky_1, 0.1, 0, 0);
+        //         letterPress(fingers.pinky_2,0.1, 0, 0);
+        //         letterPress(fingers.pinky_3, 0.1, 0, 0);
+
+        //         letterPress(fingers.ring_1, 0.3, 0.1, 0);
+        //         letterPress(fingers.ring_2, 0.3, 0, 0);
+        //         letterPress(fingers.ring_3, 0.1, 0, 0);
+
+        //         letterPress(fingers.middle_1, 0.6, 0, 0);
+        //         letterPress(fingers.middle_2, 1.4, 0, 0);
+        //         letterPress(fingers.middle_3, 0.7, 0, 0);
+
+        //         letterPress(fingers.index_1, 0.1, 0, 0);
+        //         letterPress(fingers.index_2, 0.2, 0, 0);
+        //         letterPress(fingers.index_3, 0.1, 0, 0);
+
+        //         letterPress(fingers.thumb_1, 0, -1.7, -0.1);
+        //         letterPress(fingers.thumb_2, 0.6, 0.5, 0.1);
+        //         letterPress(fingers.thumb_3, 0, 0, 0.2);
+
+        //         letterPress(fingers.wrist, -0.1, 0, 0);
+
+        //         letterPress(fingers.palm_1, 0, 0, 0);
+        //         letterPress(fingers.palm_2, 0, 0, 0);
+        //         letterPress(fingers.palm_3, 0, 0, 0);
+        //     }
+
+        //     else if (e.keyCode == '32') {
+        //         // ----- SPACE 32 -----
+        //         letterPress(fingers.pinky_1, 0, 0, 0);
+        //         letterPress(fingers.pinky_2, 0, 0, 0);
+        //         letterPress(fingers.pinky_3, 0, 0, 0);
+
+        //         letterPress(fingers.ring_1, 0, 0, 0);
+        //         letterPress(fingers.ring_2, 0, 0, 0);
+        //         letterPress(fingers.ring_3, 0, 0, 0);
+
+        //         letterPress(fingers.middle_1, 0, 0, 0);
+        //         letterPress(fingers.middle_2, 0, 0, 0);
+        //         letterPress(fingers.middle_3, 0, 0, 0);
+
+        //         letterPress(fingers.index_1, 0, 0, 0);
+        //         letterPress(fingers.index_2, 0, 0, 0);
+        //         letterPress(fingers.index_3, 0, 0, 0);
+
+        //         letterPress(fingers.thumb_1, 0, 0, 0);
+        //         letterPress(fingers.thumb_2, 0, 0, 0);
+        //         letterPress(fingers.thumb_3, 0, 0, 0);
+
+        //         letterPress(fingers.wrist, 0, 0, 0);
+
+        //         letterPress(fingers.palm_1, 0, 0, 0);
+        //         letterPress(fingers.palm_2, 0, 0, 0);
+        //         letterPress(fingers.palm_3, 0, 0, 0);
+        //     }
+
+
+
+
+        //     render();
+
+        // }
+
+        // önnur utgafa hættir
+
+
+
+
+
+
+
+
+
+
+
+        
 
 
 

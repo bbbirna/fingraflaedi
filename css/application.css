@@ -1937,6 +1937,7 @@ header {
   transform: translate(45%);
   background-color: grey;
   transform: rotate(7deg);
+  left: 4%;
   background: #000;
   /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(#383838, #000);
