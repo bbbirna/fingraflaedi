@@ -1681,7 +1681,15 @@ html, body {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background: center no-repeat #AFDBD1;
+  background: center no-repeat #F5D04C;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#F5D04C, #FFB000);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#F5D04C, #FFB000);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#F5D04C, #FFB000);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#F5D04C, #FFB000);
   display: flex;
   justify-content: center;
   align-items: center; }
@@ -1804,7 +1812,7 @@ header {
     .third-half .alphabet-filter .filter #btn-filter {
       height: 42px; }
 
-.hover, .squareButton, #btn-share, .sideButton, #btn-alpha, #btn-write, #btn-loop:hover, #btn-pause:hover, #btn-word:hover, #btn-a-n, #btn-o-o, #btn-1-10, #btn-a-n :after, #btn-o-o :after, #btn-1-10 :after, .color-pick .gif-bg-color:hover {
+.hover, .squareButton, #btn-share, .sideButton, #btn-alpha, #btn-write, #btn-loop:hover, #btn-pause:hover, #btn-word:hover, #btn-a-n, #btn-o-o, #btn-1-10, #btn-a-n :after, #btn-o-o :after, #btn-1-10 :after, .color-pick .gif-bg-color:hover, .letter :hover {
   cursor: pointer; }
 
 .squareButton, #btn-share {
@@ -1848,23 +1856,24 @@ header {
   font-size: 24px;
   width: 40px;
   height: 50px;
-  transition: .2s ease-out;
+  transition: .1s ease-out;
   position: absolute; }
   .sideButton:after, #btn-alpha:after, #btn-write:after {
     content: '';
     position: absolute;
     z-index: -1;
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
     height: 100%;
     width: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.5); }
+    background: #FFFFFF; }
   .sideButton:hover, #btn-alpha:hover, #btn-write:hover, .sideButton:active, #btn-alpha:active, #btn-write:active {
+    border: none;
     width: 50px;
     height: 50px;
-    color: #AFDBD1; }
+    color: #F5D04C; }
   .sideButton:hover:after, #btn-alpha:hover:after, #btn-write:hover:after, .sideButton:active:after, #btn-alpha:active:after, #btn-write:active:after {
     width: 100%; }
 
@@ -2518,7 +2527,7 @@ textarea {
     cursor: url(../icon/close-btn.png), auto; }
 
 .modal-content {
-  background-color: #D7EDE8;
+  background-color: #F5D04C;
   border-radius: 3px;
   margin: auto;
   /* 15% from the top and centered */
@@ -2536,7 +2545,7 @@ textarea {
   height: 70%;
   border-radius: 3px;
   margin: auto;
-  background-color: #AFDBD1;
+  background-color: #FFB000;
   display: flex;
   align-items: center;
   justify-content: center; }

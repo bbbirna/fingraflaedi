@@ -7,7 +7,11 @@
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
-	background:  center no-repeat $Sinbad;
+	background:  center no-repeat $Mustard; /* For browsers that do not support gradients */
+	    background: -webkit-linear-gradient($Mustard, $DarkMustard); /* For Safari 5.1 to 6.0 */
+	    background: -o-linear-gradient($Mustard, $DarkMustard); /* For Opera 11.1 to 12.0 */
+	    background: -moz-linear-gradient($Mustard, $DarkMustard); /* For Firefox 3.6 to 15 */
+	    background: linear-gradient($Mustard, $DarkMustard);
 	display: flex;
 	justify-content: center;
 	align-items: center;

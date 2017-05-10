@@ -75,6 +75,9 @@ justify-content: center;
 }
 .letter {
 margin: 6px;
+        :hover{
+        @extend .hover;
+}
 svg {
 height: 60px;
 margin: auto;
