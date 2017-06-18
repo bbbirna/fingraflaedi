@@ -96,7 +96,7 @@
 		.to(hand, 0.5, {autoAlpha:1, position: 'absolute', x: '-100%', ease:Back.easeInOut})
 		.to(shareBtn, 0.5, {autoAlpha:1, x: '0%', ease:Back.easeOut}, '-=.4')
 
-		.to(logo, 0.5, {content: "url('../logo/logo-circle-bl-on-yel.png')", ease:Power1.easeInOut}, '-=.2')
+		.to(logo, 0.5, {content: "url('logo/logo-circle-bl-on-yel.png')", ease:Power1.easeInOut}, '-=.2')
 
 		.to(btnWrite, 0.2, {opacity: 1,position: 'absolute', left: '-1px', ease:Power1.easeInOut})
 		.to(thirdHalf, 0.5,{position: 'relative', x: '-200%', autoAlpha: 1, ease:Power1.easeInOut},'-=.5')
@@ -118,7 +118,7 @@
 		.to(background, 0.5, {x: '-100%', ease:Power3.easeInOut})
 		.to(background, 0, {autoAlpha:0, x: '200%', ease:Power3.easeInOut})
 		.to(background, 0.5, {autoAlpha:1, left:'4%', x: '45%', rotation: 7, ease:Power3.easeInOut})
-		.to(logo, 0.5, {content: "url('../logo/logo-circle-wh-on-bl.png')", ease:Power1.easeInOut}, '-=.5')
+		.to(logo, 0.5, {content: "url('logo/logo-circle-wh-on-bl.png')", ease:Power1.easeInOut}, '-=.5')
 		
 		.to(hand, 0.5, {position: 'absolute', x: '-200%', ease:Back.easeInOut}, '-=1')
 		.to(hand, 0, {autoAlpha:0, position: 'absolute', x: '300%',ease:Power4.easeInOut})
